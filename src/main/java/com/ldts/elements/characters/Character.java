@@ -1,26 +1,52 @@
 package com.ldts.elements.characters;
 
 import com.ldts.elements.Elements;
+import com.ldts.elements.Position;
 
 //The characters of the game, both enemies, friendlies and the player
 public abstract class Character extends Elements {
+    String name;
+    boolean isDead;
     int hitPoints;
     int level;
     int aim;
     int experience;
 
-    public Character(){
+    public Character(char symbol, Position position, String name){
+        super(symbol, position);
+        this.name = name;
+        isDead = false;
         level = 1;
         hitPoints = 20*level;
         aim = 70;       //Subject to change
         experience = 0;
     }
 
-    public Character(int level){
+
+    public Character(char symbol, Position position, String name, int level){
+        super(symbol, position);
+        this.name = name;
+        isDead = false;
         this.level = level;
         hitPoints = 20*level;
         aim = 70;       //Subject to change
         experience = 0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
     }
 
     public int getHitPoints() {
@@ -60,4 +86,10 @@ public abstract class Character extends Elements {
         hitPoints += 20;
         aim += 10;
     }
+
+    public abstract void move();
+
+    public abstract void selectTarget();
+
+    public abstract void fire();
 }
