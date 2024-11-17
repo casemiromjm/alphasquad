@@ -1,3 +1,5 @@
+package com.ldts.elements;
+
 public class Position {
     int x;
     int y;

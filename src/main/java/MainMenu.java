@@ -25,7 +25,7 @@ public class MainMenu {
         return key;
     }
 
-    public void draw() throws IOException {
+    private void draw() throws IOException {
         //Draw the game title on the screen
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
@@ -35,7 +35,7 @@ public class MainMenu {
 
         //Remove the modifiers before drawing the options
         textGraphics.disableModifiers(SGR.BOLD, SGR.BORDERED);
-        //Position the options around the middle of the screen
+        //com.ldts.elements.Position the options around the middle of the screen
         int options_row = screen.getTerminalSize().getRows()/2 - 2;
         //Draw the options in the center and bold the first letter
         for(String opt:options){

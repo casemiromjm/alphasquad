@@ -24,7 +24,7 @@ public class HelpScreen {
         }
     }
 
-    public void draw(){
+    private void draw(){
 
     }
 }
