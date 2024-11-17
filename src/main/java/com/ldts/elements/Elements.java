@@ -5,6 +5,11 @@ public abstract class Elements {
     char symbol;
     private Position position;
 
+    public Elements(char symbol, Position position) {
+        this.symbol = symbol;
+        this.position = position;
+    }
+
     public char getSymbol() {
         return symbol;
     }
