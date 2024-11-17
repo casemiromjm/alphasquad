@@ -1,4 +1,6 @@
 import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -23,7 +25,25 @@ public class ScreensManager {
     }
 
     public void run() throws IOException {
-        MainMenu mainMenu = new MainMenu(screen);
-        mainMenu.draw();
+        while(true) {
+            MainMenu mainMenu = new MainMenu(screen);
+
+            KeyStroke key = mainMenu.run();
+
+            if(key.getKeyType() == KeyType.Character && key.getCharacter() == 'q'){
+                screen.close();
+            }
+
+            else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'h') {
+                HelpScreen helpScreen = new HelpScreen(screen);
+                helpScreen.run();
+            }
+
+            else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p'){
+                Game game = new Game(screen);
+                game.run();
+            }
+
+        }
     }
 }

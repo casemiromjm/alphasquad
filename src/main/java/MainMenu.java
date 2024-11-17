@@ -2,6 +2,7 @@ import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
@@ -16,6 +17,12 @@ public class MainMenu {
 
     public MainMenu(Screen screen) {
         this.screen = screen;
+    }
+
+    public  KeyStroke run() throws IOException {
+        draw();
+        KeyStroke key = screen.readInput();
+        return key;
     }
 
     public void draw() throws IOException {
@@ -36,8 +43,7 @@ public class MainMenu {
             textGraphics.putString(new TerminalPosition((screen.getTerminalSize().getColumns() / 2) - (opt.length() / 2), options_row), opt.substring(0, 1));
             textGraphics.disableModifiers(SGR.BOLD);
             textGraphics.putString(new TerminalPosition((screen.getTerminalSize().getColumns() / 2) - (opt.length() / 2) + 1, options_row), opt.substring(1));
-            options_row++;
-            options_row++;
+            options_row += 2;
         }
 
         textGraphics.enableModifiers(SGR.BOLD);
@@ -45,7 +51,7 @@ public class MainMenu {
         textGraphics.disableModifiers(SGR.BOLD);
         textGraphics.putString(new TerminalPosition(7,screen.getTerminalSize().getRows() - 2),
                 "Press the key corresponding to the bolded letter of the option.");
-        
+
         screen.refresh();
     }
 }
