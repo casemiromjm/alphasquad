@@ -1,3 +1,5 @@
+package com;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;

@@ -1,3 +1,5 @@
+package com;
+
 import com.googlecode.lanterna.screen.Screen;
 import com.controller.GameController;
 import com.model.GameModel;

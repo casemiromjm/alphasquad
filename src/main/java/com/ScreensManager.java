@@ -1,3 +1,5 @@
+package com;
+
 import com.controller.MainMenuController;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
