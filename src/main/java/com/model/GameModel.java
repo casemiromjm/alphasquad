@@ -1,4 +1,4 @@
-package com.ldts.gamecontrol;
+package com.model;
 
 public class GameModel {
     private int difficulty;

@@ -1,43 +1,39 @@
+package com.view;
+
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.screen.Screen;
+import com.model.MainMenuModel;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class MainMenu {
+public class MainMenuView {
+    private MainMenuModel mainMenuModel;
     private Screen screen;
-    private String title = "Title";
-    private List<String> options = Arrays.asList("Play", "Help", "Quit");
 
-    public MainMenu(Screen screen) {
+    public MainMenuView(MainMenuModel mainMenuModel, Screen screen) {
+        this.mainMenuModel = mainMenuModel;
         this.screen = screen;
     }
 
-    public  KeyStroke run() throws IOException {
-        draw();
-        KeyStroke key = screen.readInput();
-        return key;
-    }
-
-    private void draw() throws IOException {
+    public void draw() throws IOException {
         //Draw the game title on the screen
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
         textGraphics.enableModifiers(SGR.BOLD, SGR.BORDERED);
-        textGraphics.putString(new TerminalPosition((screen.getTerminalSize().getColumns() / 2) - (title.length() / 2), 3), title);
+        textGraphics.putString(new TerminalPosition((screen.getTerminalSize().getColumns() / 2) - (mainMenuModel.getTitle().length() / 2), 3), mainMenuModel.getTitle());
 
         //Remove the modifiers before drawing the options
         textGraphics.disableModifiers(SGR.BOLD, SGR.BORDERED);
         //com.ldts.elements.Position the options around the middle of the screen
         int options_row = screen.getTerminalSize().getRows()/2 - 2;
         //Draw the options in the center and bold the first letter
+        List<String> options = mainMenuModel.getOptions();
+
         for(String opt:options){
             textGraphics.enableModifiers(SGR.BOLD);
             textGraphics.putString(new TerminalPosition((screen.getTerminalSize().getColumns() / 2) - (opt.length() / 2), options_row), opt.substring(0, 1));

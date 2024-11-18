@@ -1,4 +1,4 @@
-package com.ldts.elements;
+package com.model.elements;
 
 public class Position {
     int x;

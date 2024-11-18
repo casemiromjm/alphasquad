@@ -1,7 +1,7 @@
 import com.googlecode.lanterna.screen.Screen;
-import com.ldts.gamecontrol.GameController;
-import com.ldts.gamecontrol.GameModel;
-import com.ldts.gamecontrol.GameView;
+import com.controller.GameController;
+import com.model.GameModel;
+import com.view.GameView;
 
 public class Game {
     private GameController gameController;

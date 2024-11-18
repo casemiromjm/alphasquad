@@ -1,4 +1,4 @@
-package com.ldts.gamecontrol;
+package com.controller;
 
 public class GameController {
 }
