@@ -1,14 +1,15 @@
 package com.ldts.elements.characters;
 
+import com.googlecode.lanterna.TextColor;
 import com.ldts.elements.Position;
 
 public class Ally extends Character{
-    public Ally(char symbol, Position position, String name) {
-        super(symbol, position, name);
+    public Ally(String symbol, TextColor color, Position position, String name) {
+        super(symbol, color, position, name);
     }
 
-    public Ally(char symbol, Position position, String name, int level) {
-        super(symbol, position, name, level);
+    public Ally(String symbol, TextColor color, Position position, String name, int level) {
+        super(symbol, color, position, name, level);
     }
 
     @Override
@@ -26,9 +27,4 @@ public class Ally extends Character{
 
     }
 
-
-    @Override
-    public void draw() {
-
-    }
 }

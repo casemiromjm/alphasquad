@@ -1,5 +1,6 @@
 package com.ldts.elements.characters;
 
+import com.googlecode.lanterna.TextColor;
 import com.ldts.elements.Elements;
 import com.ldts.elements.Position;
 
@@ -12,8 +13,8 @@ public abstract class Character extends Elements {
     int aim;
     int experience;
 
-    public Character(char symbol, Position position, String name){
-        super(symbol, position);
+    public Character(String symbol, TextColor color, Position position, String name){
+        super(symbol, color, position);
         this.name = name;
         isDead = false;
         level = 1;
@@ -23,8 +24,8 @@ public abstract class Character extends Elements {
     }
 
 
-    public Character(char symbol, Position position, String name, int level){
-        super(symbol, position);
+    public Character(String symbol, TextColor color, Position position, String name, int level){
+        super(symbol, color, position);
         this.name = name;
         isDead = false;
         this.level = level;
