@@ -1,10 +1,10 @@
-package com.view.elements.characters;
+package view.elements.characters;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.model.elements.characters.Ally;
-import com.view.elements.Drawable;
+import view.elements.Drawable;
 
 public class AllyDraw implements Drawable {
     Ally ally;

@@ -1,19 +1,17 @@
-package com;
-
 import com.googlecode.lanterna.screen.Screen;
-import com.controller.GameController;
-import com.model.GameModel;
-import com.view.GameView;
+
+import model.GameModel;
+import view.GameView;
 
 public class Game {
-    private GameController gameController;
+    private controller.GameController gameController;
     private GameView gameView;
     private GameModel gameModel;
     private Screen screen;
 
     public Game(Screen screen){
         this.screen = screen;
-        gameController = new GameController();
+        gameController = new controller.GameController();
         gameView = new GameView();
         gameModel = new GameModel();
     }

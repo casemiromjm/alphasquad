@@ -1,14 +1,13 @@
-package com.controller;
+package controller;
 
-import com.Game;
-import com.HelpScreen;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.model.MainMenuModel;
-import com.view.MainMenuView;
+import view.MainMenuView;
 
 import java.io.IOException;
+
 
 public class MainMenuController {
 
@@ -33,14 +32,14 @@ public class MainMenuController {
             } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'h') {
                 screen.clear();
                 screen.refresh();
-                HelpScreen helpScreen = new HelpScreen(screen);
+                HelpScreenController helpScreen = new HelpScreen(screen);
                 helpScreen.run();
 
             } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
                 screen.clear();
                 screen.refresh();
-                Game game = new Game(screen);
-                game.run();
+                GameController gameController = new GameController(screen);
+                gameController.run();
 
             } else if (key.getKeyType() == KeyType.EOF) {
                 break;

@@ -1,4 +1,4 @@
-package com.view.elements;
+package view.elements;
 
 public interface Drawable {
     public void draw();

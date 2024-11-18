@@ -1,11 +1,10 @@
-package com.view.elements.characters;
+package view.elements.characters;
 
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.model.elements.characters.Enemy;
-import com.view.elements.Drawable;
+import view.elements.Drawable;
 
 public class EnemyDraw implements Drawable {
     Enemy enemy;

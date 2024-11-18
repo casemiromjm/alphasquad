@@ -1,6 +1,3 @@
-package com;
-
-import com.controller.MainMenuController;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -43,7 +40,7 @@ public class ScreensManager {
     }
 
     public void run() throws IOException {
-        MainMenuController mainMenuController = new MainMenuController(screen);
+        controller.MainMenuController mainMenuController = new controller.MainMenuController(screen);
         mainMenuController.run();
         screen.close();
     }
