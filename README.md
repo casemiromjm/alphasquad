@@ -3,7 +3,7 @@
 # LDTS 24/25 - Projeto
 
 
-Nosso projeto baseia-se em no jogo [Armoured Commander](https://store.steampowered.com/app/1361580/Armoured_Commander/). Portanto, nosso jogo visa ser um combate PvE entre 2 equadrões com *power-ups* a serem coletados e facilitar o combate. #DESCREVER MELHOR ?
+Nosso projeto baseia-se no jogo [Armoured Commander](https://store.steampowered.com/app/1361580/Armoured_Commander/). Além disso, o jogo toma como inspiração o combate de [XCOM Enemy Unknown](https://store.steampowered.com/app/200510/XCOM_Enemy_Unknown/).  Portanto, o jogo visa ser um combate PvE entre 2 equadrões com *power-ups* a serem coletados e facilitar o combate. Por fim, o *game over* acontece quando o jogador morre.  #DESCREVER MELHOR ?
 
 O projeto foi desenvolvido pelos estudantes:
 - Casemiro Medeiros (up202301897)
@@ -27,11 +27,11 @@ O projeto inicialmente implementa a separação em Model - View - Controller.
 ### *Patterns* utilizados #PEGAR PATTERNS
 
 ### Problemas nos *patterns* utilizados #DESCREVER PROBLEMAS
-##### sifhfhfj
-fdfd
+##### Problema 1
+descrição do problema
 
-##### fkdjkfjdja
-adasdas
+##### Problema 2
+descrição do problema
 
 
 ### Diagrama UML da implementação atual
