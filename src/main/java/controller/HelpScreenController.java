@@ -15,7 +15,7 @@ public class HelpScreenController {
 
     public HelpScreenController(Screen screen) {
         helpScreenModel = new HelpScreenModel();
-        helpScreenView = new HelpScreenView(screen);
+        helpScreenView = new HelpScreenView(helpScreenModel, screen);
         this.screen = screen;
     }
 

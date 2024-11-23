@@ -5,7 +5,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import com.model.MainMenuModel;
+import model.MainMenuModel;
 
 import java.io.IOException;
 import java.util.List;

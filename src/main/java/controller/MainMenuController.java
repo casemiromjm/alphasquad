@@ -3,7 +3,7 @@ package controller;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
-import com.model.MainMenuModel;
+import model.MainMenuModel;
 import view.MainMenuView;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class MainMenuController {
             } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'h') {
                 screen.clear();
                 screen.refresh();
-                HelpScreenController helpScreen = new HelpScreen(screen);
+                HelpScreenController helpScreen = new HelpScreenController(screen);
                 helpScreen.run();
 
             } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {

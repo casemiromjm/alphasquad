@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/LDTS-project-t01g06.iml" filepath="$PROJECT_DIR$/.idea/LDTS-project-t01g06.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/LDTS_Project.test.iml" filepath="$PROJECT_DIR$/.idea/modules/LDTS_Project.test.iml" />
     </modules>
   </component>
