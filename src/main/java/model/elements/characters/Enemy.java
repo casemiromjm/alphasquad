@@ -4,8 +4,6 @@ import model.elements.Position;
 
 public class Enemy extends Character{
 
-    private Position position;
-
     public Enemy(Position position) {
         super(position);
     }
