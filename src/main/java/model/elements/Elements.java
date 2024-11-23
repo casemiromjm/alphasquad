@@ -1,4 +1,4 @@
-package com.model.elements;
+package model.elements;
 
 //Abstract class for all elements: characters and obstacles
 public abstract class Elements {

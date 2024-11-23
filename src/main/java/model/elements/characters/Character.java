@@ -1,7 +1,7 @@
-package com.model.elements.characters;
+package model.elements.characters;
 
-import com.model.elements.Elements;
-import com.model.elements.Position;
+import model.elements.Elements;
+import model.elements.Position;
 
 //The characters of the game, both enemies, friendlies and the player
 public abstract class Character extends Elements {
@@ -17,7 +17,7 @@ public abstract class Character extends Elements {
         level = 1;
         hitPoints = 20*level;
         aim = 70;       //Subject to change
-        experience = 0;
+        experience = 0;     // used to when an NPC dies, new newbie NPC comes in
     }
 
 

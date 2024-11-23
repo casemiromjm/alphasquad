@@ -12,12 +12,12 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 
-public class ScreensManager {
+public class ScreenManager {
 
     private Screen screen;
 
 
-    public ScreensManager() throws IOException, FontFormatException, URISyntaxException {
+    public ScreenManager() throws IOException, FontFormatException, URISyntaxException {
         URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
         File fontFile = new File(resource.toURI());
         Font font = Font.createFont(Font.TRUETYPE_FONT, fontFile);

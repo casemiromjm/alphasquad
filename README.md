@@ -3,7 +3,7 @@
 # LDTS 24/25 - Projeto
 
 
-Nosso projeto baseia-se no jogo [Armoured Commander](https://store.steampowered.com/app/1361580/Armoured_Commander/). Além disso, o jogo toma como inspiração o combate de [XCOM Enemy Unknown](https://store.steampowered.com/app/200510/XCOM_Enemy_Unknown/).  Portanto, o jogo visa ser um combate PvE entre 2 equadrões com *power-ups* a serem coletados e facilitar o combate. Por fim, o *game over* acontece quando o jogador morre.
+Nosso projeto baseia-se no jogo [Armoured Commander](https://store.steampowered.com/app/1361580/Armoured_Commander/). Além disso, o jogo toma como inspiração o combate de [XCOM Enemy Unknown](https://store.steampowered.com/app/200510/XCOM_Enemy_Unknown/).  Portanto, o jogo visa ser um combate PvE entre 2 equadrões com *power-ups* a serem coletados e facilitar o combate. Por fim, o *game over* ocorre quando o jogador morre.
 
 O projeto foi desenvolvido pelos estudantes:
 - Casemiro Medeiros (up202301897)
