@@ -1,8 +1,7 @@
-package com.model.elements.obstacles;
+package model.elements.obstacles;
 
-import com.googlecode.lanterna.TextColor;
-import com.model.elements.Elements;
-import com.model.elements.Position;
+import model.elements.Elements;
+import model.elements.Position;
 
 public abstract class Obstacle extends Elements {
     boolean crossable;
