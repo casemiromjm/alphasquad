@@ -4,7 +4,7 @@ plugins {
     id 'application'
 }
 
-group = 'org.hribalves.hero'
+group = 'org.project'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -18,10 +18,7 @@ dependencies {
 }
 
 application {
-    // define main class for gradlew run
-    mainClass = 'java.Application'
-
-    // COULD NOT FIND METHOD APPLICATION
+    mainClass = 'Application'
 }
 
 test {

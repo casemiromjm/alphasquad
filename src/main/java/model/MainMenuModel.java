@@ -1,4 +1,4 @@
-package com.model;
+package model;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +8,7 @@ public class MainMenuModel {
     private List<String> options = Arrays.asList("Play", "Help", "Quit");
 
     public MainMenuModel() {
+
     }
 
     public String getTitle() {

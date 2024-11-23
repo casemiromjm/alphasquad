@@ -1,9 +1,16 @@
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
+import controller.HelpScreenController;
 
-import java.io.IOException;
 
 public class HelpScreen {
+//    // members
+//    private HelpScreenController helpScreenController;
+//
+//    // acho q fica com erro de design, pois as classes ficam interdependentes
+//
+//    // Default Constructor
+//    public HelpScreen(Screen screen) {
+//        helpScreenController = new HelpScreenController(screen);
+//    }
 
 }
