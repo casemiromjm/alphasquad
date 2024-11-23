@@ -1,4 +1,4 @@
-package com.model.elements;
+package model.elements;
 
 public class Position {
     int x;

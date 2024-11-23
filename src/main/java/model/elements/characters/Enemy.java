@@ -1,8 +1,9 @@
-package com.model.elements.characters;
+package model.elements.characters;
 
-import com.model.elements.Position;
+import model.elements.Position;
 
 public class Enemy extends Character{
+
     public Enemy(Position position) {
         super(position);
     }

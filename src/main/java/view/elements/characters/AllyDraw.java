@@ -3,7 +3,7 @@ package view.elements.characters;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.model.elements.characters.Ally;
+import model.elements.characters.Ally;
 import view.elements.Drawable;
 
 public class AllyDraw implements Drawable {
