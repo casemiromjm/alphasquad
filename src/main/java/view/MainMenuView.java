@@ -29,7 +29,7 @@ public class MainMenuView {
 
         //Remove the modifiers before drawing the options
         textGraphics.disableModifiers(SGR.BOLD, SGR.BORDERED);
-        //com.ldts.elements.Position the options around the middle of the screen
+        //Positions the options around the middle of the screen
         int options_row = screen.getTerminalSize().getRows()/2 - 2;
         //Draw the options in the center and bold the first letter
         List<String> options = mainMenuModel.getOptions();

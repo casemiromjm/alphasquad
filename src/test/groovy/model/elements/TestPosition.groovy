@@ -51,4 +51,21 @@ class TestPosition extends Specification{
         y == 30;
     }
 
+    def "test equals"(){
+        given:
+        Position position = new Position(1, 2)
+        Position position1 = new Position(1,2)
+        Position position2 = new Position(3,4)
+
+        when:
+        boolean result = position.equals(position)
+        boolean result1 = position.equals(position1)
+        boolean result2 = position.equals(position2)
+
+        then:
+        result == true
+        result1 == true
+        result2 == false
+    }
+
 }

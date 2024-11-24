@@ -1,10 +1,10 @@
 package model.elements.characters;
 
-import model.elements.Elements;
+import model.elements.Element;
 import model.elements.Position;
 
 //The characters of the game, both enemies, friendlies and the player
-public abstract class Character extends Elements {
+public abstract class Character extends Element {
     boolean isDead;
     int hitPoints;
     int level;

@@ -1,10 +1,10 @@
 package model.elements;
 
 //Abstract class for all elements: characters and obstacles
-public abstract class Elements {
+public abstract class Element {
     private Position position;
 
-    public Elements(Position position) {
+    public Element(Position position) {
         this.position = position;
     }
 
