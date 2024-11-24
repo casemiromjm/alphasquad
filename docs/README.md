@@ -92,3 +92,4 @@ número de classes e dependências o que, na criação de testes, dificulta o pr
 
 ### Diagrama UML da Implementação Atual
 ![UML atual](uml.png)
+- Algumas ligações são temporárias para facilitar a visualização do projeto.
