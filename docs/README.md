@@ -67,8 +67,10 @@ O jogo contará com um sistema de progressão através de três níveis distinto
 
 ## Mockups
 
-![mockup do projeto](src do png do mockup)
-
+![mockup do projeto](Mockup_Menu.png)
+![mockup do projeto](Mockup_Gameplay.png)
+![mockup do projeto](Mockup_Help.png)
+![mockup do projeto](Mockup_Finalmessage.png)
 ---
 
 ## Design
