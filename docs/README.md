@@ -84,11 +84,11 @@ O projeto implementa inicialmente a separação em **Model - View - Controller**
 ---
 
 ### Problemas nos *Patterns* Utilizados
-#### Problema 1 (MVC)
-Apesar de simplificar a organizaçao das funcionalidades do projeto, tambem resulta, simultaneamente num elevado
-numero de classes e dependencias o que, na criaçao de testes, dificulta o processo.
+#### Problema 1 - (MVC)
+Apesar de simplificar a organização das funcionalidades do projeto, também resulta, simultaneamente num elevado
+número de classes e dependências o que, na criação de testes, dificulta o processo.
 
 ---
 
 ### Diagrama UML da Implementação Atual
-# [INSERIR UML DO VIEW E DO MODEL, CASO NECESSÁRIO]
+![UML atual](uml.png)
