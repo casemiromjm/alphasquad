@@ -12,14 +12,20 @@ import java.io.IOException;
 public class MainMenuController {
 
     private Screen screen;
+    private GameController gameController;
+    private HelpScreenController helpScreenController;
+    private MainMenuModel mainMenuModel;
+    private  MainMenuView mainMenuView;
 
-    public MainMenuController(Screen screen) {
+    public MainMenuController(Screen screen, GameController gameController, HelpScreenController helpScreenController) {
         this.screen = screen;
+        this.gameController = gameController;
+        this.helpScreenController = helpScreenController;
+        mainMenuModel = new MainMenuModel();
+        mainMenuView = new MainMenuView(mainMenuModel, screen);
     }
 
     public void run() throws IOException {
-        MainMenuModel mainMenuModel = new MainMenuModel();
-        MainMenuView mainMenuView = new MainMenuView(mainMenuModel, screen);
 
         while (true) {
             screen.clear();
@@ -32,13 +38,11 @@ public class MainMenuController {
             } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'h') {
                 screen.clear();
                 screen.refresh();
-                HelpScreenController helpScreen = new HelpScreenController(screen);
-                helpScreen.run();
+                helpScreenController.run();
 
             } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
                 screen.clear();
                 screen.refresh();
-                GameController gameController = new GameController(screen);
                 gameController.run();
 
             } else if (key.getKeyType() == KeyType.EOF) {

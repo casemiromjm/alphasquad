@@ -23,7 +23,7 @@ O projeto foi desenvolvido pelos estudantes:
 Ao iniciar o jogo, o utilizador será apresentado a um menu inicial com três opções principais:
 - **Play**: Dá início ao jogo.
 - **Help**: Fornece informações úteis sobre as mecânicas, regras e objetivos do jogo.
-- **Exit**: Permite sair do jogo.
+- **Quit**: Permite sair do jogo.
 
 ---
 

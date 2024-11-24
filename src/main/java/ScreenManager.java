@@ -4,6 +4,8 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
+import controller.GameController;
+import controller.HelpScreenController;
 
 import java.awt.*;
 import java.io.File;
@@ -40,7 +42,9 @@ public class ScreenManager {
     }
 
     public void run() throws IOException {
-        controller.MainMenuController mainMenuController = new controller.MainMenuController(screen);
+        HelpScreenController helpScreenController = new HelpScreenController(screen);
+        GameController gameController = new GameController(screen);
+        controller.MainMenuController mainMenuController = new controller.MainMenuController(screen, gameController, helpScreenController);
         mainMenuController.run();
         screen.close();
     }

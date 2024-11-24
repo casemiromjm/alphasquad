@@ -1,4 +1,4 @@
-package com.model.elements
+package model.elements
 
 
 import spock.lang.Specification
