@@ -6,7 +6,26 @@ import spock.lang.Specification
 
 class TestMainMenuController extends Specification{
 
-    def "Test options option"(){
+    def "Test only help"(){
+        given:
+        def screen = Stub(Screen){
+            readInput() >> new KeyStroke((Character) 'q', false, false)
+        }
+
+        def helpscreen = Mock(HelpScreenController)
+        def gamecontroller = Mock(GameController)
+
+        MainMenuController mainMenuController = new MainMenuController(screen, gamecontroller, helpscreen)
+
+        when:
+        mainMenuController.run()
+
+        then:
+        0 * helpscreen.run()
+        0 * gamecontroller.run()
+    }
+
+    def "Test all options"(){
 
         given:
         def screen = Stub(Screen){
