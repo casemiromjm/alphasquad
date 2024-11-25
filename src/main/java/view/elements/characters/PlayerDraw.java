@@ -10,7 +10,7 @@ public class PlayerDraw implements Drawable {
     Player player;
     TextGraphics textGraphics;
 
-    public PlayerDraw(Player player, TextGraphics textGraphics) {
+    public PlayerDraw(TextGraphics textGraphics, Player player) {
         this.player = player;
         this.textGraphics = textGraphics;
     }

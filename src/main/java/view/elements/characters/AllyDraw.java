@@ -10,7 +10,7 @@ public class AllyDraw implements Drawable {
     Ally ally;
     TextGraphics textGraphics;
 
-    public AllyDraw(Ally ally, TextGraphics textGraphics) {
+    public AllyDraw(TextGraphics textGraphics, Ally ally) {
         this.ally = ally;
         this.textGraphics = textGraphics;
     }
