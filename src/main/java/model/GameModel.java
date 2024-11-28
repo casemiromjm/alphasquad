@@ -44,22 +44,22 @@ public class GameModel {
 
     public void createInitialElements(){
         //Values are temporary
-        player = new Player(new Position(width/2, 1), 1);
+        player = new Player(new Position(width/2, height - 2), 1);
 
         while(enemyList.size() < difficulty * 3){
             Random rand = new Random();
-            int x = rand.nextInt(width);
-            int y = rand.nextInt(height/2);
+            int x = rand.nextInt(11, width);
+            int y = rand.nextInt(height/4);
 
             if(elementCanBePlaced(new Position(x, y))){
                 enemyList.add(new Enemy(new Position(x, y), 1));
             }
         }
 
-        while(allyList.size() < 3){
+        while(allyList.size() < 2){
             Random rand = new Random();
-            int x = rand.nextInt(width);
-            int y = rand.nextInt(2);
+            int x = rand.nextInt(11, width);
+            int y = height - 2;
 
             if(elementCanBePlaced(new Position(x, y))){
                 allyList.add(new Ally(new Position(x, y), 1));

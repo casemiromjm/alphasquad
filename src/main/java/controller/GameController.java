@@ -21,7 +21,9 @@ public class GameController {
     }
 
     public void run() throws IOException {
-        gameModel.createInitialElements();
-        gameView.drawScenario();
+        while(true) {
+            gameModel.createInitialElements();
+            gameView.drawScenario();
+        }
     }
 }

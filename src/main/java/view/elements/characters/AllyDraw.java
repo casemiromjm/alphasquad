@@ -17,6 +17,6 @@ public class AllyDraw implements Drawable {
 
     public void draw(){
         textGraphics.setForegroundColor(TextColor.ANSI.CYAN);
-        textGraphics.putString(new TerminalPosition(ally.getPosition().getX(), ally.getPosition().getY()), "E");
+        textGraphics.putString(new TerminalPosition(ally.getPosition().getX(), ally.getPosition().getY()), "A");
     }
 }

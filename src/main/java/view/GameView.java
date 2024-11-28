@@ -1,5 +1,7 @@
 package view;
 
+import com.googlecode.lanterna.TerminalPosition;
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -20,17 +22,34 @@ public class GameView {
     private GameModel gameModel;
     private TextGraphics textGraphics;
     private List<Drawable> elements = new ArrayList<>();
+    private short animation = 0;
 
     public GameView(Screen screen, GameModel gameModel) {
         this.screen = screen;
         this.gameModel = gameModel;
         textGraphics = screen.newTextGraphics();
-        createElements();
     }
 
     public void drawScenario() throws IOException {
+        int width = screen.getTerminalSize().getColumns();
+        int height = screen.getTerminalSize().getRows();
+        createElements();
         screen.clear();
-        textGraphics.setBackgroundColor(TextColor.ANSI.GREEN);
+
+        textGraphics.setForegroundColor(TextColor.ANSI.GREEN);
+
+        switch(animation){
+
+        case 0:
+            textGraphics.fillRectangle(new TerminalPosition(11, 0), new TerminalSize(width, height), '~');
+            animation = 1;
+            break;
+
+        case 1:
+            textGraphics.fillRectangle(new TerminalPosition(11, 0), new TerminalSize(width, height), '^');
+            animation = 0;
+            break;
+        }
 
         for(Drawable el : elements){
             el.draw();
