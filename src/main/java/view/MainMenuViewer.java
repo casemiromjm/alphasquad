@@ -10,13 +10,13 @@ import model.MainMenuModel;
 import java.io.IOException;
 import java.util.List;
 
-public class MainMenuView {
+public class MainMenuViewer extends Viewer {
     private MainMenuModel mainMenuModel;
     private Screen screen;
 
-    public MainMenuView(MainMenuModel mainMenuModel, Screen screen) {
+    public MainMenuViewer(MainMenuModel mainMenuModel, Screen screen) {
+        super(screen);
         this.mainMenuModel = mainMenuModel;
-        this.screen = screen;
     }
 
     public void draw() throws IOException {

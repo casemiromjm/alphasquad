@@ -2,28 +2,17 @@ package controller;
 
 import com.googlecode.lanterna.screen.Screen;
 import model.GameModel;
-import view.GameView;
+import view.GameViewer;
 
 import java.io.IOException;
 
-public class GameController {
-
-    // members
-    private Screen screen;
-    private GameModel gameModel;
-    private GameView gameView;
-
+public class GameController extends Controller{
     // Default Constructor
-    public GameController(Screen screen) {
-        this.screen = screen;
-        gameModel = new GameModel(1, screen.getTerminalSize().getColumns(), screen.getTerminalSize().getRows());
-        gameView = new GameView(screen, gameModel);
+    public GameController(GameModel gameModel) {
+        super(gameModel);
     }
 
     public void run() throws IOException {
-        while(true) {
-            gameModel.createInitialElements();
-            gameView.drawScenario();
-        }
+
     }
 }

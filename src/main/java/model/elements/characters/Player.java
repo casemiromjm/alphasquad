@@ -7,10 +7,6 @@ public class Player extends Character{
         super(position);
     }
 
-    public Player(Position position, int level) {
-        super(position, level);
-    }
-
     @Override
     public void move(){
 

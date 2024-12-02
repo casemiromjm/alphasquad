@@ -8,10 +8,6 @@ public class Enemy extends Character{
         super(position);
     }
 
-    public Enemy(Position position,int level) {
-        super(position, level);
-    }
-
     @Override
     public void move() {
 

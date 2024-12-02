@@ -17,20 +17,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameView {
-    private Screen screen;
+public class GameViewer extends Viewer {
     private GameModel gameModel;
     private TextGraphics textGraphics;
     private List<Drawable> elements = new ArrayList<>();
     private short animation = 0;
 
-    public GameView(Screen screen, GameModel gameModel) {
-        this.screen = screen;
+    public GameViewer(Screen screen, GameModel gameModel) {
+        super(screen);
         this.gameModel = gameModel;
         textGraphics = screen.newTextGraphics();
     }
 
-    public void drawScenario() throws IOException {
+    public void draw() throws IOException {
         int width = screen.getTerminalSize().getColumns();
         int height = screen.getTerminalSize().getRows();
         createElements();

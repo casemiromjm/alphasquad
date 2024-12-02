@@ -7,10 +7,6 @@ public class Ally extends Character{
         super(position);
     }
 
-    public Ally(Position position, int level) {
-        super(position, level);
-    }
-
     @Override
     public void move(){
 

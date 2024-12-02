@@ -11,17 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GameModel {
-    private int difficulty;
+public class GameModel extends Model {
     private List<Enemy> enemyList = new ArrayList<>();
     private List<Ally> allyList = new ArrayList<>();
     private Player player;
     private List<Obstacle> obstacleList;
+    private int difficulty = 1;
     private int width;
     private int height;
 
-    public GameModel(int difficulty, int width, int height) {
-        this.difficulty = difficulty;
+    public GameModel(int width, int height) {
         this.width = width;
         this.height = height;
     }
@@ -42,9 +41,13 @@ public class GameModel {
         return obstacleList;
     }
 
+    public void increaseDifficulty(){
+        difficulty++;
+    }
+
     public void createInitialElements(){
         //Values are temporary
-        player = new Player(new Position(width/2, height - 2), 1);
+        player = new Player(new Position(width/2, height - 2));
 
         while(enemyList.size() < difficulty * 3){
             Random rand = new Random();
@@ -52,7 +55,7 @@ public class GameModel {
             int y = rand.nextInt(height/4);
 
             if(elementCanBePlaced(new Position(x, y))){
-                enemyList.add(new Enemy(new Position(x, y), 1));
+                enemyList.add(new Enemy(new Position(x, y)));
             }
         }
 
@@ -62,7 +65,7 @@ public class GameModel {
             int y = height - 2;
 
             if(elementCanBePlaced(new Position(x, y))){
-                allyList.add(new Ally(new Position(x, y), 1));
+                allyList.add(new Ally(new Position(x, y)));
             }
         }
     }

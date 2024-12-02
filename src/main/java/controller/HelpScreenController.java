@@ -4,19 +4,17 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import model.HelpScreenModel;
-import view.HelpScreenView;
+import view.HelpScreenViewer;
 
 import java.io.IOException;
 
-public class HelpScreenController {
+public class HelpScreenController extends Controller{
     private HelpScreenModel helpScreenModel;
-    private HelpScreenView helpScreenView;
+    private HelpScreenViewer helpScreenView;
     private Screen screen;
 
-    public HelpScreenController(Screen screen) {
-        helpScreenModel = new HelpScreenModel();
-        helpScreenView = new HelpScreenView(helpScreenModel, screen);
-        this.screen = screen;
+    public HelpScreenController(HelpScreenModel helpScreenModel) {
+        super(helpScreenModel);
     }
 
     public void run() throws IOException {

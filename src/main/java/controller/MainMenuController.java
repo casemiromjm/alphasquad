@@ -4,25 +4,15 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import model.MainMenuModel;
-import view.MainMenuView;
+import view.MainMenuViewer;
 
 import java.io.IOException;
 
 
-public class MainMenuController {
+public class MainMenuController extends Controller{
 
-    private Screen screen;
-    private GameController gameController;
-    private HelpScreenController helpScreenController;
-    private MainMenuModel mainMenuModel;
-    private  MainMenuView mainMenuView;
-
-    public MainMenuController(Screen screen, GameController gameController, HelpScreenController helpScreenController) {
-        this.screen = screen;
-        this.gameController = gameController;
-        this.helpScreenController = helpScreenController;
-        mainMenuModel = new MainMenuModel();
-        mainMenuView = new MainMenuView(mainMenuModel, screen);
+    public MainMenuController(MainMenuModel mainMenuModel) {
+        super
     }
 
     public void run() throws IOException {
