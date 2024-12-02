@@ -23,13 +23,13 @@ public class GameViewer extends Viewer {
     private List<Drawable> elements = new ArrayList<>();
     private short animation = 0;
 
-    public GameViewer(Screen screen, GameModel gameModel) {
-        super(screen);
-        this.gameModel = gameModel;
-        textGraphics = screen.newTextGraphics();
+    public GameViewer(GameModel gameModel) {
+        super(gameModel);
     }
 
-    public void draw() throws IOException {
+    public void draw(Screen screen) throws IOException {
+
+        TextGraphics textGraphics = screen.newTextGraphics();
         int width = screen.getTerminalSize().getColumns();
         int height = screen.getTerminalSize().getRows();
         createElements();

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GameModel extends Model {
+public class GameModel extends model.Model {
     private List<Enemy> enemyList = new ArrayList<>();
     private List<Ally> allyList = new ArrayList<>();
     private Player player;

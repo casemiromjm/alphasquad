@@ -11,15 +11,15 @@ import java.io.IOException;
 import java.util.List;
 
 public class MainMenuViewer extends Viewer {
-    private MainMenuModel mainMenuModel;
-    private Screen screen;
 
-    public MainMenuViewer(MainMenuModel mainMenuModel, Screen screen) {
-        super(screen);
+    private MainMenuModel mainMenuModel;
+
+    public MainMenuViewer(MainMenuModel mainMenuModel) {
+        super(mainMenuModel);
         this.mainMenuModel = mainMenuModel;
     }
 
-    public void draw() throws IOException {
+    public void draw(Screen screen) throws IOException {
         //Draw the game title on the screen
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);

@@ -1,18 +1,18 @@
-package controller;
+package Game.controller;
 
+import Game.Application;
 import com.googlecode.lanterna.screen.Screen;
 import model.GameModel;
-import view.GameViewer;
 
 import java.io.IOException;
 
-public class GameController extends Controller{
+public class GameController extends Game.controller.Controller {
     // Default Constructor
     public GameController(GameModel gameModel) {
         super(gameModel);
     }
 
-    public void run() throws IOException {
+    public void run(Application application, Screen screen) throws IOException {
 
     }
 }

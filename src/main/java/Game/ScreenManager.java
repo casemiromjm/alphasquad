@@ -1,11 +1,11 @@
+package Game;
+
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.AWTTerminalFontConfiguration;
-import controller.GameController;
-import controller.HelpScreenController;
 
 import java.awt.*;
 import java.io.File;
@@ -17,7 +17,6 @@ import java.net.URL;
 public class ScreenManager {
 
     private Screen screen;
-
 
     public ScreenManager() throws IOException, FontFormatException, URISyntaxException {
         URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");
@@ -41,11 +40,7 @@ public class ScreenManager {
         screen.doResizeIfNecessary(); // resize screen if necessary
     }
 
-    public void run() throws IOException {
-        HelpScreenController helpScreenController = new HelpScreenController(screen);
-        GameController gameController = new GameController(screen);
-        controller.MainMenuController mainMenuController = new controller.MainMenuController(screen, gameController, helpScreenController);
-        mainMenuController.run();
-        screen.close();
+    public Screen getScreen(){
+        return screen;
     }
 }

@@ -1,6 +1,10 @@
-package controller;
+package Game.controller;
 
+import Game.Application;
+import com.googlecode.lanterna.screen.Screen;
 import model.Model;
+
+import java.io.IOException;
 
 public abstract class Controller {
     private Model model;
@@ -16,4 +20,6 @@ public abstract class Controller {
     public void setModel(Model model) {
         this.model = model;
     }
+
+    public abstract void run(Application application, Screen screen) throws IOException;
 }

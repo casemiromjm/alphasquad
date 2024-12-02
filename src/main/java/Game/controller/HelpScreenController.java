@@ -1,4 +1,4 @@
-package controller;
+package Game.controller;
 
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -8,7 +8,7 @@ import view.HelpScreenViewer;
 
 import java.io.IOException;
 
-public class HelpScreenController extends Controller{
+public class HelpScreenController extends Game.controller.Controller {
     private HelpScreenModel helpScreenModel;
     private HelpScreenViewer helpScreenView;
     private Screen screen;
@@ -17,9 +17,7 @@ public class HelpScreenController extends Controller{
         super(helpScreenModel);
     }
 
-    public void run() throws IOException {
-
-        helpScreenView.draw();
+    public void run(Application application, Screen screen) throws IOException {
 
         while(true){
             KeyStroke key = screen.readInput();
