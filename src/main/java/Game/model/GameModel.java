@@ -2,10 +2,9 @@ package Game.model;
 
 import Game.model.elements.Element;
 import Game.model.elements.Position;
-import Game.model.elements.characters.Ally;
-import Game.model.elements.characters.Enemy;
-import Game.model.elements.characters.Fighter;
-import Game.model.elements.characters.Player;
+import Game.model.elements.fighter.Ally;
+import Game.model.elements.fighter.Enemy;
+import Game.model.elements.fighter.Player;
 import Game.model.elements.obstacles.Obstacle;
 
 import java.util.ArrayList;
@@ -79,7 +78,7 @@ public class GameModel extends Model {
         }
     }
 
-    boolean elementCanBePlaced(Position position){
+    public boolean elementCanBePlaced(Position position){
         //To make more efficient
         if(player != null && player.getPosition().equals(position)){
             return false;

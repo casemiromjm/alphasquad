@@ -1,14 +1,15 @@
 package Game.view;
 
-import Game.model.elements.characters.Player;
+import Game.model.elements.Position;
+import Game.model.elements.fighter.Fighter;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import Game.model.GameModel;
-import Game.model.elements.characters.Ally;
-import Game.model.elements.characters.Enemy;
+import Game.model.elements.fighter.Ally;
+import Game.model.elements.fighter.Enemy;
 import Game.view.elements.Drawable;
 import Game.view.elements.characters.AllyDraw;
 import Game.view.elements.characters.EnemyDraw;
@@ -34,6 +35,7 @@ public class GameViewer extends Viewer {
         createElements();
         screen.clear();
 
+        textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
         textGraphics.setForegroundColor(TextColor.ANSI.GREEN);
 
         switch(animation){
@@ -67,5 +69,29 @@ public class GameViewer extends Viewer {
         for(Ally al : gameModel.getAllyList()){
             elements.add(new AllyDraw(al));
         }
+    }
+
+    public void drawTargetSelection(Screen screen, Position position) throws IOException {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setBackgroundColor(TextColor.ANSI.YELLOW);
+        textGraphics.fillRectangle(new TerminalPosition(position.getX(), position.getY()), new TerminalSize(1 , 1), ' ');
+        screen.refresh();
+        textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
+    }
+
+    public void drawSideInfo(Screen screen, Fighter fighter) throws IOException {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
+        textGraphics.putString(new TerminalPosition(2, 2), "HP: " + fighter.getHitPoints());
+        textGraphics.putString(new TerminalPosition(2, 4), "Damage: " + fighter.getDamage());
+        updateAimInfo(screen, fighter.getAim());
+        screen.refresh();
+    }
+
+    public void updateAimInfo(Screen screen, int aim) throws IOException {
+        TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
+        textGraphics.putString(new TerminalPosition(2, 6), "Aim: " + aim);
+        screen.refresh();
     }
 }

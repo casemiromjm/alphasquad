@@ -3,7 +3,7 @@ package Game.view.elements.characters;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import Game.model.elements.characters.Player;
+import Game.model.elements.fighter.Player;
 import Game.view.elements.Drawable;
 
 public class PlayerDraw implements Drawable {
