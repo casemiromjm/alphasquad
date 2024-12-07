@@ -1,7 +1,7 @@
-package view;
+package Game.view;
 
 import com.googlecode.lanterna.screen.Screen;
-import model.HelpScreenModel;
+import Game.model.HelpScreenModel;
 
 public class HelpScreenViewer extends Viewer {
 

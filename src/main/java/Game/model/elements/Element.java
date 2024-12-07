@@ -1,4 +1,4 @@
-package model.elements;
+package Game.model.elements;
 
 //Abstract class for all elements: characters and obstacles
 public abstract class Element {

@@ -1,7 +1,8 @@
-package model.elements.obstacles;
+package Game.model.elements.obstacles;
 
-import model.elements.Element;
-import model.elements.Position;
+
+import Game.model.elements.Element;
+import Game.model.elements.Position;
 
 public abstract class Obstacle extends Element {
     boolean crossable;

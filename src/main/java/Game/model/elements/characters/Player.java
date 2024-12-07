@@ -1,8 +1,11 @@
-package model.elements.characters;
+package Game.model.elements.characters;
 
-import model.elements.Position;
+import Game.model.elements.Position;
+import com.googlecode.lanterna.screen.Screen;
 
-public class Player extends Character{
+import java.util.List;
+
+public class Player extends Fighter {
     public Player(Position position) {
         super(position);
     }
@@ -13,12 +16,11 @@ public class Player extends Character{
     }
 
     @Override
-    public void selectTarget() {
-
+    public Fighter selectTarget(List<Fighter> targets) {
     }
 
     @Override
-    public void fire() {
+    public void fire(Fighter target) {
 
     }
 

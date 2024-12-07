@@ -1,15 +1,19 @@
-package model.elements.characters;
+package Game.model.elements.characters;
 
-import model.elements.Element;
-import model.elements.Position;
+
+import Game.model.elements.Element;
+import Game.model.elements.Position;
+import com.googlecode.lanterna.screen.Screen;
+
+import java.util.List;
 
 //The characters of the game, both enemies, friendlies and the player
-public abstract class Character extends Element {
+public abstract class Fighter extends Element {
     boolean isDead;
     int hitPoints;
     int aim;
 
-    public Character(Position position){
+    public Fighter(Position position){
         super(position);
         isDead = false;
         hitPoints = 20;
@@ -18,10 +22,6 @@ public abstract class Character extends Element {
 
     public boolean isDead() {
         return isDead;
-    }
-
-    public void setDead(boolean dead) {
-        isDead = dead;
     }
 
     public int getHitPoints() {
@@ -42,7 +42,7 @@ public abstract class Character extends Element {
 
     public abstract void move();
 
-    public abstract void selectTarget();
+    public abstract Fighter selectTarget(List<Fighter> targets);
 
-    public abstract void fire();
+    public abstract void fire(Fighter target);
 }

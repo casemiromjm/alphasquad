@@ -1,21 +1,19 @@
-package view.elements.characters;
+package Game.view.elements.characters;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import model.elements.characters.Enemy;
-import view.elements.Drawable;
+import Game.model.elements.characters.Enemy;
+import Game.view.elements.Drawable;
 
 public class EnemyDraw implements Drawable {
     Enemy enemy;
-    TextGraphics textGraphics;
 
-    public EnemyDraw(TextGraphics textGraphics, Enemy enemy) {
-        this.textGraphics = textGraphics;
+    public EnemyDraw(Enemy enemy) {
         this.enemy = enemy;
     }
 
-    public void draw(){
+    public void draw(TextGraphics textGraphics){
         textGraphics.setForegroundColor(TextColor.ANSI.RED);
         textGraphics.putString(new TerminalPosition(enemy.getPosition().getX(), enemy.getPosition().getY()), "E");
     }

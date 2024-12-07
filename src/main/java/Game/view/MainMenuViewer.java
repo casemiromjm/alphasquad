@@ -1,11 +1,11 @@
-package view;
+package Game.view;
 
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import model.MainMenuModel;
+import Game.model.MainMenuModel;
 
 import java.io.IOException;
 import java.util.List;

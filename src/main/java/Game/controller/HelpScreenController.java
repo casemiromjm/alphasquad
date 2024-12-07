@@ -1,10 +1,12 @@
 package Game.controller;
 
+import Game.Application;
+import Game.view.Viewer;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
-import model.HelpScreenModel;
-import view.HelpScreenViewer;
+import Game.model.HelpScreenModel;
+import Game.view.HelpScreenViewer;
 
 import java.io.IOException;
 
@@ -17,7 +19,8 @@ public class HelpScreenController extends Game.controller.Controller {
         super(helpScreenModel);
     }
 
-    public void run(Application application, Screen screen) throws IOException {
+    @Override
+    public void run(Application application, Screen screen, Viewer viewer) throws IOException {
 
         while(true){
             KeyStroke key = screen.readInput();

@@ -1,4 +1,4 @@
-package model;
+package Game.model;
 
 //TO DO in the end
 public class HelpScreenModel extends Model {

@@ -3,26 +3,30 @@ package Game.state;
 import Game.Application;
 import com.googlecode.lanterna.screen.Screen;
 import Game.controller.Controller;
-import model.Model;
-import view.Viewer;
+import Game.model.Model;
+import Game.view.Viewer;
 
 
 import java.io.IOException;
 
 public abstract class State {
-    public Model model;
+    private Model model;
     private Viewer viewer;
     private Controller controller;
 
-    public State(Model model) {
+    public State(Model model, Viewer viewer, Controller controller) {
         this.model = model;
-        this.viewer = getViewer();
-        this.controller = getController();
+        this.viewer = viewer;
+        this.controller = controller;
     }
 
-    public abstract Viewer getViewer();
+    public Viewer getViewer(){
+        return viewer;
+    }
 
-    public abstract Controller getController();
+    public Controller getController(){
+        return controller;
+    }
 
     public Model getModel(){
         return model;
@@ -30,6 +34,6 @@ public abstract class State {
 
     public void run(Application application, Screen screen) throws IOException {
         viewer.draw(screen);
-        controller.run(application, screen);
+        controller.run(application, screen, viewer);
     }
 }

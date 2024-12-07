@@ -1,9 +1,11 @@
 package Game;
 
+import Game.controller.MainMenuController;
 import Game.state.MainMenuState;
 import Game.state.State;
+import Game.view.MainMenuViewer;
 import com.googlecode.lanterna.screen.Screen;
-import model.MainMenuModel;
+import Game.model.MainMenuModel;
 
 import java.awt.*;
 import java.io.IOException;
@@ -19,7 +21,8 @@ public class Application {
 
     public Application() throws IOException, URISyntaxException, FontFormatException {
         screenManager = new ScreenManager();
-        state = new MainMenuState(new MainMenuModel());
+        MainMenuModel mainMenuModel = new MainMenuModel();
+        state = new MainMenuState(mainMenuModel, new MainMenuViewer(mainMenuModel), new MainMenuController(mainMenuModel));
     }
 
     public void setState(State state){

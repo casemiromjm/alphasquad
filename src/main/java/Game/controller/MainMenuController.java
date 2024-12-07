@@ -1,9 +1,15 @@
 package Game.controller;
 
+import Game.Application;
+import Game.model.GameModel;
+import Game.state.GameState;
+import Game.view.GameViewer;
+import Game.view.MainMenuViewer;
+import Game.view.Viewer;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
-import model.MainMenuModel;
+import Game.model.MainMenuModel;
 
 import java.io.IOException;
 
@@ -14,23 +20,29 @@ public class MainMenuController extends Game.controller.Controller {
         super(mainMenuModel);
     }
 
-    public void run(Application application, Screen screen) throws IOException {
+    @Override
+    public void run(Application application, Screen screen, Viewer viewer) throws IOException {
 
         while (true) {
             KeyStroke key = screen.readInput();
 
             if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
+                application.setState(null);
                 break;
 
             } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'h') {
                 screen.clear();
-                screen.refresh();
-                application.setState(new GameState());
+                //application.setState(new GameState(new GameModel(screen.getTerminalSize().getColumns(), screen.getTerminalSize().getRows())));
+                break;
 
             } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
-
+                screen.clear();
+                GameModel gameModel = new GameModel(screen.getTerminalSize().getColumns(), screen.getTerminalSize().getRows());
+                application.setState(new GameState(gameModel, new GameViewer(gameModel), new GameController(gameModel)));
+                break;
 
             } else if (key.getKeyType() == KeyType.EOF) {
+                application.setState(null);
                 break;
             }
         }

@@ -1,25 +1,24 @@
-package view;
+package Game.view;
 
+import Game.model.elements.characters.Player;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import model.GameModel;
-import model.elements.characters.Ally;
-import model.elements.characters.Enemy;
-import view.elements.Drawable;
-import view.elements.characters.AllyDraw;
-import view.elements.characters.EnemyDraw;
-import view.elements.characters.PlayerDraw;
+import Game.model.GameModel;
+import Game.model.elements.characters.Ally;
+import Game.model.elements.characters.Enemy;
+import Game.view.elements.Drawable;
+import Game.view.elements.characters.AllyDraw;
+import Game.view.elements.characters.EnemyDraw;
+import Game.view.elements.characters.PlayerDraw;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameViewer extends Viewer {
-    private GameModel gameModel;
-    private TextGraphics textGraphics;
     private List<Drawable> elements = new ArrayList<>();
     private short animation = 0;
 
@@ -51,22 +50,22 @@ public class GameViewer extends Viewer {
         }
 
         for(Drawable el : elements){
-            el.draw();
+            el.draw(textGraphics);
         }
 
         screen.refresh();
     }
 
     private void createElements(){
+        GameModel gameModel = (GameModel) super.getModel();
+        elements.add(new PlayerDraw(gameModel.getPlayer()));
 
-        elements.add(new PlayerDraw(textGraphics, gameModel.getPlayer()));
-
-        for(Enemy en : gameModel.getEnemyList()){
-            elements.add(new EnemyDraw(textGraphics, en));
+        for(Enemy enemy : gameModel.getEnemyList()) {
+            elements.add(new EnemyDraw(enemy));
         }
 
         for(Ally al : gameModel.getAllyList()){
-            elements.add(new AllyDraw(textGraphics, al));
+            elements.add(new AllyDraw(al));
         }
     }
 }

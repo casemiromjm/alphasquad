@@ -1,8 +1,10 @@
-package model.elements.characters;
+package Game.model.elements.characters;
 
-import model.elements.Position;
+import Game.model.elements.Position;
 
-public class Ally extends Character{
+import java.util.List;
+
+public class Ally extends Fighter {
     public Ally(Position position) {
         super(position);
     }
@@ -13,12 +15,12 @@ public class Ally extends Character{
     }
 
     @Override
-    public void selectTarget() {
+    public Fighter selectTarget(List<Fighter> targets) {
 
     }
 
     @Override
-    public void fire() {
+    public void fire(Fighter target) {
 
     }
 
