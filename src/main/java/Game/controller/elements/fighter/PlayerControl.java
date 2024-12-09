@@ -29,7 +29,8 @@ public class PlayerControl extends GameController implements FighterControl{
     @Override
     public void run(Application application, Screen screen, Viewer viewer) throws IOException {
         move(screen);
-        viewer.draw(screen); //Temporary
+        GameViewer gameViewer = (GameViewer) viewer;
+        gameViewer.draw(screen); //Temporary
         GameModel gameModel = (GameModel) super.getModel();
         List<Fighter> enemies = new ArrayList<>(gameModel.getEnemyList());
         Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);
@@ -40,34 +41,38 @@ public class PlayerControl extends GameController implements FighterControl{
     @Override
     public void move(Screen screen) throws IOException {
         boolean moved = false;
+        GameModel gameModel = (GameModel) super.getModel();
+        Position position = player.getPosition();
 
         while(!moved){
             KeyStroke keyStroke = screen.readInput();
-            GameModel gameModel = (GameModel) super.getModel();
-            Position position;
 
-            switch (keyStroke.getKeyType()){
-                case KeyType.ArrowUp:
-                    position = new Position(player.getPosition().getX(), player.getPosition().getY() - 1);
-                    moved = gameModel.elementCanBePlaced(position);
-                    break;
+            if (keyStroke.getKeyType() == KeyType.ArrowUp) {
+                position = new Position(player.getPosition().getX(), player.getPosition().getY() - 1);
+                moved = gameModel.elementCanBePlaced(position);
+            }
 
-                case KeyType.ArrowDown:
-                    position = new Position(player.getPosition().getX(), player.getPosition().getY() + 1);
-                    moved = gameModel.elementCanBePlaced(position);
-                    break;
+            else if(keyStroke.getKeyType() == KeyType.ArrowDown) {
+                position = new Position(player.getPosition().getX(), player.getPosition().getY() + 1);
+                moved = gameModel.elementCanBePlaced(position);
+            }
 
-                case KeyType.ArrowRight:
-                    position = new Position(player.getPosition().getX() + 1, player.getPosition().getY());
-                    moved = gameModel.elementCanBePlaced(position);
-                    break;
+            else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
+                position = new Position(player.getPosition().getX() + 1, player.getPosition().getY());
+                moved = gameModel.elementCanBePlaced(position);
+            }
 
-                case KeyType.ArrowLeft:
-                    position = new Position(player.getPosition().getX() - 1, player.getPosition().getY());
-                    moved = gameModel.elementCanBePlaced(position);
-                    break;
+            else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
+                position = new Position(player.getPosition().getX() - 1, player.getPosition().getY());
+                moved = gameModel.elementCanBePlaced(position);
+            }
+
+            else if(keyStroke.getKeyType() == KeyType.Enter){
+                moved = true;
             }
         }
+
+        player.setPosition(position);
     }
 
     @Override
@@ -77,23 +82,31 @@ public class PlayerControl extends GameController implements FighterControl{
         boolean selected = false;
 
         while(!selected) {
-            gameViewer.drawTargetSelection(screen, targets.get(target_index).getPosition());
+            gameViewer.drawFighterCombatPhase(screen, player, targets.get(target_index).getPosition());
             KeyStroke keyStroke = screen.readInput();
 
             switch (keyStroke.getKeyType()) {
                 case KeyType.ArrowRight:
                     target_index++;
-                    target = targets.get(abs(target_index % targets.size()));
                     break;
 
                 case KeyType.ArrowLeft:
                     target_index--;
-                    target = targets.get(abs(target_index % targets.size()));
                     break;
 
                 case KeyType.Enter:
                     selected = true;
+                    break;
             }
+
+            if(target_index < 0){
+                target_index += targets.size();
+            }
+            else if(target_index >= targets.size()){
+                target_index -= targets.size();
+            }
+
+            target = targets.get(target_index);
         }
         return target;
     }

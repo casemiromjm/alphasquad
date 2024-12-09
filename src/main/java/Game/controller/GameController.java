@@ -33,18 +33,15 @@ public class GameController extends Game.controller.Controller {
         List<Fighter> enemies = new ArrayList<>();
         enemies.addAll(gameModel.getEnemyList());
 
-        ((GameViewer) viewer).drawSideInfo(screen, gameModel.getPlayer());
         PlayerControl playerControl = new PlayerControl(gameModel, gameModel.getPlayer());
         playerControl.run(application, screen, viewer);
 
         for(Ally ally : gameModel.getAllyList()){
-            ((GameViewer) viewer).drawSideInfo(screen, ally);
             AllyControl allyControl = new AllyControl(gameModel, ally);
             allyControl.run(application, screen, viewer);
         }
 
         for(Enemy enemy : gameModel.getEnemyList()){
-            ((GameViewer) viewer).drawSideInfo(screen, enemy);
             EnemyControl enemyControl = new EnemyControl(gameModel, enemy);
             enemyControl.run(application, screen, viewer);
         }

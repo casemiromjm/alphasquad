@@ -5,18 +5,20 @@ import Game.model.elements.Element;
 import Game.model.elements.Position;
 
 public abstract class Obstacle extends Element {
-    boolean crossable;
+    private int damageReduction;
+    private int protection;
 
-    public Obstacle(Position position, boolean crossable) {
+    public Obstacle(Position position, int damageReduction, int protection) {
         super(position);
-        this.crossable = crossable;
+        this.damageReduction = damageReduction;
+        this.protection = protection;
     }
 
-    public boolean isCrossable() {
-        return crossable;
+    public int getDamageReduction() {
+        return damageReduction;
     }
 
-    public void setCrossable(boolean crossable) {
-        this.crossable = crossable;
+    public int getProtection() {
+        return protection;
     }
 }

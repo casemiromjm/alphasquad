@@ -55,7 +55,7 @@ public class GameModel extends Model {
 
         while(allyList.size() < 2){
             Random rand = new Random();
-            int x = rand.nextInt(11, width);
+            int x = rand.nextInt(12, width);
             int y = height - 2;
 
             if(elementCanBePlaced(new Position(x, y))){
@@ -69,7 +69,7 @@ public class GameModel extends Model {
 
         while(enemyList.size() < difficulty * 3){
             Random rand = new Random();
-            int x = rand.nextInt(11, width);
+            int x = rand.nextInt(12, width);
             int y = rand.nextInt(height/4);
 
             if(elementCanBePlaced(new Position(x, y))){

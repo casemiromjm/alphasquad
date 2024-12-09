@@ -1,4 +1,4 @@
-package Game.view.elements.characters;
+package Game.view.elements.fighter;
 
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;

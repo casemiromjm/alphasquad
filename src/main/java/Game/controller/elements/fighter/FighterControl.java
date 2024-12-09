@@ -9,9 +9,9 @@ import java.io.IOException;
 import java.util.List;
 
 public interface FighterControl {
-    public void move(Screen screen) throws IOException;
+    void move(Screen screen) throws IOException;
 
-    public Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer) throws IOException;
+    Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer) throws IOException;
 
-    public void fire(Fighter target);
+    void fire(Fighter target);
 }

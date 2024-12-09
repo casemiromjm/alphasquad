@@ -29,6 +29,8 @@ public class AllyControl extends GameController implements FighterControl {
     @Override
     public void run(Application application, Screen screen, Viewer viewer) throws IOException {
         move(screen);
+        GameViewer gameViewer = (GameViewer) viewer;
+        gameViewer.draw(screen);
         GameModel gameModel = (GameModel) super.getModel();
         List<Fighter> enemies = new ArrayList<>(gameModel.getEnemyList());
         Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);
@@ -38,34 +40,38 @@ public class AllyControl extends GameController implements FighterControl {
     @Override
     public void move(Screen screen) throws IOException {
         boolean moved = false;
+        GameModel gameModel = (GameModel) super.getModel();
+        Position position = ally.getPosition();
 
         while(!moved){
             KeyStroke keyStroke = screen.readInput();
-            GameModel gameModel = (GameModel) super.getModel();
-            Position position;
 
-            switch (keyStroke.getKeyType()){
-                case KeyType.ArrowUp:
-                    position = new Position(ally.getPosition().getX(), ally.getPosition().getY() - 1);
-                    moved = gameModel.elementCanBePlaced(position);
-                    break;
+            if (keyStroke.getKeyType() == KeyType.ArrowUp) {
+                position = new Position(ally.getPosition().getX(), ally.getPosition().getY() - 1);
+                moved = gameModel.elementCanBePlaced(position);
+            }
 
-                case KeyType.ArrowDown:
-                    position = new Position(ally.getPosition().getX(), ally.getPosition().getY() + 1);
-                    moved = gameModel.elementCanBePlaced(position);
-                    break;
+            else if(keyStroke.getKeyType() == KeyType.ArrowDown) {
+                position = new Position(ally.getPosition().getX(), ally.getPosition().getY() + 1);
+                moved = gameModel.elementCanBePlaced(position);
+            }
 
-                case KeyType.ArrowRight:
-                    position = new Position(ally.getPosition().getX() + 1, ally.getPosition().getY());
-                    moved = gameModel.elementCanBePlaced(position);
-                    break;
+            else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
+                position = new Position(ally.getPosition().getX() + 1, ally.getPosition().getY());
+                moved = gameModel.elementCanBePlaced(position);
+            }
 
-                case KeyType.ArrowLeft:
-                    position = new Position(ally.getPosition().getX() - 1, ally.getPosition().getY());
-                    moved = gameModel.elementCanBePlaced(position);
-                    break;
+            else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
+                position = new Position(ally.getPosition().getX() - 1, ally.getPosition().getY());
+                moved = gameModel.elementCanBePlaced(position);
+            }
+
+            else if(keyStroke.getKeyType() == KeyType.Enter){
+                moved = true;
             }
         }
+
+        ally.setPosition(position);
     }
 
     @Override
@@ -75,23 +81,31 @@ public class AllyControl extends GameController implements FighterControl {
         boolean selected = false;
 
         while(!selected) {
-            gameViewer.drawTargetSelection(screen, targets.get(target_index).getPosition());
+            gameViewer.drawFighterCombatPhase(screen, ally, targets.get(target_index).getPosition());
             KeyStroke keyStroke = screen.readInput();
 
             switch (keyStroke.getKeyType()) {
                 case KeyType.ArrowRight:
                     target_index++;
-                    target = targets.get(abs(target_index % targets.size()));
                     break;
 
                 case KeyType.ArrowLeft:
                     target_index--;
-                    target = targets.get(abs(target_index % targets.size()));
                     break;
 
                 case KeyType.Enter:
                     selected = true;
+                    break;
             }
+
+            if(target_index < 0){
+                target_index += targets.size();
+            }
+            else if(target_index >= targets.size()){
+                target_index -= targets.size();
+            }
+
+            target = targets.get(target_index);
         }
         return target;
     }
