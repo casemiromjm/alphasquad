@@ -28,9 +28,10 @@ public class PlayerControl extends GameController implements FighterControl{
 
     @Override
     public void run(Application application, Screen screen, Viewer viewer) throws IOException {
-        move(screen);
         GameViewer gameViewer = (GameViewer) viewer;
-        gameViewer.draw(screen); //Temporary
+        gameViewer.draw(screen);
+        move(screen);
+        gameViewer.draw(screen);
         GameModel gameModel = (GameModel) super.getModel();
         List<Fighter> enemies = new ArrayList<>(gameModel.getEnemyList());
         Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);
@@ -104,7 +105,7 @@ public class PlayerControl extends GameController implements FighterControl{
                 target_index += targets.size();
             }
             else if(target_index >= targets.size()){
-                target_index -= targets.size();
+                target_index %= targets.size();
             }
 
             target = targets.get(target_index);

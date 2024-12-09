@@ -187,10 +187,10 @@ public class GameModel extends Model {
     private Obstacle checkObstacles(Position origin, Position target){
         //In case there is more than one possible obstacle, choose the one with the biggest protection
         List<Obstacle> candidates;
-        Obstacle result;
+        Obstacle result = null;
 
         for(Obstacle ob : obstacleList){
-            if(ob.getPosition().getX() )
+            //if(ob.getPosition().getX() )
         }
         return result;
     }
