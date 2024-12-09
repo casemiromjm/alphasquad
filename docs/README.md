@@ -78,10 +78,14 @@ O jogo contará com um sistema de progressão através de três níveis distinto
 ### Padrão MVC
 O projeto implementa inicialmente a separação em **Model - View - Controller**.
 
+### State Pattern
+O projeto implementa o padrão de estados para gerir a mudança de ecrãs e alterar as funcionalidades de cada momento.
+
 ---
 
 ### *Patterns* Utilizados
 - MVC (Model-View-Controller)
+- States
 
 ---
 
@@ -92,6 +96,14 @@ número de classes e dependências o que, na criação de testes, dificulta o pr
 
 ---
 
-### Diagrama UML da Implementação Atual
+### Diagrama UML da Implementação Atual (alterar)
 ![UML atual](uml.png)
 - Algumas ligações são temporárias para facilitar a visualização do projeto.
+
+---
+
+### _Code Smells_ Conhecidos
+- Smell 1 ...
+
+---
+
