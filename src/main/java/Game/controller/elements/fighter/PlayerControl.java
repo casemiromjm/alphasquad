@@ -68,6 +68,7 @@ public class PlayerControl extends GameController implements FighterControl{
             }
 
             else if(keyStroke.getKeyType() == KeyType.Enter){
+                position = player.getPosition();
                 moved = true;
             }
         }

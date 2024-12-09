@@ -2,6 +2,13 @@ package Game.view;
 
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Fighter;
+import Game.model.elements.obstacles.Bush;
+import Game.model.elements.obstacles.Obstacle;
+import Game.model.elements.obstacles.SmallStoneWall;
+import Game.model.elements.obstacles.SmallWoodenWall;
+import Game.view.elements.obstacles.BushDraw;
+import Game.view.elements.obstacles.SmallStoneWallDraw;
+import Game.view.elements.obstacles.SmallWoodenWallDraw;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -66,6 +73,20 @@ public class GameViewer extends Viewer {
             elements.add(new AllyDraw(al));
         }
 
+        for(Obstacle ob : gameModel.getObstacleList()){
+            if(ob instanceof Bush){
+                elements.add(new BushDraw((Bush) ob));
+            }
+
+            else if(ob instanceof SmallStoneWall){
+                elements.add(new SmallStoneWallDraw((SmallStoneWall) ob));
+            }
+
+            else if(ob instanceof SmallWoodenWall){
+                elements.add(new SmallWoodenWallDraw((SmallWoodenWall) ob));
+            }
+        }
+
         return elements;
     }
 
@@ -83,8 +104,8 @@ public class GameViewer extends Viewer {
     }
 
     private void drawTargetSelection(TextGraphics textGraphics, Position position) {
-        textGraphics.setBackgroundColor(TextColor.ANSI.YELLOW);
-        textGraphics.fillRectangle(new TerminalPosition(position.getX(), position.getY()), new TerminalSize(1 , 1), ' ');
+        textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+        textGraphics.setCharacter(new TerminalPosition(position.getX(), position.getY()), 'T');
     }
 
     private void drawSideInfo(TextGraphics textGraphics, Fighter fighter) {

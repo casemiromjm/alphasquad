@@ -67,6 +67,7 @@ public class AllyControl extends GameController implements FighterControl {
             }
 
             else if(keyStroke.getKeyType() == KeyType.Enter){
+                position = ally.getPosition();
                 moved = true;
             }
         }
