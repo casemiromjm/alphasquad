@@ -1,15 +1,20 @@
 package Game.controller;
 
 import Game.Application;
-import Game.model.elements.characters.Fighter;
+import Game.controller.elements.fighter.AllyControl;
+import Game.controller.elements.fighter.EnemyControl;
+import Game.controller.elements.fighter.PlayerControl;
+import Game.model.elements.fighter.Ally;
+import Game.model.elements.fighter.Enemy;
+import Game.model.elements.fighter.Fighter;
+import Game.model.elements.fighter.Player;
+import Game.view.GameViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.screen.Screen;
 import Game.model.GameModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class GameController extends Game.controller.Controller {
@@ -28,17 +33,17 @@ public class GameController extends Game.controller.Controller {
         List<Fighter> enemies = new ArrayList<>();
         enemies.addAll(gameModel.getEnemyList());
 
-        for(Fighter playable : alliesAndPlayer){
-            playable.move();
-            Fighter target = playable.selectTarget(enemies);
-            playable.fire(target);
+        PlayerControl playerControl = new PlayerControl(gameModel, gameModel.getPlayer());
+        playerControl.run(application, screen, viewer);
 
+        for(Ally ally : gameModel.getAllyList()){
+            AllyControl allyControl = new AllyControl(gameModel, ally);
+            allyControl.run(application, screen, viewer);
         }
 
-        for(Fighter enemy : enemies){
-            enemy.move();
-            Fighter target = enemy.selectTarget(alliesAndPlayer);
-            enemy.fire(target);
+        for(Enemy enemy : gameModel.getEnemyList()){
+            EnemyControl enemyControl = new EnemyControl(gameModel, enemy);
+            enemyControl.run(application, screen, viewer);
         }
     }
 }

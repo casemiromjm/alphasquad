@@ -2,10 +2,9 @@ package Game.model;
 
 import Game.model.elements.Element;
 import Game.model.elements.Position;
-import Game.model.elements.characters.Ally;
-import Game.model.elements.characters.Enemy;
-import Game.model.elements.characters.Fighter;
-import Game.model.elements.characters.Player;
+import Game.model.elements.fighter.Ally;
+import Game.model.elements.fighter.Enemy;
+import Game.model.elements.fighter.Player;
 import Game.model.elements.obstacles.Obstacle;
 
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class GameModel extends Model {
 
         while(allyList.size() < 2){
             Random rand = new Random();
-            int x = rand.nextInt(11, width);
+            int x = rand.nextInt(12, width);
             int y = height - 2;
 
             if(elementCanBePlaced(new Position(x, y))){
@@ -70,7 +69,7 @@ public class GameModel extends Model {
 
         while(enemyList.size() < difficulty * 3){
             Random rand = new Random();
-            int x = rand.nextInt(11, width);
+            int x = rand.nextInt(12, width);
             int y = rand.nextInt(height/4);
 
             if(elementCanBePlaced(new Position(x, y))){
@@ -79,7 +78,7 @@ public class GameModel extends Model {
         }
     }
 
-    boolean elementCanBePlaced(Position position){
+    public boolean elementCanBePlaced(Position position){
         //To make more efficient
         if(player != null && player.getPosition().equals(position)){
             return false;

@@ -1,9 +1,8 @@
-package Game.model.elements.characters;
+package Game.model.elements.fighter;
 
 
 import Game.model.elements.Element;
 import Game.model.elements.Position;
-import com.googlecode.lanterna.screen.Screen;
 
 import java.util.List;
 
@@ -12,12 +11,14 @@ public abstract class Fighter extends Element {
     boolean isDead;
     int hitPoints;
     int aim;
+    int damage;
 
     public Fighter(Position position){
         super(position);
         isDead = false;
         hitPoints = 20;
         aim = 70;       //Subject to change
+        damage = 10;
     }
 
     public boolean isDead() {
@@ -40,9 +41,11 @@ public abstract class Fighter extends Element {
         this.aim = aim;
     }
 
-    public abstract void move();
+    public int getDamage() {
+        return damage;
+    }
 
-    public abstract Fighter selectTarget(List<Fighter> targets);
-
-    public abstract void fire(Fighter target);
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
 }
