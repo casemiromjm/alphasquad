@@ -9,6 +9,7 @@ import Game.model.elements.obstacles.SmallWoodenWall;
 import Game.view.elements.obstacles.BushDraw;
 import Game.view.elements.obstacles.SmallStoneWallDraw;
 import Game.view.elements.obstacles.SmallWoodenWallDraw;
+import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -45,7 +46,7 @@ public class GameViewer extends Viewer {
         screen.refresh();
     }
 
-    public void drawFighterCombatPhase(Screen screen, Fighter fighter,Position target) throws IOException {
+    public void drawFighterCombatPhase(Screen screen, Fighter fighter, Fighter target) throws IOException {
         screen.clear();
 
         TextGraphics textGraphics = screen.newTextGraphics();
@@ -54,8 +55,8 @@ public class GameViewer extends Viewer {
 
         drawBackground(textGraphics, width, height);
         drawElements(textGraphics);
-        drawSideInfo(textGraphics, fighter);
-        drawTargetSelection(textGraphics, target);
+        drawSideInfo(textGraphics, fighter, target);
+        drawTargetSelection(textGraphics, target.getPosition());
 
         screen.refresh();
     }
@@ -91,9 +92,10 @@ public class GameViewer extends Viewer {
     }
 
     private void drawBackground(TextGraphics textGraphics, int width, int height){
+        GameModel gameModel = (GameModel) super.getModel();
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
         textGraphics.setForegroundColor(TextColor.ANSI.GREEN);
-        textGraphics.fillRectangle(new TerminalPosition(12, 0), new TerminalSize(width, height), '~');
+        textGraphics.fillRectangle(new TerminalPosition(gameModel.getArenaStartPoint(), 0), new TerminalSize(width, height), '~');
     }
 
     private void drawElements(TextGraphics textGraphics){
@@ -108,11 +110,25 @@ public class GameViewer extends Viewer {
         textGraphics.setCharacter(new TerminalPosition(position.getX(), position.getY()), 'T');
     }
 
-    private void drawSideInfo(TextGraphics textGraphics, Fighter fighter) {
+    private void drawSideInfo(TextGraphics textGraphics, Fighter fighter, Fighter target) {
+        GameModel gameModel = (GameModel) super.getModel();
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
-        textGraphics.putString(new TerminalPosition(1, 2), "HP: " + fighter.getHitPoints());
-        textGraphics.putString(new TerminalPosition(1, 4), "Damage: " + fighter.getDamage());
-        textGraphics.putString(new TerminalPosition(1, 6), "Aim: " ); //To update when aim calculation is implemented
+
+        textGraphics.enableModifiers(SGR.BOLD);
+        textGraphics.putString(new TerminalPosition(1, 2), "Active Player");
+        textGraphics.disableModifiers(SGR.BOLD);
+        textGraphics.putString(new TerminalPosition(1, 4), "HP: " + fighter.getHitPoints());
+        textGraphics.putString(new TerminalPosition(1, 6), "Base Damage: " + fighter.getDamage());
+        textGraphics.putString(new TerminalPosition(1, 8), "Real Damage: " + gameModel.damageCalculator(fighter, target.getPosition()));
+        textGraphics.putString(new TerminalPosition(1, 10), "Base Aim: " + fighter.getAim());
+        textGraphics.putString(new TerminalPosition(1, 12), "Real Aim: " + gameModel.aimCalculator(fighter, target.getPosition())); //To update when aim calculation is implemented
+
+        textGraphics.enableModifiers(SGR.BOLD);
+        textGraphics.putString(new TerminalPosition(1, 16), "Target");
+        textGraphics.disableModifiers(SGR.BOLD);
+        textGraphics.putString(new TerminalPosition(1, 18), "HP: " + target.getHitPoints());
+        textGraphics.putString(new TerminalPosition(1, 20), "Damage: " + target.getDamage());
+        textGraphics.putString(new TerminalPosition(1, 22), "Aim: " + target.getAim());
     }
 }

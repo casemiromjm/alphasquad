@@ -25,11 +25,13 @@ public class GameModel extends Model {
     private int difficulty = 1;
     private int width;
     private int height;
+    private int arenaStartPoint;
     private Random rand;
 
-    public GameModel(int width, int height) {
+    public GameModel(int width, int height, int arenaStartPoint) {
         this.width = width;
         this.height = height;
+        this.arenaStartPoint = arenaStartPoint;
         rand = new Random();
         createInitialElements();
 
@@ -43,6 +45,14 @@ public class GameModel extends Model {
         this.rand = rand;
         createInitialElements();
         createLevelElements();
+    }
+
+    public int getArenaStartPoint() {
+        return arenaStartPoint;
+    }
+
+    public void setArenaStartPoint(int arenaStartPoint) {
+        this.arenaStartPoint = arenaStartPoint;
     }
 
     public List<Enemy> getEnemyList() {
@@ -75,7 +85,7 @@ public class GameModel extends Model {
         player = new Player(new Position(width/2, height - 2));
 
         while(allyList.size() < 2){
-            int x = rand.nextInt(12, width);
+            int x = rand.nextInt(arenaStartPoint, width);
             int y = height - 2;
 
             if(elementCanBePlaced(new Position(x, y))){
@@ -87,7 +97,7 @@ public class GameModel extends Model {
     private void createLevelElements(){
         //Creating Level specific elements
         while(enemyList.size() < difficulty * 3){
-            Position position = generatePosition(12, width, 0, height/4);
+            Position position = generatePosition(arenaStartPoint, width, 0, height/4);
 
             if(elementCanBePlaced(position)){
                 enemyList.add(new Enemy(position));
@@ -96,7 +106,7 @@ public class GameModel extends Model {
 
         //Add stone walls
         for(int i = 0; i < 2; i++) {
-            Position position = generatePosition(12, width, height/4, 3 * height/4);
+            Position position = generatePosition(arenaStartPoint, width, height/4, 3 * height/4);
 
             if (elementCanBePlaced(position)) {
                 obstacleList.add(new SmallStoneWall(position));
@@ -104,7 +114,7 @@ public class GameModel extends Model {
         }
 
         for(int i = 0; i < 4; i++){
-            Position position = generatePosition(12, width, height/4, 3 * height/4);
+            Position position = generatePosition(arenaStartPoint, width, height/4, 3 * height/4);
 
             if (elementCanBePlaced(position)) {
                 obstacleList.add(new SmallWoodenWall(position));
@@ -112,7 +122,7 @@ public class GameModel extends Model {
         }
 
         for(int i = 0; i < 4; i++){
-            Position position = generatePosition(12, width, height/4, 3 * height/4);
+            Position position = generatePosition(arenaStartPoint, width, height/4, 3 * height/4);
 
             if (elementCanBePlaced(position)) {
                 obstacleList.add(new Bush(position));
@@ -129,7 +139,7 @@ public class GameModel extends Model {
 
     public boolean elementCanBePlaced(Position position){
         //To make more efficient
-        if(position.getX() < 12 || position.getX() > width - 1 || position.getY() < 0 || position.getY() > height - 1)
+        if(position.getX() < arenaStartPoint || position.getX() > width - 1 || position.getY() < 0 || position.getY() > height - 1)
             return false;
 
         if(player.getPosition().equals(position))
@@ -168,9 +178,18 @@ public class GameModel extends Model {
         Obstacle obstacle = checkObstacles(origin, target);
 
         if(obstacle != null)
-            return toIntExact(round(sqrt(pow(origin.getX() - target.getX(), 2) + pow(origin.getY() - target.getY(), 2))) + obstacle.getProtection());
+            return 2 * toIntExact(round(getDistance(origin, target))) + obstacle.getProtection();
 
-        return toIntExact(round(sqrt(pow(origin.getX() - target.getX(), 2) + pow(origin.getY() - target.getY(), 2))));
+        return 2 * toIntExact(round(getDistance(origin, target)));
+    }
+
+    public int aimCalculator(Fighter origin, Position target){
+        int aim = origin.getAim() - aimPenaltyCalculator(origin.getPosition(), target);
+        if(aim < 0){
+            return 0;
+        }
+
+        return aim;
     }
 
     public int damagePenaltyCalculator(Position origin, Position target){
@@ -182,16 +201,73 @@ public class GameModel extends Model {
         return 0;
     }
 
+    public int damageCalculator(Fighter origin, Position target){
+        int damage = origin.getDamage() - damagePenaltyCalculator(origin.getPosition(), target);
+        if(damage < 0){
+            return 0;
+        }
+
+        return damage;
+    }
 
     //Checks for any obstacle adjacent to the target position that may interfere with the Line of Sight (LoS) from the origin
     private Obstacle checkObstacles(Position origin, Position target){
         //In case there is more than one possible obstacle, choose the one with the biggest protection
-        List<Obstacle> candidates;
+        List<Obstacle> candidates = new ArrayList<>();
         Obstacle result = null;
 
         for(Obstacle ob : obstacleList){
-            //if(ob.getPosition().getX() )
+            Position ob_position = ob.getPosition();
+            //Hard to understand, to improve
+            if(getDistance(ob_position, target) < 2){
+                if((ob_position.getX() >= origin.getX() && ob_position.getY() >= origin.getY() && ob_position.getX() <= target.getX() && ob_position.getY() <= target.getY()) ||
+                        (ob_position.getX() <= origin.getX() && ob_position.getY() >= origin.getY() && ob_position.getX() >= target.getX() && ob_position.getY() <= target.getY()) ||
+                        (ob_position.getX() <= origin.getX() && ob_position.getY() <= origin.getY() && ob_position.getX() >= target.getX() && ob_position.getY() >= target.getY()) ||
+                        (ob_position.getX() >= origin.getX() && ob_position.getY() <= origin.getY() && ob_position.getX() <= target.getX() && ob_position.getY() >= target.getY())){
+
+                    candidates.add(ob);
+                }
+            }
         }
+
+        for(Obstacle ob : candidates){
+            if(result == null){
+                result = ob;
+            }
+
+            else if(ob.getProtection() > result.getProtection()){
+                result = ob;
+            }
+        }
+
         return result;
+    }
+
+    public double getDistance(Position p1, Position p2){
+        return sqrt(pow(p1.getX() - p2.getX(), 2) + pow(p1.getY() - p2.getY(), 2));
+    }
+
+    public boolean hitOrMiss(Fighter origin, Fighter target){
+        int totalAim = aimCalculator(origin, target.getPosition());
+
+        if(totalAim <= 0 || totalAim >= 100){
+            return false;
+        }
+
+        int hitValue = rand.nextInt(1, 101);
+
+        return hitValue <= totalAim;
+    }
+
+    public void cleanDeath(){
+        enemyList.removeIf(Fighter::isDead);
+        allyList.removeIf(Fighter::isDead);
+    }
+
+    public void checkNewLevel(){
+        if(enemyList.isEmpty()){
+            nextLevel();
+            createLevelElements();
+        }
     }
 }

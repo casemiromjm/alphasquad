@@ -1,28 +1,95 @@
 package Game.controller.elements.fighter;
 
+import Game.Application;
 import Game.controller.GameController;
 import Game.model.GameModel;
+import Game.model.elements.Position;
 import Game.model.elements.fighter.Enemy;
 import Game.model.elements.fighter.Fighter;
 import Game.view.GameViewer;
+import Game.view.Viewer;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class EnemyControl extends GameController implements FighterControl {
-    private Enemy enemy;
+    private final Enemy enemy;
+    private Fighter target;
 
     public EnemyControl(GameModel gameModel, Enemy enemy) {
         super(gameModel);
         this.enemy = enemy;
     }
 
-    public void move(Screen screen) throws IOException{}
+    public void run(Application application, Screen screen, Viewer viewer) throws IOException {
+        GameModel gameModel = (GameModel) super.getModel();
+        List<Fighter> alliesAndPlayer = new ArrayList<>();
+        alliesAndPlayer.add(gameModel.getPlayer());
+        alliesAndPlayer.addAll(gameModel.getAllyList());
 
-    public Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer) throws IOException{
-        return null;
+        target = selectTarget(screen, alliesAndPlayer, (GameViewer) viewer);
+        GameViewer gameViewer = (GameViewer) viewer;
+        long time = System.currentTimeMillis();
+
+        gameViewer.draw(screen);
+        time = waiting(time, 4000);
+        move(screen);
+        gameViewer.draw(screen);
+        time = waiting(time, 4000);
+        gameViewer.drawFighterCombatPhase(screen, enemy, target);
+        time = waiting(time, 4000);
+        fire(target);
+        waiting(time, 3000);
     }
 
-    public void fire(Fighter target){}
+    public void move(Screen screen){
+        GameModel gameModel = (GameModel) super.getModel();
+        Position currentPosition = enemy.getPosition();
+        List<Position> adjacentPositions = Arrays.asList(new Position(currentPosition.getX() + 1, currentPosition.getY()),
+                new Position(currentPosition.getX() - 1, currentPosition.getY()),
+                new Position(currentPosition.getX(), currentPosition.getY()  + 1),
+                new Position(currentPosition.getX(), currentPosition.getY() - 1));
+
+        Position best = currentPosition;
+        int aim = gameModel.aimCalculator(enemy, target.getPosition());     //Senseless value, to change
+
+        for(Position pos : adjacentPositions){
+            enemy.setPosition(pos);
+            int pos_aim = gameModel.aimPenaltyCalculator(pos, target.getPosition());
+
+            if(pos_aim < aim && gameModel.elementCanBePlaced(pos)){
+                best = pos;
+                aim = pos_aim;
+            }
+        }
+        enemy.setPosition(best);
+    }
+
+    public Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer){
+        GameModel gameModel = (GameModel) super.getModel();
+        Fighter closest = targets.getFirst();
+
+        for(Fighter fighter : targets){
+            if(gameModel.getDistance(enemy.getPosition(), fighter.getPosition()) < gameModel.getDistance(enemy.getPosition(), closest.getPosition()))
+                closest = fighter;
+
+        }
+        return closest;
+    }
+
+    public void fire(Fighter target){
+        GameModel gameModel = (GameModel) super.getModel();
+
+        if(gameModel.hitOrMiss(enemy, target)){
+            target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(enemy, target.getPosition()));
+        }
+    }
+
+    private long waiting(long time, long timer){
+        while(System.currentTimeMillis() - time < timer);
+        return System.currentTimeMillis() - time;
+    }
 }

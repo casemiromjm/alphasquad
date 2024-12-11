@@ -16,11 +16,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.abs;
-
 public class AllyControl extends GameController implements FighterControl {
 
-    private Ally ally;
+    private final Ally ally;
+    private Fighter target;
 
     public AllyControl(GameModel gameModel, Ally ally) {
         super(gameModel);
@@ -83,7 +82,7 @@ public class AllyControl extends GameController implements FighterControl {
         boolean selected = false;
 
         while(!selected) {
-            gameViewer.drawFighterCombatPhase(screen, ally, targets.get(target_index).getPosition());
+            gameViewer.drawFighterCombatPhase(screen, ally, targets.get(target_index));
             KeyStroke keyStroke = screen.readInput();
 
             switch (keyStroke.getKeyType()) {
@@ -115,7 +114,9 @@ public class AllyControl extends GameController implements FighterControl {
     //Temporary
     @Override
     public void fire(Fighter target) {
-        int realDamage = 0;
-        target.setHitPoints(target.getHitPoints() - ally.getDamage());
+        GameModel gameModel = (GameModel) super.getModel();
+        if(gameModel.hitOrMiss(ally, target)){
+            target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(ally, target.getPosition()));
+        }
     }
 }

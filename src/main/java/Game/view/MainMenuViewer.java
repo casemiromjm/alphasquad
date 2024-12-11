@@ -21,6 +21,7 @@ public class MainMenuViewer extends Viewer {
 
     public void draw(Screen screen) throws IOException {
         //Draw the game title on the screen
+        screen.clear();
         TextGraphics textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE);

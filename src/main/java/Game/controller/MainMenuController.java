@@ -23,28 +23,23 @@ public class MainMenuController extends Game.controller.Controller {
     @Override
     public void run(Application application, Screen screen, Viewer viewer) throws IOException {
 
-        while (true) {
-            KeyStroke key = screen.readInput();
+        KeyStroke key = screen.readInput();
 
-            if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
-                application.setState(null);
-                break;
+        if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
+            application.setState(null);
 
-            } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'h') {
-                screen.clear();
-                //application.setState(new GameState(new GameModel(screen.getTerminalSize().getColumns(), screen.getTerminalSize().getRows())));
-                break;
+        } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'h') {
+            screen.clear();
+            //application.setState(new GameState(new GameModel(screen.getTerminalSize().getColumns(), screen.getTerminalSize().getRows())));
 
-            } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
-                screen.clear();
-                GameModel gameModel = new GameModel(screen.getTerminalSize().getColumns(), screen.getTerminalSize().getRows());
-                application.setState(new GameState(gameModel, new GameViewer(gameModel), new GameController(gameModel)));
-                break;
+        } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
+            GameModel gameModel = new GameModel(screen.getTerminalSize().getColumns(), screen.getTerminalSize().getRows(), 17);
+            application.setState(new GameState(gameModel, new GameViewer(gameModel), new GameController(gameModel)));
 
-            } else if (key.getKeyType() == KeyType.EOF) {
-                application.setState(null);
-                break;
-            }
+        } else if (key.getKeyType() == KeyType.EOF) {
+            application.setState(null);
+
+
         }
     }
 }

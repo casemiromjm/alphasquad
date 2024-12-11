@@ -30,7 +30,7 @@ public class ScreenManager {
 
         Terminal terminal = new DefaultTerminalFactory()
                 .setTerminalEmulatorFontConfiguration(cfg)
-                .setForceAWTOverSwing(true).setInitialTerminalSize(new TerminalSize(80, 40))
+                .setForceAWTOverSwing(true).setInitialTerminalSize(new TerminalSize(85, 45))
                 .createTerminal();
 
         screen = new TerminalScreen(terminal);

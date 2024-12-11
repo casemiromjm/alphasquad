@@ -4,11 +4,14 @@ import Game.Application;
 import Game.controller.elements.fighter.AllyControl;
 import Game.controller.elements.fighter.EnemyControl;
 import Game.controller.elements.fighter.PlayerControl;
+import Game.model.MainMenuModel;
 import Game.model.elements.fighter.Ally;
 import Game.model.elements.fighter.Enemy;
 import Game.model.elements.fighter.Fighter;
 import Game.model.elements.fighter.Player;
+import Game.state.MainMenuState;
 import Game.view.GameViewer;
+import Game.view.MainMenuViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.screen.Screen;
 import Game.model.GameModel;
@@ -26,24 +29,27 @@ public class GameController extends Game.controller.Controller {
     public void run(Application application, Screen screen, Viewer viewer) throws IOException {
         GameModel gameModel = (GameModel) super.getModel();
 
-        List<Fighter> alliesAndPlayer = new ArrayList<>();
-        alliesAndPlayer.add(gameModel.getPlayer());
-        alliesAndPlayer.addAll(gameModel.getAllyList());
-        
-        List<Fighter> enemies = new ArrayList<>();
-        enemies.addAll(gameModel.getEnemyList());
-
         PlayerControl playerControl = new PlayerControl(gameModel, gameModel.getPlayer());
         playerControl.run(application, screen, viewer);
+        gameModel.cleanDeath();
+        gameModel.checkNewLevel();
 
         for(Ally ally : gameModel.getAllyList()){
             AllyControl allyControl = new AllyControl(gameModel, ally);
             allyControl.run(application, screen, viewer);
+            gameModel.cleanDeath();
+            gameModel.checkNewLevel();
         }
 
         for(Enemy enemy : gameModel.getEnemyList()){
             EnemyControl enemyControl = new EnemyControl(gameModel, enemy);
             enemyControl.run(application, screen, viewer);
+            gameModel.cleanDeath();
+
+            if(gameModel.getPlayer().isDead()){
+                MainMenuModel mainMenuModel = new MainMenuModel();
+                application.setState(new MainMenuState(mainMenuModel, new MainMenuViewer(mainMenuModel), new MainMenuController(mainMenuModel)));
+            }
         }
     }
 }
