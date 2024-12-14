@@ -6,9 +6,16 @@ import Game.model.elements.obstacles.Bush;
 import Game.model.elements.obstacles.Obstacle;
 import Game.model.elements.obstacles.SmallStoneWall;
 import Game.model.elements.obstacles.SmallWoodenWall;
+import Game.model.elements.powerUps.ExtraAim;
+import Game.model.elements.powerUps.ExtraDamage;
+import Game.model.elements.powerUps.ExtraHealth;
+import Game.model.elements.powerUps.PowerUp;
 import Game.view.elements.obstacles.BushDraw;
 import Game.view.elements.obstacles.SmallStoneWallDraw;
 import Game.view.elements.obstacles.SmallWoodenWallDraw;
+import Game.view.elements.powerUps.ExtraAimDraw;
+import Game.view.elements.powerUps.ExtraDamageDraw;
+import Game.view.elements.powerUps.ExtraHealthDraw;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
@@ -88,6 +95,20 @@ public class GameViewer extends Viewer {
             }
         }
 
+        for(PowerUp pu : gameModel.getPowerUpList()){
+            if(pu instanceof ExtraHealth){
+                elements.add(new ExtraHealthDraw((ExtraHealth) pu));
+            }
+
+            else if(pu instanceof ExtraAim){
+                elements.add(new ExtraAimDraw((ExtraAim) pu));
+            }
+
+            else if(pu instanceof ExtraDamage){
+                elements.add(new ExtraDamageDraw((ExtraDamage) pu));
+            }
+        }
+
         return elements;
     }
 
@@ -99,6 +120,7 @@ public class GameViewer extends Viewer {
     }
 
     private void drawElements(TextGraphics textGraphics){
+
         List<Drawable> elements = createElements();
         for(Drawable el : elements){
             el.draw(textGraphics);

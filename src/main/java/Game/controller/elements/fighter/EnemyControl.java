@@ -35,12 +35,11 @@ public class EnemyControl extends GameController implements FighterControl {
         long time = System.currentTimeMillis();
 
         gameViewer.draw(screen);
-        time = waiting(time, 4000);
+        time = waiting(time, 1500);
         move(screen);
         gameViewer.draw(screen);
-        time = waiting(time, 4000);
+        time = waiting(time, 1500);
         gameViewer.drawFighterCombatPhase(screen, enemy, target);
-        time = waiting(time, 4000);
         fire(target);
         waiting(time, 3000);
     }
@@ -53,16 +52,19 @@ public class EnemyControl extends GameController implements FighterControl {
                 new Position(currentPosition.getX(), currentPosition.getY()  + 1),
                 new Position(currentPosition.getX(), currentPosition.getY() - 1));
 
-        Position best = currentPosition;
-        int aim = gameModel.aimCalculator(enemy, target.getPosition());     //Senseless value, to change
+        Position best = null;
+        int aim_penalty = 0;     //Senseless value, to change
 
         for(Position pos : adjacentPositions){
-            enemy.setPosition(pos);
-            int pos_aim = gameModel.aimPenaltyCalculator(pos, target.getPosition());
-
-            if(pos_aim < aim && gameModel.elementCanBePlaced(pos)){
+            int pos_aim_penalty = gameModel.aimPenaltyCalculator(pos, target.getPosition());
+            if(best == null && gameModel.elementCanBePlaced(pos)){
                 best = pos;
-                aim = pos_aim;
+                aim_penalty = pos_aim_penalty;
+            }
+
+            else if(pos_aim_penalty < aim_penalty && gameModel.elementCanBePlaced(pos)){
+                best = pos;
+                aim_penalty = pos_aim_penalty;
             }
         }
         enemy.setPosition(best);

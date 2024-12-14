@@ -27,11 +27,12 @@ public class AllyControl extends GameController implements FighterControl {
     }
     @Override
     public void run(Application application, Screen screen, Viewer viewer) throws IOException {
+        GameModel gameModel = (GameModel) super.getModel();
         GameViewer gameViewer = (GameViewer) viewer;
         gameViewer.draw(screen);
         move(screen);
+        gameModel.applyPowerUps(ally);
         gameViewer.draw(screen);
-        GameModel gameModel = (GameModel) super.getModel();
         List<Fighter> enemies = new ArrayList<>(gameModel.getEnemyList());
         Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);
         fire(target);

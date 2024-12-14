@@ -10,6 +10,10 @@ import Game.model.elements.obstacles.Bush;
 import Game.model.elements.obstacles.Obstacle;
 import Game.model.elements.obstacles.SmallStoneWall;
 import Game.model.elements.obstacles.SmallWoodenWall;
+import Game.model.elements.powerUps.ExtraAim;
+import Game.model.elements.powerUps.ExtraDamage;
+import Game.model.elements.powerUps.ExtraHealth;
+import Game.model.elements.powerUps.PowerUp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +26,8 @@ public class GameModel extends Model {
     private List<Ally> allyList = new ArrayList<>();
     private Player player;
     private List<Obstacle> obstacleList = new ArrayList<>();
-    private int difficulty = 1;
+    private List<PowerUp> powerUpList = new ArrayList<>();
+    private int level = 1;
     private int width;
     private int height;
     private int arenaStartPoint;
@@ -71,13 +76,31 @@ public class GameModel extends Model {
         return obstacleList;
     }
 
+    public List<PowerUp> getPowerUpList() {
+        return powerUpList;
+    }
+
+    public int getLevel(){
+        return level;
+
+    }
+
     public void nextLevel(){
-        difficulty++;
+        level++;
         obstacleList.clear();
         enemyList.clear();
-        //powerUpList.clear();
+        powerUpList.clear();
+        newLevelPermElements();
 
         createLevelElements();
+    }
+
+    public boolean checkNewLevel(){
+        if(enemyList.isEmpty()){
+            nextLevel();
+            return true;
+        }
+        return false;
     }
 
     private void createInitialElements(){
@@ -85,49 +108,80 @@ public class GameModel extends Model {
         player = new Player(new Position(width/2, height - 2));
 
         while(allyList.size() < 2){
-            int x = rand.nextInt(arenaStartPoint, width);
+            int x = rand.nextInt(width/2 - 3, width/2 + 4);
             int y = height - 2;
 
-            if(elementCanBePlaced(new Position(x, y))){
+            if(elementCanBePlaced(new Position(x, y)))
                 allyList.add(new Ally(new Position(x, y)));
-            }
+
         }
     }
 
     private void createLevelElements(){
         //Creating Level specific elements
-        while(enemyList.size() < difficulty * 3){
+        while(enemyList.size() < level * 3){
             Position position = generatePosition(arenaStartPoint, width, 0, height/4);
 
-            if(elementCanBePlaced(position)){
+            if(elementCanBePlaced(position))
                 enemyList.add(new Enemy(position));
-            }
+
         }
 
         //Add stone walls
         for(int i = 0; i < 2; i++) {
-            Position position = generatePosition(arenaStartPoint, width, height/4, 3 * height/4);
+            Position position = generatePosition(arenaStartPoint, width, height/5, 4 * height/5);
 
-            if (elementCanBePlaced(position)) {
+            if (elementCanBePlaced(position))
                 obstacleList.add(new SmallStoneWall(position));
-            }
+
         }
 
         for(int i = 0; i < 4; i++){
-            Position position = generatePosition(arenaStartPoint, width, height/4, 3 * height/4);
+            Position position = generatePosition(arenaStartPoint, width, height/5, 4 * height/5);
 
-            if (elementCanBePlaced(position)) {
+            if (elementCanBePlaced(position))
                 obstacleList.add(new SmallWoodenWall(position));
-            }
+
         }
 
         for(int i = 0; i < 4; i++){
-            Position position = generatePosition(arenaStartPoint, width, height/4, 3 * height/4);
+            Position position = generatePosition(arenaStartPoint, width, height/5, 4 * height/5);
 
-            if (elementCanBePlaced(position)) {
+            if (elementCanBePlaced(position))
                 obstacleList.add(new Bush(position));
+
+        }
+
+        //To improve
+        List<Position> powerup_pos = new ArrayList<>();
+        while(true){
+            Position position = generatePosition(arenaStartPoint, width, 4 * height/5, 4 * height);
+
+            if(elementCanBePlaced(position)){
+                powerUpList.add(new ExtraHealth(position));
+                powerup_pos.add(position);
+                break;
             }
         }
+
+        while(true){
+            Position position = generatePosition(arenaStartPoint, width, 4 * height/5, 4 * height);
+
+            if(elementCanBePlaced(position) && !powerup_pos.contains(position)){
+                powerUpList.add(new ExtraAim(position));
+                break;
+            }
+        }
+
+        while(true){
+            Position position = generatePosition(arenaStartPoint, width, 4 * height/5, 4 * height);
+
+            if(elementCanBePlaced(position) && !powerup_pos.contains(position)){
+                powerUpList.add(new ExtraDamage(position));
+                break;
+            }
+        }
+
     }
 
     private Position generatePosition(int xOrigin, int xLimit, int yOrigin, int yLimit){
@@ -264,10 +318,34 @@ public class GameModel extends Model {
         allyList.removeIf(Fighter::isDead);
     }
 
-    public void checkNewLevel(){
-        if(enemyList.isEmpty()){
-            nextLevel();
-            createLevelElements();
+    public void applyPowerUps(Fighter fighter){
+        for(int i = 0; i < powerUpList.size(); i++) {
+            if (powerUpList.get(i).getPosition().equals(fighter.getPosition())){
+                powerUpList.get(i).apply(fighter);
+                powerUpList.remove(i);
+                break;
+            }
         }
+    }
+
+    private void newLevelPermElements(){
+        player.setPosition(new Position(width/2, height - 2));
+        improveFighter(player);
+
+        for(Ally ally : allyList){
+            int x = rand.nextInt(width/2 - 3, width/2 + 4);
+            int y = height - 2;
+
+            if(elementCanBePlaced(new Position(x, y))){
+                ally.setPosition(new Position(x, y));
+                improveFighter(ally);
+            }
+        }
+    }
+
+    private void improveFighter(Fighter fighter){
+        fighter.setHitPoints(fighter.getHitPoints() + 20);
+        fighter.setAim(fighter.getAim() + 10);
+        fighter.setDamage(fighter.getDamage() + 5);
     }
 }

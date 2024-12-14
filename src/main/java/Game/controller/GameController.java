@@ -29,16 +29,24 @@ public class GameController extends Game.controller.Controller {
     public void run(Application application, Screen screen, Viewer viewer) throws IOException {
         GameModel gameModel = (GameModel) super.getModel();
 
+        if(gameModel.getLevel() > 3){
+            MainMenuModel mainMenuModel = new MainMenuModel();
+            application.setState(new MainMenuState(mainMenuModel, new MainMenuViewer(mainMenuModel), new MainMenuController(mainMenuModel)));
+            return;
+        }
+
         PlayerControl playerControl = new PlayerControl(gameModel, gameModel.getPlayer());
         playerControl.run(application, screen, viewer);
         gameModel.cleanDeath();
-        gameModel.checkNewLevel();
+        if(gameModel.checkNewLevel())                  // If level is over, the turn will also be over
+            return;
 
         for(Ally ally : gameModel.getAllyList()){
             AllyControl allyControl = new AllyControl(gameModel, ally);
             allyControl.run(application, screen, viewer);
             gameModel.cleanDeath();
-            gameModel.checkNewLevel();
+            if(gameModel.checkNewLevel())              // If level is over, the turn will also be over
+                return;
         }
 
         for(Enemy enemy : gameModel.getEnemyList()){
