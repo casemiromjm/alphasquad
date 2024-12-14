@@ -16,10 +16,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.abs;
 
 public class PlayerControl extends GameController implements FighterControl{
-    private Player player;
+    private final Player player;
 
     public PlayerControl(GameModel gameModel, Player player) {
         super(gameModel);
@@ -28,10 +27,12 @@ public class PlayerControl extends GameController implements FighterControl{
 
     @Override
     public void run(Application application, Screen screen, Viewer viewer) throws IOException {
-        move(screen);
-        GameViewer gameViewer = (GameViewer) viewer;
-        gameViewer.draw(screen); //Temporary
         GameModel gameModel = (GameModel) super.getModel();
+        GameViewer gameViewer = (GameViewer) viewer;
+        gameViewer.draw(screen);
+        move(screen);
+        gameModel.applyPowerUps(player);
+        gameViewer.draw(screen);
         List<Fighter> enemies = new ArrayList<>(gameModel.getEnemyList());
         Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);
         fire(target);
@@ -68,6 +69,7 @@ public class PlayerControl extends GameController implements FighterControl{
             }
 
             else if(keyStroke.getKeyType() == KeyType.Enter){
+                position = player.getPosition();
                 moved = true;
             }
         }
@@ -82,7 +84,7 @@ public class PlayerControl extends GameController implements FighterControl{
         boolean selected = false;
 
         while(!selected) {
-            gameViewer.drawFighterCombatPhase(screen, player, targets.get(target_index).getPosition());
+            gameViewer.drawFighterCombatPhase(screen, player, targets.get(target_index));
             KeyStroke keyStroke = screen.readInput();
 
             switch (keyStroke.getKeyType()) {
@@ -103,7 +105,7 @@ public class PlayerControl extends GameController implements FighterControl{
                 target_index += targets.size();
             }
             else if(target_index >= targets.size()){
-                target_index -= targets.size();
+                target_index %= targets.size();
             }
 
             target = targets.get(target_index);
@@ -114,7 +116,10 @@ public class PlayerControl extends GameController implements FighterControl{
     //Temporary
     @Override
     public void fire(Fighter target) {
-        int realDamage = 0;
-        target.setHitPoints(target.getHitPoints() - player.getDamage());
+        GameModel gameModel = (GameModel) super.getModel();
+
+        if(gameModel.hitOrMiss(player, target)){
+            target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(player, target.getPosition()));
+        }
     }
 }

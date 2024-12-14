@@ -8,21 +8,19 @@ import java.util.List;
 
 //The characters of the game, both enemies, friendlies and the player
 public abstract class Fighter extends Element {
-    boolean isDead;
     int hitPoints;
     int aim;
     int damage;
 
     public Fighter(Position position){
         super(position);
-        isDead = false;
         hitPoints = 20;
         aim = 70;       //Subject to change
         damage = 10;
     }
 
     public boolean isDead() {
-        return isDead;
+        return hitPoints <= 0;
     }
 
     public int getHitPoints() {
