@@ -166,7 +166,7 @@ public class GameViewer extends Viewer {
         clip.open(audioInputStream);
 
         FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        volume.setValue(1.0f);
+        volume.setValue(-12.0f);
 
         clip.start();
     }
@@ -180,7 +180,7 @@ public class GameViewer extends Viewer {
         clip.open(audioInputStream);
 
         FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        volume.setValue(1.0f);
+        volume.setValue(-12.0f);
 
         clip.start();
     }
