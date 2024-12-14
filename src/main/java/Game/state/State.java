@@ -7,6 +7,8 @@ import Game.model.Model;
 import Game.view.Viewer;
 
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public abstract class State {
@@ -32,7 +34,7 @@ public abstract class State {
         return model;
     }
 
-    public void run(Application application, Screen screen) throws IOException {
+    public void run(Application application, Screen screen) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         viewer.draw(screen);
         controller.run(application, screen, viewer);
     }

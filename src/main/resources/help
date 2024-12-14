@@ -1,0 +1,10 @@
+-> You are in control of a squad of 3 soldiers:
+    -> You (the player) are represented by the 'P' character, and your allies by 'A';
+    -> Your death represents the end of the game, while your allies' deaths are "irrelevant";
+    -> Your enemies are represented by red 'E's.
+
+-> This game is turn based with each turn being split into three phases:
+    -> Movement phase: use the arrow keys to move your characters;
+    -> Combat phase:
+        -> use the right and left arrows to choose your target (marked with a 'T');
+        -> press enter to select the target

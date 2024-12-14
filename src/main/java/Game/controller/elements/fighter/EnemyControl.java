@@ -10,6 +10,8 @@ import Game.view.GameViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.screen.Screen;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +26,7 @@ public class EnemyControl extends GameController implements FighterControl {
         this.enemy = enemy;
     }
 
-    public void run(Application application, Screen screen, Viewer viewer) throws IOException {
+    public void run(Application application, Screen screen, Viewer viewer) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         GameModel gameModel = (GameModel) super.getModel();
         List<Fighter> alliesAndPlayer = new ArrayList<>();
         alliesAndPlayer.add(gameModel.getPlayer());
@@ -40,7 +42,7 @@ public class EnemyControl extends GameController implements FighterControl {
         gameViewer.draw(screen);
         time = waiting(time, 1500);
         gameViewer.drawFighterCombatPhase(screen, enemy, target);
-        fire(target);
+        fire(target, gameViewer);
         waiting(time, 3000);
     }
 
@@ -82,12 +84,15 @@ public class EnemyControl extends GameController implements FighterControl {
         return closest;
     }
 
-    public void fire(Fighter target){
+    public void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
 
         if(gameModel.hitOrMiss(enemy, target)){
+            gameViewer.hitSound();
             target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(enemy, target.getPosition()));
+            return;
         }
+        gameViewer.missSound();
     }
 
     private long waiting(long time, long timer){

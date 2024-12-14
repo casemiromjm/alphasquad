@@ -6,6 +6,8 @@ import Game.view.Viewer;
 import com.googlecode.lanterna.screen.Screen;
 import Game.model.Model;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public abstract class Controller {
@@ -19,5 +21,5 @@ public abstract class Controller {
         return model;
     }
 
-    public abstract void run(Application application, Screen screen, Viewer viewer) throws IOException;
+    public abstract void run(Application application, Screen screen, Viewer viewer) throws IOException, UnsupportedAudioFileException, LineUnavailableException;
 }

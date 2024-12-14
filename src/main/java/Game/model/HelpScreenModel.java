@@ -1,10 +1,14 @@
 package Game.model;
 
-//TO DO in the end
 public class HelpScreenModel extends Model {
 
-    // members
+    private String text;
 
-    // Default Constructor
+    public HelpScreenModel() {
 
+    }
+
+    private void createHelpText(){
+        text = ""
+    }
 }

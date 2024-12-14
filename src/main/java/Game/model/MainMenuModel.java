@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainMenuModel extends Model {
-    private String title = "Title";
+    private String title = "Alpha Squad";
     private List<String> options = Arrays.asList("Play", "Help", "Quit");
 
     public MainMenuModel() {

@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class HelpScreenController extends Game.controller.Controller {
     private HelpScreenModel helpScreenModel;
-    private HelpScreenViewer helpScreenView;
     private Screen screen;
 
     public HelpScreenController(HelpScreenModel helpScreenModel) {
@@ -21,7 +20,7 @@ public class HelpScreenController extends Game.controller.Controller {
 
     @Override
     public void run(Application application, Screen screen, Viewer viewer) throws IOException {
-
+        viewer.draw(screen);
         while(true){
             KeyStroke key = screen.readInput();
 

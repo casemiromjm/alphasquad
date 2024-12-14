@@ -7,6 +7,8 @@ import Game.view.MainMenuViewer;
 import com.googlecode.lanterna.screen.Screen;
 import Game.model.MainMenuModel;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -15,7 +17,7 @@ public class Application {
     private State state;
     private ScreenManager screenManager;
 
-    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException {
+    public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
         new Application().start();
     }
 
@@ -33,7 +35,7 @@ public class Application {
         return screenManager.getScreen();
     }
 
-    private void start() throws IOException {
+    private void start() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         while(this.state != null){
             state.run(this, screenManager.getScreen());
         }
