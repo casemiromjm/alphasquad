@@ -5,6 +5,8 @@ import Game.view.GameViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.screen.Screen;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.List;
 
@@ -13,5 +15,5 @@ public interface FighterControl {
 
     Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer) throws IOException;
 
-    void fire(Fighter target);
+    void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 }

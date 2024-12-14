@@ -30,6 +30,9 @@ import Game.view.elements.fighter.AllyDraw;
 import Game.view.elements.fighter.EnemyDraw;
 import Game.view.elements.fighter.PlayerDraw;
 
+import javax.sound.sampled.*;
+import java.awt.geom.Arc2D;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -152,5 +155,33 @@ public class GameViewer extends Viewer {
         textGraphics.putString(new TerminalPosition(1, 18), "HP: " + target.getHitPoints());
         textGraphics.putString(new TerminalPosition(1, 20), "Damage: " + target.getDamage());
         textGraphics.putString(new TerminalPosition(1, 22), "Aim: " + target.getAim());
+    }
+
+    public void hitSound() throws LineUnavailableException, UnsupportedAudioFileException, IOException {
+
+        File soundFile = new File("src/main/resources/sounds/hit.wav");
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+
+        FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        volume.setValue(1.0f);
+
+        clip.start();
+    }
+
+    public void missSound() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+
+        File soundFile = new File("src/main/resources/sounds/miss.wav");
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+
+        FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        volume.setValue(1.0f);
+
+        clip.start();
     }
 }

@@ -16,6 +16,8 @@ import Game.view.Viewer;
 import com.googlecode.lanterna.screen.Screen;
 import Game.model.GameModel;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ public class GameController extends Game.controller.Controller {
         super(gameModel);
     }
 
-    public void run(Application application, Screen screen, Viewer viewer) throws IOException {
+    public void run(Application application, Screen screen, Viewer viewer) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         GameModel gameModel = (GameModel) super.getModel();
 
         if(gameModel.getLevel() > 3){

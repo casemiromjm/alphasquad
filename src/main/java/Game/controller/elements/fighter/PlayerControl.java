@@ -12,6 +12,8 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ public class PlayerControl extends GameController implements FighterControl{
     }
 
     @Override
-    public void run(Application application, Screen screen, Viewer viewer) throws IOException {
+    public void run(Application application, Screen screen, Viewer viewer) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         GameModel gameModel = (GameModel) super.getModel();
         GameViewer gameViewer = (GameViewer) viewer;
         gameViewer.draw(screen);
@@ -35,7 +37,7 @@ public class PlayerControl extends GameController implements FighterControl{
         gameViewer.draw(screen);
         List<Fighter> enemies = new ArrayList<>(gameModel.getEnemyList());
         Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);
-        fire(target);
+        fire(target, gameViewer);
     }
 
 
@@ -115,11 +117,14 @@ public class PlayerControl extends GameController implements FighterControl{
 
     //Temporary
     @Override
-    public void fire(Fighter target) {
+    public void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
 
         if(gameModel.hitOrMiss(player, target)){
+            gameViewer.hitSound();
             target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(player, target.getPosition()));
+            return;
         }
+        gameViewer.missSound();
     }
 }
