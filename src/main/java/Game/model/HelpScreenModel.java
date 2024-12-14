@@ -9,6 +9,6 @@ public class HelpScreenModel extends Model {
     }
 
     private void createHelpText(){
-        text = ""
+        text = "";
     }
 }
