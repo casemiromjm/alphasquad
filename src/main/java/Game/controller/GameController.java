@@ -4,26 +4,25 @@ import Game.Application;
 import Game.controller.elements.fighter.AllyControl;
 import Game.controller.elements.fighter.EnemyControl;
 import Game.controller.elements.fighter.PlayerControl;
-import Game.model.MainMenuModel;
+import Game.model.DefeatModel;
+import Game.model.GameModel;
+import Game.model.VictoryModel;
 import Game.model.elements.fighter.Ally;
 import Game.model.elements.fighter.Enemy;
-import Game.model.elements.fighter.Fighter;
-import Game.model.elements.fighter.Player;
-import Game.state.MainMenuState;
-import Game.view.GameViewer;
-import Game.view.MainMenuViewer;
+import Game.state.DefeatState;
+import Game.state.GameState;
+import Game.state.VictoryState;
+import Game.view.DefeatViewer;
+import Game.view.VictoryViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.screen.Screen;
-import Game.model.GameModel;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameController extends Game.controller.Controller {
-    // Default Constructor
+
     public GameController(GameModel gameModel) {
         super(gameModel);
     }
@@ -32,13 +31,16 @@ public class GameController extends Game.controller.Controller {
         GameModel gameModel = (GameModel) super.getModel();
 
         if(gameModel.getLevel() > 3){
-            MainMenuModel mainMenuModel = new MainMenuModel();
-            application.setState(new MainMenuState(mainMenuModel, new MainMenuViewer(mainMenuModel), new MainMenuController(mainMenuModel)));
+            VictoryModel victoryModel = new VictoryModel();
+            application.setState(new VictoryState(victoryModel, new VictoryViewer(victoryModel), new VictoryController(victoryModel)));
             return;
         }
 
         PlayerControl playerControl = new PlayerControl(gameModel, gameModel.getPlayer());
         playerControl.run(application, screen, viewer);
+        if(!(application.getState() instanceof GameState)){
+            return;
+        }
         gameModel.cleanDeath();
         if(gameModel.checkNewLevel())                  // If level is over, the turn will also be over
             return;
@@ -46,6 +48,9 @@ public class GameController extends Game.controller.Controller {
         for(Ally ally : gameModel.getAllyList()){
             AllyControl allyControl = new AllyControl(gameModel, ally);
             allyControl.run(application, screen, viewer);
+            if(!(application.getState() instanceof GameState)){
+                return;
+            }
             gameModel.cleanDeath();
             if(gameModel.checkNewLevel())              // If level is over, the turn will also be over
                 return;
@@ -57,8 +62,8 @@ public class GameController extends Game.controller.Controller {
             gameModel.cleanDeath();
 
             if(gameModel.getPlayer().isDead()){
-                MainMenuModel mainMenuModel = new MainMenuModel();
-                application.setState(new MainMenuState(mainMenuModel, new MainMenuViewer(mainMenuModel), new MainMenuController(mainMenuModel)));
+                DefeatModel defeatModel = new DefeatModel();
+                application.setState(new DefeatState(defeatModel, new DefeatViewer(defeatModel), new DefeatController(defeatModel)));
             }
         }
     }

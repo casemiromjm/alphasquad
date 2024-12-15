@@ -7,7 +7,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class BushDraw implements Drawable {
-    private Bush bush;
+    private final Bush bush;
 
     public BushDraw(Bush bush) {
         this.bush = bush;

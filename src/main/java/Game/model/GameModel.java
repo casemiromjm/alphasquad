@@ -22,16 +22,16 @@ import java.util.Random;
 import static java.lang.Math.*;
 
 public class GameModel extends Model {
-    private List<Enemy> enemyList = new ArrayList<>();
-    private List<Ally> allyList = new ArrayList<>();
+    private final List<Enemy> enemyList = new ArrayList<>();
+    private final List<Ally> allyList = new ArrayList<>();
     private Player player;
-    private List<Obstacle> obstacleList = new ArrayList<>();
-    private List<PowerUp> powerUpList = new ArrayList<>();
+    private final List<Obstacle> obstacleList = new ArrayList<>();
+    private final List<PowerUp> powerUpList = new ArrayList<>();
     private int level = 1;
-    private int width;
-    private int height;
+    private final int width;
+    private final int height;
     private int arenaStartPoint;
-    private Random rand;
+    private final Random rand;
 
     public GameModel(int width, int height, int arenaStartPoint) {
         this.width = width;
@@ -239,11 +239,8 @@ public class GameModel extends Model {
 
     public int aimCalculator(Fighter origin, Position target){
         int aim = origin.getAim() - aimPenaltyCalculator(origin.getPosition(), target);
-        if(aim < 0){
-            return 0;
-        }
+        return Math.max(aim, 0);
 
-        return aim;
     }
 
     public int damagePenaltyCalculator(Position origin, Position target){
@@ -257,11 +254,8 @@ public class GameModel extends Model {
 
     public int damageCalculator(Fighter origin, Position target){
         int damage = origin.getDamage() - damagePenaltyCalculator(origin.getPosition(), target);
-        if(damage < 0){
-            return 0;
-        }
+        return Math.max(damage, 0);
 
-        return damage;
     }
 
     //Checks for any obstacle adjacent to the target position that may interfere with the Line of Sight (LoS) from the origin
@@ -304,9 +298,11 @@ public class GameModel extends Model {
     public boolean hitOrMiss(Fighter origin, Fighter target){
         int totalAim = aimCalculator(origin, target.getPosition());
 
-        if(totalAim <= 0 || totalAim >= 100){
+        if(totalAim <= 0)
             return false;
-        }
+
+        else if(totalAim >= 100)
+            return true;
 
         int hitValue = rand.nextInt(1, 101);
 
@@ -335,10 +331,12 @@ public class GameModel extends Model {
         for(Ally ally : allyList){
             int x = rand.nextInt(width/2 - 3, width/2 + 4);
             int y = height - 2;
-
-            if(elementCanBePlaced(new Position(x, y))){
-                ally.setPosition(new Position(x, y));
-                improveFighter(ally);
+            while(true) {
+                if (elementCanBePlaced(new Position(x, y))) {
+                    ally.setPosition(new Position(x, y));
+                    improveFighter(ally);
+                    break;
+                }
             }
         }
     }

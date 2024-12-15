@@ -1,11 +1,11 @@
 package Game;
 
 import Game.controller.MainMenuController;
+import Game.model.MainMenuModel;
 import Game.state.MainMenuState;
 import Game.state.State;
 import Game.view.MainMenuViewer;
 import com.googlecode.lanterna.screen.Screen;
-import Game.model.MainMenuModel;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -15,7 +15,7 @@ import java.net.URISyntaxException;
 
 public class Application {
     private State state;
-    private ScreenManager screenManager;
+    private final ScreenManager screenManager;
 
     public static void main(String[] args) throws IOException, URISyntaxException, FontFormatException, UnsupportedAudioFileException, LineUnavailableException {
         new Application().start();
@@ -31,6 +31,10 @@ public class Application {
         this.state = state;
     }
 
+    public State getState() {
+        return state;
+    }
+
     public Screen getScreen(){
         return screenManager.getScreen();
     }
@@ -41,5 +45,10 @@ public class Application {
         }
 
         screenManager.getScreen().close();
+    }
+
+    public long waiting(long time, long timer){
+        while(System.currentTimeMillis() - time < timer);
+        return System.currentTimeMillis();
     }
 }

@@ -2,14 +2,18 @@ package Game.controller;
 
 import Game.Application;
 import Game.model.GameModel;
+import Game.model.HelpScreenModel;
+import Game.model.MainMenuModel;
 import Game.state.GameState;
+import Game.state.HelpState;
+import Game.state.MainMenuState;
 import Game.view.GameViewer;
+import Game.view.HelpScreenViewer;
 import Game.view.MainMenuViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
-import Game.model.MainMenuModel;
 
 import java.io.IOException;
 
@@ -22,15 +26,14 @@ public class MainMenuController extends Game.controller.Controller {
 
     @Override
     public void run(Application application, Screen screen, Viewer viewer) throws IOException {
-
         KeyStroke key = screen.readInput();
 
         if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
             application.setState(null);
 
         } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'h') {
-            screen.clear();
-            //application.setState(new GameState(new GameModel(screen.getTerminalSize().getColumns(), screen.getTerminalSize().getRows())));
+            HelpScreenModel helpScreenModel = new HelpScreenModel();
+            application.setState(new HelpState(helpScreenModel, new HelpScreenViewer(helpScreenModel), new HelpScreenController(helpScreenModel)));
 
         } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
             GameModel gameModel = new GameModel(screen.getTerminalSize().getColumns(), screen.getTerminalSize().getRows(), 17);
@@ -38,8 +41,6 @@ public class MainMenuController extends Game.controller.Controller {
 
         } else if (key.getKeyType() == KeyType.EOF) {
             application.setState(null);
-
-
         }
     }
 }

@@ -1,12 +1,12 @@
 package Game.view;
 
-import com.googlecode.lanterna.screen.Screen;
 import Game.model.Model;
+import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
 
 public abstract class Viewer {
-    private Model model;
+    private final Model model;
 
     public Viewer(Model model) {
         this.model = model;

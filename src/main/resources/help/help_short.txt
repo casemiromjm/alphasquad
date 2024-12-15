@@ -1,0 +1,36 @@
+-> You are in control of a squad of 3 soldiers:
+    -> The player is represented by a 'P', and your allies by an 'A';
+    -> Your death represents the end of the game;
+    -> Your enemies are represented by red 'E's.
+
+-> The order of the turns is player-allies-enemies;
+
+-> Each turn is split into two phases:
+    -> Movement phase: use the arrow keys to move your characters;
+    -> Combat phase:
+        -> use the right and left arrows to choose your target and ENTER to select;
+
+
+->There is a total of three levels, before victory is reached and any losses you
+suffer between levels are permanent and will not be replenished. Despite this,
+any of your characters that survive will have their stats buffed each round.
+
+
+-> In game, there are five important stats that will be displayed on the left side
+of the screen:
+    -> HP
+    -> Damage
+    -> Aim
+    -> Real Aim/Damage
+
+
+-> On the battlefield there will be series of obstacles ('S', 'W', 'B') that will
+affect yours and your enemies' damage and chances to hit.
+
+
+-> Last but not least, there are also three different power ups to make you
+stronger (Extra Health: '+', Extra Damage: '>', Extra Aim: 'o').
+
+
+For more in-depth help, read the help.txt file on the following location:
+src/main/resources/help/help.txt (Recommended)

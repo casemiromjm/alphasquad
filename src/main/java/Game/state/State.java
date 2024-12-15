@@ -1,21 +1,21 @@
 package Game.state;
 
 import Game.Application;
-import com.googlecode.lanterna.screen.Screen;
 import Game.controller.Controller;
 import Game.model.Model;
 import Game.view.Viewer;
-
+import com.googlecode.lanterna.screen.Screen;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 public abstract class State {
-    private Model model;
-    private Viewer viewer;
-    private Controller controller;
+    private final Model model;
+    private final Viewer viewer;
+    private final Controller controller;
 
+    //To later apply the factory method on all states, similar to Hero, to avoid having to create controllers and viewers independently
     public State(Model model, Viewer viewer, Controller controller) {
         this.model = model;
         this.viewer = viewer;

@@ -7,7 +7,7 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
 public class SmallStoneWallDraw implements Drawable {
-    private SmallStoneWall smallStoneWall;
+    private final SmallStoneWall smallStoneWall;
 
     public SmallStoneWallDraw(SmallStoneWall smallStoneWall) {
         this.smallStoneWall = smallStoneWall;

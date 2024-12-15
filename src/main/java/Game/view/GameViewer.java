@@ -1,6 +1,9 @@
 package Game.view;
 
+import Game.model.GameModel;
 import Game.model.elements.Position;
+import Game.model.elements.fighter.Ally;
+import Game.model.elements.fighter.Enemy;
 import Game.model.elements.fighter.Fighter;
 import Game.model.elements.obstacles.Bush;
 import Game.model.elements.obstacles.Obstacle;
@@ -10,6 +13,10 @@ import Game.model.elements.powerUps.ExtraAim;
 import Game.model.elements.powerUps.ExtraDamage;
 import Game.model.elements.powerUps.ExtraHealth;
 import Game.model.elements.powerUps.PowerUp;
+import Game.view.elements.Drawable;
+import Game.view.elements.fighter.AllyDraw;
+import Game.view.elements.fighter.EnemyDraw;
+import Game.view.elements.fighter.PlayerDraw;
 import Game.view.elements.obstacles.BushDraw;
 import Game.view.elements.obstacles.SmallStoneWallDraw;
 import Game.view.elements.obstacles.SmallWoodenWallDraw;
@@ -22,16 +29,8 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import Game.model.GameModel;
-import Game.model.elements.fighter.Ally;
-import Game.model.elements.fighter.Enemy;
-import Game.view.elements.Drawable;
-import Game.view.elements.fighter.AllyDraw;
-import Game.view.elements.fighter.EnemyDraw;
-import Game.view.elements.fighter.PlayerDraw;
 
 import javax.sound.sampled.*;
-import java.awt.geom.Arc2D;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;

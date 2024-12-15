@@ -2,11 +2,16 @@ package Game.controller.elements.fighter;
 
 import Game.Application;
 import Game.controller.GameController;
+import Game.controller.MainMenuController;
 import Game.model.GameModel;
+import Game.model.MainMenuModel;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Ally;
 import Game.model.elements.fighter.Fighter;
+import Game.state.GameState;
+import Game.state.MainMenuState;
 import Game.view.GameViewer;
+import Game.view.MainMenuViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -32,7 +37,10 @@ public class AllyControl extends GameController implements FighterControl {
         GameModel gameModel = (GameModel) super.getModel();
         GameViewer gameViewer = (GameViewer) viewer;
         gameViewer.draw(screen);
-        move(screen);
+        move(application, screen);
+        if(!(application.getState() instanceof GameState)){
+            return;
+        }
         gameModel.applyPowerUps(ally);
         gameViewer.draw(screen);
         List<Fighter> enemies = new ArrayList<>(gameModel.getEnemyList());
@@ -41,7 +49,7 @@ public class AllyControl extends GameController implements FighterControl {
     }
 
     @Override
-    public void move(Screen screen) throws IOException {
+    public void move(Application application, Screen screen) throws IOException {
         boolean moved = false;
         GameModel gameModel = (GameModel) super.getModel();
         Position position = ally.getPosition();
@@ -72,6 +80,12 @@ public class AllyControl extends GameController implements FighterControl {
             else if(keyStroke.getKeyType() == KeyType.Enter){
                 position = ally.getPosition();
                 moved = true;
+            }
+
+            else if(keyStroke.getKeyType() == KeyType.Escape) {
+                MainMenuModel mainMenuModel = new MainMenuModel();
+                application.setState(new MainMenuState(mainMenuModel, new MainMenuViewer(mainMenuModel), new MainMenuController(mainMenuModel)));
+                return;
             }
         }
 

@@ -5,8 +5,8 @@ import Game.model.elements.Element;
 import Game.model.elements.Position;
 
 public abstract class Obstacle extends Element {
-    private int damageReduction;
-    private int protection;
+    private final int damageReduction;
+    private final int protection;
 
     public Obstacle(Position position, int damageReduction, int protection) {
         super(position);

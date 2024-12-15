@@ -1,10 +1,10 @@
 package Game.view.elements.fighter;
 
+import Game.model.elements.fighter.Ally;
+import Game.view.elements.Drawable;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import Game.model.elements.fighter.Ally;
-import Game.view.elements.Drawable;
 
 public class AllyDraw implements Drawable {
     Ally ally;
