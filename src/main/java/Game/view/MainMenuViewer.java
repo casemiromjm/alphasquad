@@ -1,18 +1,18 @@
 package Game.view;
 
+import Game.model.MainMenuModel;
 import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import Game.model.MainMenuModel;
 
 import java.io.IOException;
 import java.util.List;
 
 public class MainMenuViewer extends Viewer {
 
-    private MainMenuModel mainMenuModel;
+    private final MainMenuModel mainMenuModel;
 
     public MainMenuViewer(MainMenuModel mainMenuModel) {
         super(mainMenuModel);

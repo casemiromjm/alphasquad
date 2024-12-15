@@ -1,6 +1,5 @@
 package Game.view.elements.powerUps;
 
-import Game.model.elements.powerUps.ExtraDamage;
 import Game.model.elements.powerUps.ExtraHealth;
 import Game.view.elements.Drawable;
 import com.googlecode.lanterna.TerminalPosition;

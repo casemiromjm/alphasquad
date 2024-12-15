@@ -35,18 +35,19 @@ public class EnemyControl extends GameController implements FighterControl {
         target = selectTarget(screen, alliesAndPlayer, (GameViewer) viewer);
         GameViewer gameViewer = (GameViewer) viewer;
         long time = System.currentTimeMillis();
+        long timer = 1000;
 
         gameViewer.draw(screen);
-        time = waiting(time, 1500);
-        move(screen);
+        time = application.waiting(time, timer);
+        move(application, screen);
         gameViewer.draw(screen);
-        time = waiting(time, 1500);
+        time = application.waiting(time, timer);
         gameViewer.drawFighterCombatPhase(screen, enemy, target);
+        application.waiting(time, timer);
         fire(target, gameViewer);
-        waiting(time, 3000);
     }
 
-    public void move(Screen screen){
+    public void move(Application application, Screen screen){
         GameModel gameModel = (GameModel) super.getModel();
         Position currentPosition = enemy.getPosition();
         List<Position> adjacentPositions = Arrays.asList(new Position(currentPosition.getX() + 1, currentPosition.getY()),
@@ -93,10 +94,5 @@ public class EnemyControl extends GameController implements FighterControl {
             return;
         }
         gameViewer.missSound();
-    }
-
-    private long waiting(long time, long timer){
-        while(System.currentTimeMillis() - time < timer);
-        return System.currentTimeMillis() - time;
     }
 }

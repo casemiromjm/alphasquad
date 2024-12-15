@@ -16,7 +16,7 @@ import java.net.URL;
 
 public class ScreenManager {
 
-    private Screen screen;
+    private final Screen screen;
 
     public ScreenManager() throws IOException, FontFormatException, URISyntaxException {
         URL resource = getClass().getClassLoader().getResource("fonts/square.ttf");

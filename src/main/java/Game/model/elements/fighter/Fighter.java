@@ -4,8 +4,6 @@ package Game.model.elements.fighter;
 import Game.model.elements.Element;
 import Game.model.elements.Position;
 
-import java.util.List;
-
 //The characters of the game, both enemies, friendlies and the player
 public abstract class Fighter extends Element {
     int hitPoints;
