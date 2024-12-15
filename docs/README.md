@@ -2,7 +2,7 @@
 
 Neste projeto, propomos criar um jogo inspirado no [Armoured Commander](https://store.steampowered.com/app/1361580/Armoured_Commander/), com elementos adicionais retirados do sistema de combate do [XCOM Enemy Unknown](https://store.steampowered.com/app/200510/XCOM_Enemy_Unknown/).
 
-O objetivo do jogo é proporcionar um confronto PvE entre dois esquadrões, onde o jogador poderá recolher *power-ups* para melhorar a sua performance e facilitar o combate. O jogo termina com a vitória do esquadrão ou com a morte do jogador, apresentando uma mensagem de *game over*.
+O objetivo do jogo é proporcionar um confronto PvE entre dois esquadrões, em que o jogador poderá recolher *power-ups* para melhorar a sua performance e facilitar o combate. O jogo termina com a vitória do esquadrão ou com a morte do jogador, apresentando uma mensagem de *game over*.
 
 ---
 
@@ -78,10 +78,14 @@ O jogo contará com um sistema de progressão através de três níveis distinto
 ### Padrão MVC
 O projeto implementa inicialmente a separação em **Model - View - Controller**.
 
+### State Pattern
+O projeto implementa o padrão de estados para gerir a mudança de ecrãs e alterar as funcionalidades de cada momento.
+
 ---
 
 ### *Patterns* Utilizados
 - MVC (Model-View-Controller)
+- States
 
 ---
 
@@ -92,6 +96,14 @@ número de classes e dependências o que, na criação de testes, dificulta o pr
 
 ---
 
-### Diagrama UML da Implementação Atual
+### Diagrama UML da Implementação Atual (alterar)
 ![UML atual](uml.png)
 - Algumas ligações são temporárias para facilitar a visualização do projeto.
+
+---
+
+### _Code Smells_ Conhecidos
+- Smell 1 ...
+
+---
+
