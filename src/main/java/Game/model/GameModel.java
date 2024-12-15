@@ -128,28 +128,31 @@ public class GameModel extends Model {
         }
 
         //Add stone walls
-        for(int i = 0; i < 2; i++) {
+        for(int i = 0; i < 2;) {
             Position position = generatePosition(arenaStartPoint, width, height/5, 4 * height/5);
 
-            if (elementCanBePlaced(position))
+            if (elementCanBePlaced(position)) {
                 obstacleList.add(new SmallStoneWall(position));
-
+                i++;
+            }
         }
 
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < 4;){
             Position position = generatePosition(arenaStartPoint, width, height/5, 4 * height/5);
 
-            if (elementCanBePlaced(position))
+            if (elementCanBePlaced(position)) {
                 obstacleList.add(new SmallWoodenWall(position));
-
+                i++;
+            }
         }
 
-        for(int i = 0; i < 4; i++){
-            Position position = generatePosition(arenaStartPoint, width, height/5, 4 * height/5);
+        for(int i = 0; i < 4;) {
+            Position position = generatePosition(arenaStartPoint, width, height / 5, 4 * height / 5);
 
-            if (elementCanBePlaced(position))
+            if (elementCanBePlaced(position)){
                 obstacleList.add(new Bush(position));
-
+                i++;
+            }
         }
 
         //To improve
@@ -329,9 +332,9 @@ public class GameModel extends Model {
         improveFighter(player);
 
         for(Ally ally : allyList){
-            int x = rand.nextInt(width/2 - 3, width/2 + 4);
-            int y = height - 2;
             while(true) {
+                int x = rand.nextInt(width/2 - 3, width/2 + 4);
+                int y = height - 2;
                 if (elementCanBePlaced(new Position(x, y))) {
                     ally.setPosition(new Position(x, y));
                     improveFighter(ally);

@@ -168,6 +168,9 @@ public class GameViewer extends Viewer {
         volume.setValue(-12.0f);
 
         clip.start();
+        clip.drain();
+        clip.close();
+        audioInputStream.close();
     }
 
     public void missSound() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -182,5 +185,8 @@ public class GameViewer extends Viewer {
         volume.setValue(-12.0f);
 
         clip.start();
+        clip.drain();
+        clip.close();
+        audioInputStream.close();
     }
 }

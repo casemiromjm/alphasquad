@@ -6,17 +6,19 @@
 -> The order of the turns is player-allies-enemies;
 
 -> Each turn is split into two phases:
-    -> Movement phase: use the arrow keys to move your characters;
+    -> Movement phase: use the arrow keys to move your characters, you can also press 'Q' to abandon the match and
+    return to the menu;
     -> Combat phase:
         -> use the right and left arrows to choose your target (marked with a 'T');
         -> press Enter to select the target.
 
 ->There is a total of three levels, before victory is reached, each one with an increasing number of enemies
-in each, despite this, any losses you suffer between levels are permanent and will not be replenished. Plus, any of your characters
-that survive will have their stats buffed.
+in each, despite this, any losses you suffer between levels are permanent and will not be replenished. Plus, any of your
+characters that survive will have their stats buffed.
 
 -> In game, there are five important stats that will be displayed on the left side of the screen:
-    -> HP: represents the total health of the active and target characters, when it reaches 0, the character is considered dead;
+    -> HP: represents the total health of the active and target characters, when it reaches 0, the character is
+    considered dead;
     -> Damage: represents the damage dealt by each hit shot on the target;
     -> Aim: represents the chance each shot has to hit the target and is affected by distance and cover;
     -> Real Aim/Damage: similar to the ones referred above, but represent the real values when all modifiers are applied.
@@ -26,8 +28,8 @@ that survive will have their stats buffed.
     -> Small Wooden Wall 'W': reduces the incoming damage by 5 and the enemy aim by 20;
     -> Bush 'B': reduces the enemy aim by 10;
 
-    You need to be adjacent to them (8 blocks around you) and the obstacle needs to be between the origin and the target to take effect
-    (flanking is a valid tactic to negate this effects).
+    You need to be adjacent to them (8 blocks around you) and the obstacle needs to be between the origin and the target
+    to take effect (flanking is a valid tactic to negate this effects).
 
 -> Last but not least, there are also three different power ups to make you stronger:
     -> Health '+': increases your HP by 20 points;
