@@ -64,6 +64,7 @@ public class GameController extends Game.controller.Controller {
             if(gameModel.getPlayer().isDead()){
                 DefeatModel defeatModel = new DefeatModel();
                 application.setState(new DefeatState(defeatModel, new DefeatViewer(defeatModel), new DefeatController(defeatModel)));
+                return;
             }
         }
     }
