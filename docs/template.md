@@ -1,25 +1,21 @@
-<!--- template for the final report --->
+## LDTS_T01G06 - Alpha Squad
 
-## LDTS_01 06 - <PROJECT NAME>
+Neste projeto, propomos criar um jogo inspirado no [Armoured Commander](https://store.steampowered.com/app/1361580/Armoured_Commander/), com elementos adicionais retirados do sistema de combate do [XCOM Enemy Unknown](https://store.steampowered.com/app/200510/XCOM_Enemy_Unknown/).
 
-> Include here one or two paragraphs explaining the main idea of the project, followed by a sentence identifying who the authors are.
+O objetivo do jogo é proporcionar um confronto PvE entre dois esquadrões, em que o jogador poderá recolher *power-ups* para melhorar a sua performance e facilitar o combate. O jogo termina com a vitória do esquadrão ou com a morte do jogador, apresentando uma mensagem de *game over*.
 
-**Example**:
+O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilherme Ferreira (up202207524@fe.up.pt) e Hugo Alves (up202305395@fe.up.pt) para LDTS 2024⁄25.
 
-In this exciting platform game you can help KangarooBoy save the world, by collecting all the coins throughout ten different levels in which you will […].
-
-This project was developed by *John Doe* (*john.doe*@fe.up.pt) and *Jane Doe* (*jane.doe*@fe.up.pt) for LPOO 2018⁄19.
-
-### IMPLEMENTED FEATURES
+### *FEATURES* IMPLEMENTADAS
 
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
-
-**Examples**:
 
 - **Jumping** - The game character will jump when the space bar key is pressed.
 - **Getting hidden coins** - When the game character hits a platform from below (by jumping beneath it) it will smash that segment of the platform and will get any coins that may exist hidden there.
 
-### PLANNED FEATURES
+### *FEATURES* FUTURAS
+
+-> extra features
 
 > This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
 
@@ -70,18 +66,21 @@ The use of the State Pattern in the current design allows the following benefits
 
 #### KNOWN CODE SMELLS
 
+##### Code smell 1
+
+##### Code smell 2
+
+##### Code smell 3
+
 > This section should describe 3 to 5 different code smells that you have identified in your current implementation.
 
-### TESTING
+### TESTING (deixar por último)
 
 - Screenshot of coverage report.
 - Link to mutation testing report.
 
 ### SELF-EVALUATION
 
-> In this section describe how the work regarding the project was divided between the students. In the event that members of the group do not agree on a work distribution, the group should send an email to the teacher explaining the disagreement.
-
-**Example**:
-
-- John Doe: 40%
-- Jane Doe: 60%
+- Casemiro Medeiros:
+- Guilherme Ferreira:
+- Hugo Alves:

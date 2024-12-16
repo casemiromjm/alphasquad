@@ -10,4 +10,4 @@ O objetivo do jogo é proporcionar um confronto PvE entre dois esquadrões, em q
 
 ---
 
-Relatório completo [aqui](docs/README.md)!
+Relatório completo [aqui](docs/intermediate-delivery/README.md)!

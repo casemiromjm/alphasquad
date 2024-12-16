@@ -1,3 +1,4 @@
+<!--- Report da entrega intermediária --->
 # LDTS 24/25 - Projeto
 
 Neste projeto, propomos criar um jogo inspirado no [Armoured Commander](https://store.steampowered.com/app/1361580/Armoured_Commander/), com elementos adicionais retirados do sistema de combate do [XCOM Enemy Unknown](https://store.steampowered.com/app/200510/XCOM_Enemy_Unknown/).
@@ -67,10 +68,10 @@ O jogo contará com um sistema de progressão através de três níveis distinto
 
 ## Mockups
 
-![mockup do projeto](Mockup_Menu.png)
-![mockup do projeto](Mockup_Gameplay.png)
-![mockup do projeto](Mockup_Help.png)
-![mockup do projeto](Mockup_Finalmessage.png)
+![mockup do projeto](../mocks/Mockup_Menu.png)
+![mockup do projeto](../mocks/Mockup_Gameplay.png)
+![mockup do projeto](../mocks/Mockup_Help.png)
+![mockup do projeto](../mocks/Mockup_Finalmessage.png)
 ---
 
 ## Design
@@ -96,14 +97,6 @@ número de classes e dependências o que, na criação de testes, dificulta o pr
 
 ---
 
-### Diagrama UML da Implementação Atual (alterar)
-![UML atual](uml.png)
+### Diagrama UML da Implementação Atual
+![UML atual](../umls/uml.png)
 - Algumas ligações são temporárias para facilitar a visualização do projeto.
-
----
-
-### _Code Smells_ Conhecidos
-- Smell 1 ...
-
----
-
