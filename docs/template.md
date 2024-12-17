@@ -64,9 +64,10 @@ The use of the State Pattern in the current design allows the following benefits
 - We don’t need to have a long set of conditional if or switch statements associated with the various states; instead, polimorphism is used to activate the right behavior.
 - There are now more classes and instances to manage, but still in a reasonable number.
 
-#### KNOWN CODE SMELLS
+#### *CODE SMELLS* CONHECIDOS
 
-##### Code smell 1
+##### *Buffer* de movimento do esquadrão aliado
+- Esse pequeno *bug* acontece quando, antes da fase de movimento aliada, é pressionado alguma tecla de movimento. Após ser pressionada, ela é mantida em memória e logo após entrar na fase de movimento, a personagem move-se nesta direção.
 
 ##### Code smell 2
 
