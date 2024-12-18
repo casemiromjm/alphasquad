@@ -3,11 +3,13 @@ package Game.controller.elements.fighter;
 import Game.Application;
 import Game.controller.GameController;
 import Game.controller.MainMenuController;
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.model.MainMenuModel;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Ally;
 import Game.model.elements.fighter.Fighter;
+import Game.model.gameModel.GameUtils;
+import Game.sound.SoundPlayer;
 import Game.state.GameState;
 import Game.state.MainMenuState;
 import Game.view.GameViewer;
@@ -26,7 +28,6 @@ import java.util.List;
 public class AllyControl extends GameController implements FighterControl {
 
     private final Ally ally;
-    private Fighter target;
 
     public AllyControl(GameModel gameModel, Ally ally) {
         super(gameModel);
@@ -45,36 +46,37 @@ public class AllyControl extends GameController implements FighterControl {
         gameViewer.draw(screen);
         List<Fighter> enemies = new ArrayList<>(gameModel.getEnemyList());
         Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);
-        fire(target, gameViewer);
+        fire(target);
     }
 
     @Override
     public void move(Application application, Screen screen) throws IOException {
         boolean moved = false;
         GameModel gameModel = (GameModel) super.getModel();
+        GameUtils gameUtils = new GameUtils(gameModel);
         Position position = ally.getPosition();
 
         while(!moved){
             KeyStroke keyStroke = screen.readInput();
 
             if (keyStroke.getKeyType() == KeyType.ArrowUp) {
-                position = new Position(ally.getPosition().getX(), ally.getPosition().getY() - 1);
-                moved = gameModel.elementCanBePlaced(position);
+                position = ally.getUp();
+                moved = gameUtils.elementCanBePlaced(position);
             }
 
             else if(keyStroke.getKeyType() == KeyType.ArrowDown) {
-                position = new Position(ally.getPosition().getX(), ally.getPosition().getY() + 1);
-                moved = gameModel.elementCanBePlaced(position);
+                position = ally.getDown();
+                moved = gameUtils.elementCanBePlaced(position);
             }
 
             else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
-                position = new Position(ally.getPosition().getX() + 1, ally.getPosition().getY());
-                moved = gameModel.elementCanBePlaced(position);
+                position = ally.getRight();
+                moved = gameUtils.elementCanBePlaced(position);
             }
 
             else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
-                position = new Position(ally.getPosition().getX() - 1, ally.getPosition().getY());
-                moved = gameModel.elementCanBePlaced(position);
+                position = ally.getLeft();
+                moved = gameUtils.elementCanBePlaced(position);
             }
 
             else if(keyStroke.getKeyType() == KeyType.Enter){
@@ -130,13 +132,15 @@ public class AllyControl extends GameController implements FighterControl {
 
     //Temporary
     @Override
-    public void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
+        GameUtils gameUtils = new GameUtils(gameModel);
+        SoundPlayer soundPlayer = new SoundPlayer();
         if(gameModel.hitOrMiss(ally, target)){
-            gameViewer.hitSound();
-            target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(ally, target.getPosition()));
+            soundPlayer.hitSound();
+            target.sufferDamage(gameUtils.damageCalculator(ally, target.getPosition()));
             return;
         }
-        gameViewer.missSound();
+        soundPlayer.missSound();
     }
 }

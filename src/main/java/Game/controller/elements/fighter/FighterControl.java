@@ -15,5 +15,5 @@ public interface FighterControl {
 
     Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer) throws IOException;
 
-    void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException;
+    void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 }

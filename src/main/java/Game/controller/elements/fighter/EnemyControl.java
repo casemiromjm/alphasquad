@@ -2,10 +2,12 @@ package Game.controller.elements.fighter;
 
 import Game.Application;
 import Game.controller.GameController;
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Enemy;
 import Game.model.elements.fighter.Fighter;
+import Game.model.gameModel.GameUtils;
+import Game.sound.SoundPlayer;
 import Game.view.GameViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.screen.Screen;
@@ -41,31 +43,27 @@ public class EnemyControl extends GameController implements FighterControl {
         time = application.waiting(time, timer);
         move(application, screen);
         gameViewer.draw(screen);
-        time = application.waiting(time, timer);
-        gameViewer.drawFighterCombatPhase(screen, enemy, target);
         application.waiting(time, timer);
-        fire(target, gameViewer);
+        gameViewer.drawFighterCombatPhase(screen, enemy, target);
+        fire(target);
     }
 
     public void move(Application application, Screen screen){
         GameModel gameModel = (GameModel) super.getModel();
-        Position currentPosition = enemy.getPosition();
-        List<Position> adjacentPositions = Arrays.asList(new Position(currentPosition.getX() + 1, currentPosition.getY()),
-                new Position(currentPosition.getX() - 1, currentPosition.getY()),
-                new Position(currentPosition.getX(), currentPosition.getY()  + 1),
-                new Position(currentPosition.getX(), currentPosition.getY() - 1));
+        GameUtils gameUtils = new GameUtils(gameModel);
+        List<Position> adjacentPositions = Arrays.asList(enemy.getUp(), enemy.getDown(), enemy.getLeft(), enemy.getRight());
 
         Position best = null;
-        int aim_penalty = 0;     //Senseless value, to change
+        int aim_penalty = 0;
 
         for(Position pos : adjacentPositions){
-            int pos_aim_penalty = gameModel.aimPenaltyCalculator(pos, target.getPosition());
-            if(best == null && gameModel.elementCanBePlaced(pos)){
+            int pos_aim_penalty = gameUtils.aimPenaltyCalculator(pos, target.getPosition());
+            if(best == null && gameUtils.elementCanBePlaced(pos)){
                 best = pos;
                 aim_penalty = pos_aim_penalty;
             }
 
-            else if(pos_aim_penalty < aim_penalty && gameModel.elementCanBePlaced(pos)){
+            else if(pos_aim_penalty < aim_penalty && gameUtils.elementCanBePlaced(pos)){
                 best = pos;
                 aim_penalty = pos_aim_penalty;
             }
@@ -74,25 +72,25 @@ public class EnemyControl extends GameController implements FighterControl {
     }
 
     public Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer){
-        GameModel gameModel = (GameModel) super.getModel();
         Fighter closest = targets.getFirst();
 
         for(Fighter fighter : targets){
-            if(gameModel.getDistance(enemy.getPosition(), fighter.getPosition()) < gameModel.getDistance(enemy.getPosition(), closest.getPosition()))
+            if(Position.getDistance(enemy.getPosition(), fighter.getPosition()) < Position.getDistance(enemy.getPosition(), closest.getPosition()))
                 closest = fighter;
 
         }
         return closest;
     }
 
-    public void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
-
+        GameUtils gameUtils = new GameUtils(gameModel);
+        SoundPlayer soundPlayer = new SoundPlayer();
         if(gameModel.hitOrMiss(enemy, target)){
-            gameViewer.hitSound();
-            target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(enemy, target.getPosition()));
+            soundPlayer.hitSound();
+            target.sufferDamage(gameUtils.damageCalculator(enemy, target.getPosition()));
             return;
         }
-        gameViewer.missSound();
+        soundPlayer.missSound();
     }
 }

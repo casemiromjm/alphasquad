@@ -3,11 +3,13 @@ package Game.controller.elements.fighter;
 import Game.Application;
 import Game.controller.GameController;
 import Game.controller.MainMenuController;
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.model.MainMenuModel;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Fighter;
 import Game.model.elements.fighter.Player;
+import Game.model.gameModel.GameUtils;
+import Game.sound.SoundPlayer;
 import Game.state.GameState;
 import Game.state.MainMenuState;
 import Game.view.GameViewer;
@@ -46,7 +48,7 @@ public class PlayerControl extends GameController implements FighterControl{
         gameViewer.draw(screen);
         List<Fighter> enemies = new ArrayList<>(gameModel.getEnemyList());
         Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);
-        fire(target, gameViewer);
+        fire(target);
     }
 
 
@@ -54,29 +56,30 @@ public class PlayerControl extends GameController implements FighterControl{
     public void move(Application application, Screen screen) throws IOException {
         boolean moved = false;
         GameModel gameModel = (GameModel) super.getModel();
+        GameUtils gameUtils = new GameUtils(gameModel);
         Position position = player.getPosition();
 
         while(!moved){
             KeyStroke keyStroke = screen.readInput();
 
             if (keyStroke.getKeyType() == KeyType.ArrowUp) {
-                position = new Position(player.getPosition().getX(), player.getPosition().getY() - 1);
-                moved = gameModel.elementCanBePlaced(position);
+                position = player.getUp();
+                moved = gameUtils.elementCanBePlaced(position);
             }
 
             else if(keyStroke.getKeyType() == KeyType.ArrowDown) {
-                position = new Position(player.getPosition().getX(), player.getPosition().getY() + 1);
-                moved = gameModel.elementCanBePlaced(position);
+                position = player.getDown();
+                moved = gameUtils.elementCanBePlaced(position);
             }
 
             else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
-                position = new Position(player.getPosition().getX() + 1, player.getPosition().getY());
-                moved = gameModel.elementCanBePlaced(position);
+                position = player.getRight();
+                moved = gameUtils.elementCanBePlaced(position);
             }
 
             else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
-                position = new Position(player.getPosition().getX() - 1, player.getPosition().getY());
-                moved = gameModel.elementCanBePlaced(position);
+                position = player.getLeft();
+                moved = gameUtils.elementCanBePlaced(position);
             }
 
             else if(keyStroke.getKeyType() == KeyType.Enter){
@@ -90,7 +93,6 @@ public class PlayerControl extends GameController implements FighterControl{
                 return;
             }
         }
-
         player.setPosition(position);
     }
 
@@ -132,14 +134,15 @@ public class PlayerControl extends GameController implements FighterControl{
 
     //Temporary
     @Override
-    public void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
-
+        GameUtils gameUtils = new GameUtils(gameModel);
+        SoundPlayer soundPlayer = new SoundPlayer();
         if(gameModel.hitOrMiss(player, target)){
-            gameViewer.hitSound();
-            target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(player, target.getPosition()));
+            soundPlayer.hitSound();
+            target.sufferDamage(gameUtils.damageCalculator(player, target.getPosition()));
             return;
         }
-        gameViewer.missSound();
+        soundPlayer.missSound();
     }
 }

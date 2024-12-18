@@ -1,5 +1,7 @@
-package model.elements
+package Game.model.elements
 
+
+import static java.lang.Math.sqrt
 
 import spock.lang.Specification
 
@@ -10,10 +12,10 @@ class TestPosition extends Specification{
         Position position = new Position(1,2)
 
         when:
-        int x = position.getX();
+        int x = position.getX()
 
         then:
-        x == 1;
+        x == 1
     }
 
     def "test getY"(){
@@ -21,10 +23,10 @@ class TestPosition extends Specification{
         Position position = new Position(1,2)
 
         when:
-        int y = position.getY();
+        int y = position.getY()
 
         then:
-        y == 2;
+        y == 2
     }
 
     def "test setX"(){
@@ -33,10 +35,10 @@ class TestPosition extends Specification{
 
         when:
         position.setX(3)
-        int x = position.getX();
+        int x = position.getX()
 
         then:
-        x == 3;
+        x == 3
     }
 
     def "test setY"(){
@@ -45,10 +47,10 @@ class TestPosition extends Specification{
 
         when:
         position.setY(30)
-        int y = position.getY();
+        int y = position.getY()
 
         then:
-        y == 30;
+        y == 30
     }
 
     def "test equals"(){
@@ -57,15 +59,23 @@ class TestPosition extends Specification{
         Position position1 = new Position(1,2)
         Position position2 = new Position(3,4)
 
-        when:
-        boolean result = position.equals(position)
-        boolean result1 = position.equals(position1)
-        boolean result2 = position.equals(position2)
+        expect:
+        position.equals(position)
+        position.equals(position1)
+        !position.equals(position2)
+    }
 
-        then:
-        result == true
-        result1 == true
-        result2 == false
+    def "test getDistance"(Position a, Position b, double dist){
+        expect:
+        Position.getDistance(a, b) == dist
+
+        where:
+        a                   | b                 | dist
+        new Position(0,0)   | new Position(0,0)   | 0
+        new Position(1, 0)  | new Position(2, 0)  | 1
+        new Position(0,1)   | new Position(0, 2)  | 1
+        new Position(1, 1)  | new Position(2,2)   | sqrt(2)
+        new Position(10, 20)| new Position(5, 10) | sqrt(125)
     }
 
 }

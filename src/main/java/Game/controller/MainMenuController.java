@@ -1,15 +1,13 @@
 package Game.controller;
 
 import Game.Application;
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.model.HelpScreenModel;
 import Game.model.MainMenuModel;
 import Game.state.GameState;
 import Game.state.HelpState;
-import Game.state.MainMenuState;
 import Game.view.GameViewer;
 import Game.view.HelpScreenViewer;
-import Game.view.MainMenuViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;

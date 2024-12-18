@@ -14,15 +14,7 @@ public class MainMenuModel extends Model {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public List<String> getOptions() {
         return options;
-    }
-
-    public void setOptions(List<String> options) {
-        this.options = options;
     }
 }

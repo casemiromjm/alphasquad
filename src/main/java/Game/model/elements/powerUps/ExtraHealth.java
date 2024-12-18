@@ -10,6 +10,6 @@ public class ExtraHealth extends PowerUp {
 
     @Override
     public void apply(Fighter fighter) {
-        fighter.setHitPoints(fighter.getHitPoints() + 20);
+        fighter.increaseHealth(20);
     }
 }

@@ -1,6 +1,6 @@
 package Game.view;
 
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Ally;
 import Game.model.elements.fighter.Enemy;
@@ -13,6 +13,7 @@ import Game.model.elements.powerUps.ExtraAim;
 import Game.model.elements.powerUps.ExtraDamage;
 import Game.model.elements.powerUps.ExtraHealth;
 import Game.model.elements.powerUps.PowerUp;
+import Game.model.gameModel.GameUtils;
 import Game.view.elements.Drawable;
 import Game.view.elements.fighter.AllyDraw;
 import Game.view.elements.fighter.EnemyDraw;
@@ -30,8 +31,6 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
-import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,57 +135,24 @@ public class GameViewer extends Viewer {
 
     private void drawSideInfo(TextGraphics textGraphics, Fighter fighter, Fighter target) {
         GameModel gameModel = (GameModel) super.getModel();
+        GameUtils gameUtils = new GameUtils(gameModel);
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
 
         textGraphics.enableModifiers(SGR.BOLD);
         textGraphics.putString(new TerminalPosition(1, 2), "Active Player");
         textGraphics.disableModifiers(SGR.BOLD);
-        textGraphics.putString(new TerminalPosition(1, 4), "HP: " + fighter.getHitPoints());
+        textGraphics.putString(new TerminalPosition(1, 4), "HP: " + fighter.getHealth());
         textGraphics.putString(new TerminalPosition(1, 6), "Base Damage: " + fighter.getDamage());
-        textGraphics.putString(new TerminalPosition(1, 8), "Real Damage: " + gameModel.damageCalculator(fighter, target.getPosition()));
+        textGraphics.putString(new TerminalPosition(1, 8), "Real Damage: " + gameUtils.damageCalculator(fighter, target.getPosition()));
         textGraphics.putString(new TerminalPosition(1, 10), "Base Aim: " + fighter.getAim());
-        textGraphics.putString(new TerminalPosition(1, 12), "Real Aim: " + gameModel.aimCalculator(fighter, target.getPosition())); //To update when aim calculation is implemented
+        textGraphics.putString(new TerminalPosition(1, 12), "Real Aim: " + gameUtils.aimCalculator(fighter, target.getPosition())); //To update when aim calculation is implemented
 
         textGraphics.enableModifiers(SGR.BOLD);
         textGraphics.putString(new TerminalPosition(1, 16), "Target");
         textGraphics.disableModifiers(SGR.BOLD);
-        textGraphics.putString(new TerminalPosition(1, 18), "HP: " + target.getHitPoints());
+        textGraphics.putString(new TerminalPosition(1, 18), "HP: " + target.getHealth());
         textGraphics.putString(new TerminalPosition(1, 20), "Damage: " + target.getDamage());
         textGraphics.putString(new TerminalPosition(1, 22), "Aim: " + target.getAim());
-    }
-
-    public void hitSound() throws LineUnavailableException, UnsupportedAudioFileException, IOException {
-
-        File soundFile = new File("src/main/resources/sounds/hit.wav");
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
-
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-
-        FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        volume.setValue(-12.0f);
-
-        clip.start();
-        clip.drain();
-        clip.close();
-        audioInputStream.close();
-    }
-
-    public void missSound() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
-        File soundFile = new File("src/main/resources/sounds/miss.wav");
-        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
-
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-
-        FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-        volume.setValue(-12.0f);
-
-        clip.start();
-        clip.drain();
-        clip.close();
-        audioInputStream.close();
     }
 }

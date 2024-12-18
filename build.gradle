@@ -1,7 +1,7 @@
 plugins {
     id 'java'
+    id 'info.solidsoft.pitest' version '1.6.0'
     id 'groovy'
-    id 'application'
 }
 
 group = 'org.project'
@@ -14,13 +14,13 @@ repositories {
 dependencies {
     implementation group: 'com.googlecode.lanterna', name: 'lanterna', version: '3.1.2'
     testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
-    testImplementation 'org.codehaus.groovy:groovy-all:3.0.21'
-}
-
-application {
-    mainClass = 'Game.Application'
+    testImplementation 'org.codehaus.groovy:groovy-all:3.0.22'
 }
 
 test {
     useJUnitPlatform()
+}
+
+pitest{
+    junit5PluginVersion = '0.12'
 }

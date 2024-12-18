@@ -11,6 +11,6 @@ public class ExtraDamage extends PowerUp {
     //Probably to improve (possibly add an increaseDamage method on the fighter class)
     @Override
     public void apply(Fighter fighter) {
-        fighter.setDamage(fighter.getDamage() + 5);
+        fighter.increaseDamage(5);
     }
 }
