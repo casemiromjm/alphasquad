@@ -1,6 +1,6 @@
 ## LDTS_T01G06 - Alpha Squad
 
-Neste projeto, propomos criar um jogo inspirado no [Armoured Commander](https://store.steampowered.com/app/1361580/Armoured_Commander/), com elementos adicionais retirados do sistema de combate do [XCOM Enemy Unknown](https://store.steampowered.com/app/200510/XCOM_Enemy_Unknown/).
+Neste projeto, propomos criar um jogo inspirado no [Armoured Commander](https://store.steampowered.com/app/1361580/Armoured_Commander/), com elementos adicionais retirados do sistema de combate do [XCOM Enemy Unknown](https://store.steampowered.com/app/200510/XCOM_Enemy_Unknown/). Por fim, também toma como inspiração [Dwarf Fortress](https://store.steampowered.com/app/975370/Dwarf_Fortress/).
 
 O objetivo do jogo é proporcionar um confronto PvE entre dois esquadrões, em que o jogador poderá recolher *power-ups* para melhorar a sua performance e facilitar o combate. O jogo termina com a vitória do esquadrão ou com a morte do jogador, apresentando uma mensagem de *game over*.
 
@@ -67,7 +67,7 @@ The use of the State Pattern in the current design allows the following benefits
 #### *CODE SMELLS* CONHECIDOS
 
 ##### *Buffer* de movimento do esquadrão aliado
-- Esse pequeno *bug* acontece quando, antes da fase de movimento aliada, é pressionado alguma tecla de movimento. Após ser pressionada, ela é mantida em memória e logo após entrar na fase de movimento, a personagem move-se nesta direção.
+- Esse pequeno *bug* acontece quando, antes da fase de movimento do esquadrão aliado, é pressionado alguma tecla de movimento. Após ser pressionada, ela é mantida em memória e, logo após entrar na fase de movimento, a personagem move-se nesta direção.
 
 ##### Code smell 2
 
