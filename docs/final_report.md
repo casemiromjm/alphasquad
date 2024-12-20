@@ -8,6 +8,8 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
 
 ### *FEATURES* IMPLEMENTADAS
 
+<!--- preciso pegar prints e gifs para add aqui --->
+
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 
 - **Jumping** - The game character will jump when the space bar key is pressed.
@@ -33,6 +35,8 @@ Como em qualquer jogo, sempre existirão *features* possíveis para um *roadmap*
     - Minas terrestre: blocos que parecem normais, mas explodem ao serem atravessados por um tanque, causando dano significativo. Pode-se usar um novo *power-up* para contornar estes novos obstáculos.
 
 ### DESIGN
+
+<---! foco maior no states pattern --->
 
 > This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts:
 
@@ -94,6 +98,8 @@ The use of the State Pattern in the current design allows the following benefits
 - Link to mutation testing report.
 
 ### AUTOAVALIAÇÃO
+
+<!--- ter q mandar msg perguntando sobre isso aq --->
 
 - Casemiro Medeiros:
 - Guilherme Ferreira:
