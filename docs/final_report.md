@@ -15,9 +15,22 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
 
 ### *FEATURES* FUTURAS
 
--> extra features
+Como em qualquer jogo, sempre existirão *features* possíveis para um *roadmap* que visa mantê-lo interessante. Entre elas, podemos citar:
 
-> This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
+- Modo PvP
+  - Nesse modo, ao invés de ter um oponente controlado pela máquina, teríamos outro jogador localmente a traçar estratégias e a tomar decisões no confronto.
+
+- Novos *power-ups*
+  - Novos *power-ups* tornam o jogo mais dinâmico, uma vez que abre possibilidade para novas estratégias. Como exemplo destes novos *power-ups* temos:
+    - Munição incendiária: adiciona o efeito *burn* em que o tanque atingido por essa munição sofre um dano extra por determinada quantidade de turnos.
+    - Munição explosiva: adiciona a possibilidade de um ataque crítico que confere mais dano no tanque atingido.
+    - Equipe de engenheiros: adiciona a capacidade de regenerar vida por determinada quantidade de turnos.
+
+- Novas *features* no mapa
+  - Atualizações no mapa dão mais variedades de estratégias e mais dinamicidade ao jogo. Como exemplo temos:
+    - Blocos de água: o tanque não consegue atravessar estes blocos. (~~a não ser que tenha um novo *power-up*, quem sabe...~~).
+    - Blocos de lama: adicionam a chance do movimento não ser bem sucedido e o tanque nao se mover.
+    - Minas terrestre: blocos que parecem normais, mas explodem ao serem atravessados por um tanque, causando dano significativo. Pode-se usar um novo *power-up* para contornar estes novos obstáculos.
 
 ### DESIGN
 
@@ -30,7 +43,7 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
 
 **Example of one of such subsections**:
 
-------
+---
 
 #### THE JUMP ACTION OF THE KANGAROOBOY SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
 
@@ -67,7 +80,7 @@ The use of the State Pattern in the current design allows the following benefits
 #### *CODE SMELLS* CONHECIDOS
 
 ##### *Buffer* de movimento do esquadrão aliado
-- Esse pequeno *bug* acontece quando, antes da fase de movimento do esquadrão aliado, é pressionado alguma tecla de movimento. Após ser pressionada, ela é mantida em memória e, logo após entrar na fase de movimento, a personagem move-se nesta direção.
+- Este pequeno *bug* acontece quando, antes da fase de movimento do esquadrão aliado, é pressionado alguma tecla de movimento. Após ser pressionada, ela é mantida em memória e, logo após entrar na fase de movimento, a personagem move-se nesta direção.
 
 ##### Code smell 2
 
@@ -80,7 +93,7 @@ The use of the State Pattern in the current design allows the following benefits
 - Screenshot of coverage report.
 - Link to mutation testing report.
 
-### SELF-EVALUATION
+### AUTOAVALIAÇÃO
 
 - Casemiro Medeiros:
 - Guilherme Ferreira:
