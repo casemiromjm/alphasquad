@@ -5,7 +5,7 @@ import Game.model.elements.fighter.Player
 import spock.lang.Specification
 
 class TestFighter extends Specification {
-    //Since fighter is an abstract class, the class player, which inherits its functions will be used in its place
+    // Since fighter is an abstract class, the class player, which inherits its functions will be used in its place. Ally and enemy are similar.
     def fighter
     def baseHealth
 
@@ -16,24 +16,24 @@ class TestFighter extends Specification {
 
     def "test sufferDamage"(){
         when:
-        fighter.sufferDamage(dam)
+        fighter.sufferDamage(damage)
 
         then:
-        fighter.getHealth() == baseHealth - dam
+        fighter.getHealth() == baseHealth - damage
 
         where:
-        dam << [0, 1, 5, 10, 20, 21, 25, 30]
+        damage << [0, 1, 5, 10, 20, 21, 25, 30]
     }
 
     def "test isDead"(){
         when:
-        fighter.sufferDamage(dam)
+        fighter.sufferDamage(damage)
 
         then:
-        fighter.isDead() == (baseHealth - dam <= 0)
+        fighter.isDead() == (baseHealth - damage <= 0)
 
         where:
-        dam << [0, 1, 5, 10, 20, 21, 25, 30]
+        damage << [0, 1, 5, 10, 20, 21, 25, 30]
     }
 
     def "test increaseHealth"(){

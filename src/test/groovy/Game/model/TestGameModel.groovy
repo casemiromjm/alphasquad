@@ -7,7 +7,7 @@ class TestGameModel extends Specification {
     Random random
     GameModel gameModel
 
-    def setup(){
+    def setup() {
         def width = 20
         def height = 10
         random = Mock()
