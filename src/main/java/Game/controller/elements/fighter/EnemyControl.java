@@ -6,7 +6,6 @@ import Game.model.gameModel.GameModel;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Enemy;
 import Game.model.elements.fighter.Fighter;
-import Game.model.gameModel.GameUtils;
 import Game.sound.SoundPlayer;
 import Game.view.GameViewer;
 import Game.view.Viewer;
@@ -50,20 +49,19 @@ public class EnemyControl extends GameController implements FighterControl {
 
     public void move(Application application, Screen screen){
         GameModel gameModel = (GameModel) super.getModel();
-        GameUtils gameUtils = new GameUtils(gameModel);
         List<Position> adjacentPositions = Arrays.asList(enemy.getUp(), enemy.getDown(), enemy.getLeft(), enemy.getRight());
 
         Position best = null;
         int aim_penalty = 0;
 
         for(Position pos : adjacentPositions){
-            int pos_aim_penalty = gameUtils.aimPenaltyCalculator(pos, target.getPosition());
-            if(best == null && gameUtils.elementCanBePlaced(pos)){
+            int pos_aim_penalty = gameModel.aimPenaltyCalculator(pos, target.getPosition());
+            if(best == null && gameModel.elementCanBePlaced(pos)){
                 best = pos;
                 aim_penalty = pos_aim_penalty;
             }
 
-            else if(pos_aim_penalty < aim_penalty && gameUtils.elementCanBePlaced(pos)){
+            else if(pos_aim_penalty < aim_penalty && gameModel.elementCanBePlaced(pos)){
                 best = pos;
                 aim_penalty = pos_aim_penalty;
             }
@@ -84,11 +82,10 @@ public class EnemyControl extends GameController implements FighterControl {
 
     public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
-        GameUtils gameUtils = new GameUtils(gameModel);
         SoundPlayer soundPlayer = new SoundPlayer();
         if(gameModel.hitOrMiss(enemy, target)){
             soundPlayer.hitSound();
-            target.sufferDamage(gameUtils.damageCalculator(enemy, target.getPosition()));
+            target.sufferDamage(gameModel.damageCalculator(enemy, target.getPosition()));
             return;
         }
         soundPlayer.missSound();

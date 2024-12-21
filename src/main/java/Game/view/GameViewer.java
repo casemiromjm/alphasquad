@@ -13,7 +13,6 @@ import Game.model.elements.powerUps.ExtraAim;
 import Game.model.elements.powerUps.ExtraDamage;
 import Game.model.elements.powerUps.ExtraHealth;
 import Game.model.elements.powerUps.PowerUp;
-import Game.model.gameModel.GameUtils;
 import Game.view.elements.Drawable;
 import Game.view.elements.fighter.AllyDraw;
 import Game.view.elements.fighter.EnemyDraw;
@@ -135,7 +134,6 @@ public class GameViewer extends Viewer {
 
     private void drawSideInfo(TextGraphics textGraphics, Fighter fighter, Fighter target) {
         GameModel gameModel = (GameModel) super.getModel();
-        GameUtils gameUtils = new GameUtils(gameModel);
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
         textGraphics.setForegroundColor(TextColor.ANSI.WHITE);
 
@@ -144,9 +142,9 @@ public class GameViewer extends Viewer {
         textGraphics.disableModifiers(SGR.BOLD);
         textGraphics.putString(new TerminalPosition(1, 4), "HP: " + fighter.getHealth());
         textGraphics.putString(new TerminalPosition(1, 6), "Base Damage: " + fighter.getDamage());
-        textGraphics.putString(new TerminalPosition(1, 8), "Real Damage: " + gameUtils.damageCalculator(fighter, target.getPosition()));
+        textGraphics.putString(new TerminalPosition(1, 8), "Real Damage: " + gameModel.damageCalculator(fighter, target.getPosition()));
         textGraphics.putString(new TerminalPosition(1, 10), "Base Aim: " + fighter.getAim());
-        textGraphics.putString(new TerminalPosition(1, 12), "Real Aim: " + gameUtils.aimCalculator(fighter, target.getPosition())); //To update when aim calculation is implemented
+        textGraphics.putString(new TerminalPosition(1, 12), "Real Aim: " + gameModel.aimCalculator(fighter, target.getPosition())); //To update when aim calculation is implemented
 
         textGraphics.enableModifiers(SGR.BOLD);
         textGraphics.putString(new TerminalPosition(1, 16), "Target");

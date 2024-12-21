@@ -4,6 +4,7 @@ import Game.Application;
 import Game.model.gameModel.GameModel;
 import Game.model.HelpScreenModel;
 import Game.model.MainMenuModel;
+import Game.model.gameModel.RandomGameBuilder;
 import Game.state.GameState;
 import Game.state.HelpState;
 import Game.view.GameViewer;
@@ -14,6 +15,7 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
+import java.util.Random;
 
 
 public class MainMenuController extends Game.controller.Controller {
@@ -34,7 +36,9 @@ public class MainMenuController extends Game.controller.Controller {
             application.setState(new HelpState(helpScreenModel, new HelpScreenViewer(helpScreenModel), new HelpScreenController(helpScreenModel)));
 
         } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
-            GameModel gameModel = new GameModel(screen.getTerminalSize().getColumns(), screen.getTerminalSize().getRows(), 17);
+            int width = screen.getTerminalSize().getColumns();
+            int height = screen.getTerminalSize().getRows();
+            GameModel gameModel = new GameModel(width, height, 17, new RandomGameBuilder(width, height, 17, new Random()));
             application.setState(new GameState(gameModel, new GameViewer(gameModel), new GameController(gameModel)));
 
         } else if (key.getKeyType() == KeyType.EOF) {

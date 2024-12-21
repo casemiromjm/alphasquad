@@ -8,7 +8,6 @@ import Game.model.MainMenuModel;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Ally;
 import Game.model.elements.fighter.Fighter;
-import Game.model.gameModel.GameUtils;
 import Game.sound.SoundPlayer;
 import Game.state.GameState;
 import Game.state.MainMenuState;
@@ -53,7 +52,6 @@ public class AllyControl extends GameController implements FighterControl {
     public void move(Application application, Screen screen) throws IOException {
         boolean moved = false;
         GameModel gameModel = (GameModel) super.getModel();
-        GameUtils gameUtils = new GameUtils(gameModel);
         Position position = ally.getPosition();
 
         while(!moved){
@@ -61,22 +59,22 @@ public class AllyControl extends GameController implements FighterControl {
 
             if (keyStroke.getKeyType() == KeyType.ArrowUp) {
                 position = ally.getUp();
-                moved = gameUtils.elementCanBePlaced(position);
+                moved = gameModel.elementCanBePlaced(position);
             }
 
             else if(keyStroke.getKeyType() == KeyType.ArrowDown) {
                 position = ally.getDown();
-                moved = gameUtils.elementCanBePlaced(position);
+                moved = gameModel.elementCanBePlaced(position);
             }
 
             else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
                 position = ally.getRight();
-                moved = gameUtils.elementCanBePlaced(position);
+                moved = gameModel.elementCanBePlaced(position);
             }
 
             else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
                 position = ally.getLeft();
-                moved = gameUtils.elementCanBePlaced(position);
+                moved = gameModel.elementCanBePlaced(position);
             }
 
             else if(keyStroke.getKeyType() == KeyType.Enter){
@@ -134,11 +132,10 @@ public class AllyControl extends GameController implements FighterControl {
     @Override
     public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
-        GameUtils gameUtils = new GameUtils(gameModel);
         SoundPlayer soundPlayer = new SoundPlayer();
         if(gameModel.hitOrMiss(ally, target)){
             soundPlayer.hitSound();
-            target.sufferDamage(gameUtils.damageCalculator(ally, target.getPosition()));
+            target.sufferDamage(gameModel.damageCalculator(ally, target.getPosition()));
             return;
         }
         soundPlayer.missSound();
