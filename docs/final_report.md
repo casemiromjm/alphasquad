@@ -7,10 +7,7 @@ O objetivo do jogo é proporcionar um confronto PvE entre dois esquadrões, em q
 O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilherme Ferreira (up202207524@fe.up.pt) e Hugo Alves (up202305395@fe.up.pt) para LDTS 2024⁄25.
 
 ### *FEATURES* IMPLEMENTADAS
-
 <!--- preciso pegar prints e gifs para add aqui --->
-
-> This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 
 - **Menu inicial** - O jogo tem um menu inicial com opções de:
   - `Play` - Inicia o combate no nível 1
@@ -30,7 +27,7 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
   - `Nvl 1` - 
   - `Nvl 2` - 
   - `Nvl 3` - 
-- **Efeitos Sonoros** - Após o disparo, seja do aliado, seja do inimigo, sempre é seguido de um efeito sonoro de acerto ou de erro.
+- **Efeitos Sonoros** - Após o disparo, seja do aliado, seja do inimigo, sempre é emitido um efeito sonoro de acerto ou de erro.
 
 
 
