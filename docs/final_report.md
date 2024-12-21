@@ -12,9 +12,27 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
 
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 
-- **Menu inicial** 
-- **Power-ups** - 
-- **Blocos de obstáculos** -
+- **Menu inicial** - O jogo tem um menu inicial com opções de:
+  - `Play` - Inicia o combate no nível 1
+  - `Help` - Apresenta um ecrã que explica como o jogo funciona e algumas dicas
+  - `Quit` - Fecha o jogo
+- **Power-ups** - Implementamos alguns *power-ups* iniciais, sendo eles:
+  - `Health (+)` - Aumenta o HP em 20 pontos
+  - `Aim (o)` - Melhora a precisão em 10 pontos
+  - `Damage (>)` - Aumenta o dano em 5 pontos
+- **Blocos de obstáculos** - Implementamos alguns tipos de obstáculos, os quais são:
+  - `Arbusto (B)` - Reduz a precisão do inimigo em 10 pontos
+  - `Parede de Madeira Pequena (W)` - Reduz o dano recebido em 5 pontos e a precisão inimiga em 20 pontos
+  - `Parede de Pedra Pequena (S)` - Reduz o dano recebido em 10 pontos e a precisão inimiga em 30 pontos
+  
+  > Você precisa estar adjacente a eles (8 blocos) e obstáculo precisa estar entre a origem e o alvo para surtir efeito. Flanquear é uma tática válida para negar os efeitos dos obstáculos.
+- **Diferentes níveis** - Há mais inimigos em cada nível. Os aliados que se manterem vivos para o próximo nível, sofrem uma melhoria nos seus *stats*.
+  - `Nvl 1` - 
+  - `Nvl 2` - 
+  - `Nvl 3` - 
+- **Efeitos Sonoros** - Após o disparo, seja do aliado, seja do inimigo, sempre é seguido de um efeito sonoro de acerto ou de erro.
+
+
 
 ### *FEATURES* FUTURAS
 
@@ -85,7 +103,7 @@ The use of the State Pattern in the current design allows the following benefits
 #### *CODE SMELLS* CONHECIDOS
 
 ##### *Buffer* de movimento do esquadrão aliado
-- Este pequeno *bug* acontece quando, antes da fase de movimento do esquadrão aliado, é pressionado alguma tecla de movimento. Após ser pressionada, ela é mantida em memória e, logo após entrar na fase de movimento, a personagem move-se nesta direção.
+Este pequeno *bug* acontece quando, antes da fase de movimento do esquadrão aliado, é pressionado alguma tecla de movimento. Após ser pressionada, ela é mantida em memória e, logo após entrar na fase de movimento, a personagem move-se nesta direção.
 
 ##### Code smell 2
 
