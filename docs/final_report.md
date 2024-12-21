@@ -7,7 +7,6 @@ O objetivo do jogo é proporcionar um confronto PvE entre dois esquadrões, em q
 O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilherme Ferreira (up202207524@fe.up.pt) e Hugo Alves (up202305395@fe.up.pt) para LDTS 2024⁄25.
 
 ### *FEATURES* IMPLEMENTADAS
-<!--- preciso pegar prints e gifs para add aqui --->
 
 - **Menu Inicial** - O jogo tem um menu inicial com opções de:
   - `Play` - Inicia o combate no nível 1
@@ -23,7 +22,7 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
   - `Parede de Pedra Pequena (S)` - Reduz o dano recebido em 10 pontos e a precisão inimiga em 30 pontos
   
   > Você precisa estar adjacente a eles (8 blocos) e obstáculo precisa estar entre a origem e o alvo para surtir efeito. Flanquear é uma tática válida para negar os efeitos dos obstáculos.
-- **Diferentes níveis** - Há mais inimigos em cada nível. Os aliados que se manterem vivos para o próximo nível, sofrem uma melhoria nos seus *stats*.
+- **Diferentes níveis** - Há mais inimigos em cada nível. Os aliados que se manterem vivos para o próximo nível, sofrem uma melhoria nos seus *stats*. Vale ressaltar também que cada nível é gerado aleatoriamente.
   - `Nvl 1` - 3 inimigos
   - `Nvl 2` - 6 inimigos
   - `Nvl 3` - 9 inimigos
@@ -31,26 +30,67 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
 - **Tela de Vitória/Derrota** - Ao fim do jogo é exibida uma mensagem de finalização, seja de vitória, seja de derrota.
 
 <p align="center" justify="center">
-  <img src="./main_menu.png">
+  <img src="screenshots/main_menu.png">
 </p>
 <p align="center">
   <b><i>Fig. 1 - Menu Inicial</i></b>
 </p>
 
 <p align="center" justify="center">
-  <img src="./help.png">
+  <img src="screenshots/help.png">
 </p>
 <p align="center">
   <b><i>Fig. 2 - Ecrã de Help</i></b>
 </p>
 
 <p align="center" justify="center">
-  <img src="./nvl1.png">
+  <img src="screenshots/nvl1.png">
 </p>
 <p align="center">
   <b><i>Fig. 3 - Nível 1</i></b>
 </p>
 
+<p align="center" justify="center">
+  <img src="screenshots/nvl2.png">
+</p>
+<p align="center">
+  <b><i>Fig. 4 - Nível 2</i></b>
+</p>
+
+<p align="center" justify="center">
+  <img src="screenshots/nvl3.png">
+</p>
+<p align="center">
+  <b><i>Fig. 4 - Nível 3</i></b>
+</p>
+
+<p align="center" justify="center">
+  <img src="screenshots/win.png">
+</p>
+<p align="center">
+  <b><i>Fig. 5 - Ecrã de vitória</i></b>
+</p>
+
+<p align="center" justify="center">
+  <img src="screenshots/loss.png">
+</p>
+<p align="center">
+  <b><i>Fig. 6 - Ecrã de derrota</i></b>
+</p>
+
+<p align="center" justify="center">
+  <img src="gifs/battle.gif">
+</p>
+<p align="center">
+  <b><i>Fig. 7 - Simulação do combate</i></b>
+</p>
+
+<p align="center" justify="center">
+  <img src="gifs/powerup.gif">
+</p>
+<p align="center">
+  <b><i>Fig. 8 - Pegando power-up</i></b>
+</p>
 
 
 ### *FEATURES* FUTURAS
