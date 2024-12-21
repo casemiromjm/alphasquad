@@ -12,8 +12,9 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
 
 > This section should contain a list of implemented features and their descriptions. In the end of the section, include two or three screenshots that illustrate the most important features.
 
-- **Jumping** - The game character will jump when the space bar key is pressed.
-- **Getting hidden coins** - When the game character hits a platform from below (by jumping beneath it) it will smash that segment of the platform and will get any coins that may exist hidden there.
+- **Menu inicial** 
+- **Power-ups** - 
+- **Blocos de obstáculos** -
 
 ### *FEATURES* FUTURAS
 
@@ -30,13 +31,13 @@ Como em qualquer jogo, sempre existirão *features* possíveis para um *roadmap*
 
 - Novas *features* no mapa
   - Atualizações no mapa dão mais variedades de estratégias e mais dinamicidade ao jogo. Como exemplo temos:
-    - Blocos de água: o tanque não consegue atravessar estes blocos. (~~a não ser que tenha um novo *power-up*, quem sabe...~~).
-    - Blocos de lama: adicionam a chance do movimento não ser bem sucedido e o tanque nao se mover.
+    - Blocos de água: o tanque não consegue atravessar estes blocos. (~~exceto se tenha um novo *power-up*, quem sabe...~~).
+    - Blocos de lama: adicionam a possibilidade do movimento não ser bem-sucedido e o tanque nao se mover.
     - Minas terrestre: blocos que parecem normais, mas explodem ao serem atravessados por um tanque, causando dano significativo. Pode-se usar um novo *power-up* para contornar estes novos obstáculos.
 
 ### DESIGN
 
-<---! foco maior no states pattern --->
+O design baseia-se em dois padrões. Primeiramente, utiliza a arquitetura MVC (Model - View - Controller), tornando o projeto mais modular. Contudo, com o avanço do desenvolvimento, foi percebida a necessidade de adotar outro padrão de desenvolvimento, o *State Pattern*.
 
 > This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts:
 
@@ -51,15 +52,15 @@ Como em qualquer jogo, sempre existirão *features* possíveis para um *roadmap*
 
 #### THE JUMP ACTION OF THE KANGAROOBOY SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
 
-**Problem in Context**
+**Problema**
 
 There was a lot of scattered conditional logic when deciding how the KangarooBoy should behave when jumping, as the jumps should be different depending on the items that came to his possession during the game (an helix will alow him to fly, driking a potion will allow him to jump double the height, etc.). This is a violation of the **Single Responsability Principle**. We could concentrate all the conditional logic in the same method to circumscribe the issue to that one method but the **Single Responsability Principle** would still be violated.
 
-**The Pattern**
+**Pattern escolhido**
 
-We have applied the **State** pattern. This pattern allows you to represent different states with different subclasses. We can switch to a different state of the application by switching to another implementation (i.e., another subclass). This pattern allowed to address the identified problems because […].
+Nós utilizamos o **State pattern**. Este padrão nos permite representar estados diversos com diferentes subclasses/funcionalidades. We can switch to a different state of the application by switching to another implementation (i.e., another subclass). This pattern allowed to address the identified problems because […].
 
-**Implementation**
+**Implementação**
 
 The following figure shows how the pattern’s roles were mapped to the application classes.
 
