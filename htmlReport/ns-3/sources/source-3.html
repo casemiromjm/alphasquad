@@ -1,0 +1,298 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > PlayerControl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Game.controller.elements.fighter</a>
+</div>
+
+<h1>Coverage Summary for Class: PlayerControl (Game.controller.elements.fighter)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlayerControl</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/60)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PlayerControl$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/61)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Game.controller.elements.fighter;
+&nbsp;
+&nbsp;import Game.Application;
+&nbsp;import Game.controller.GameController;
+&nbsp;import Game.controller.MainMenuController;
+&nbsp;import Game.model.gameModel.GameModel;
+&nbsp;import Game.model.MainMenuModel;
+&nbsp;import Game.model.elements.Position;
+&nbsp;import Game.model.elements.fighter.Fighter;
+&nbsp;import Game.model.elements.fighter.Player;
+&nbsp;import Game.model.gameModel.GameUtils;
+&nbsp;import Game.sound.SoundPlayer;
+&nbsp;import Game.state.GameState;
+&nbsp;import Game.state.MainMenuState;
+&nbsp;import Game.view.GameViewer;
+&nbsp;import Game.view.MainMenuViewer;
+&nbsp;import Game.view.Viewer;
+&nbsp;import com.googlecode.lanterna.input.KeyStroke;
+&nbsp;import com.googlecode.lanterna.input.KeyType;
+&nbsp;import com.googlecode.lanterna.screen.Screen;
+&nbsp;
+&nbsp;import javax.sound.sampled.LineUnavailableException;
+&nbsp;import javax.sound.sampled.UnsupportedAudioFileException;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;
+&nbsp;public class PlayerControl extends GameController implements FighterControl{
+&nbsp;    private final Player player;
+&nbsp;
+&nbsp;    public PlayerControl(GameModel gameModel, Player player) {
+<b class="nc">&nbsp;        super(gameModel);</b>
+<b class="nc">&nbsp;        this.player = player;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void run(Application application, Screen screen, Viewer viewer) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+<b class="nc">&nbsp;        GameModel gameModel = (GameModel) super.getModel();</b>
+<b class="nc">&nbsp;        GameViewer gameViewer = (GameViewer) viewer;</b>
+<b class="nc">&nbsp;        gameViewer.draw(screen);</b>
+<b class="nc">&nbsp;        move(application, screen);</b>
+&nbsp;        //To be refactored, too confusing (possibly follow the idea of LanternGUI for this)
+<b class="nc">&nbsp;        if(!(application.getState() instanceof GameState)){</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        gameModel.applyPowerUps(player);</b>
+<b class="nc">&nbsp;        gameViewer.draw(screen);</b>
+<b class="nc">&nbsp;        List&lt;Fighter&gt; enemies = new ArrayList&lt;&gt;(gameModel.getEnemyList());</b>
+<b class="nc">&nbsp;        Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);</b>
+<b class="nc">&nbsp;        fire(target);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void move(Application application, Screen screen) throws IOException {
+<b class="nc">&nbsp;        boolean moved = false;</b>
+<b class="nc">&nbsp;        GameModel gameModel = (GameModel) super.getModel();</b>
+<b class="nc">&nbsp;        GameUtils gameUtils = new GameUtils(gameModel);</b>
+<b class="nc">&nbsp;        Position position = player.getPosition();</b>
+&nbsp;
+<b class="nc">&nbsp;        while(!moved){</b>
+<b class="nc">&nbsp;            KeyStroke keyStroke = screen.readInput();</b>
+&nbsp;
+<b class="nc">&nbsp;            if (keyStroke.getKeyType() == KeyType.ArrowUp) {</b>
+<b class="nc">&nbsp;                position = player.getUp();</b>
+<b class="nc">&nbsp;                moved = gameUtils.elementCanBePlaced(position);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            else if(keyStroke.getKeyType() == KeyType.ArrowDown) {</b>
+<b class="nc">&nbsp;                position = player.getDown();</b>
+<b class="nc">&nbsp;                moved = gameUtils.elementCanBePlaced(position);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            else if (keyStroke.getKeyType() == KeyType.ArrowRight) {</b>
+<b class="nc">&nbsp;                position = player.getRight();</b>
+<b class="nc">&nbsp;                moved = gameUtils.elementCanBePlaced(position);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {</b>
+<b class="nc">&nbsp;                position = player.getLeft();</b>
+<b class="nc">&nbsp;                moved = gameUtils.elementCanBePlaced(position);</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            else if(keyStroke.getKeyType() == KeyType.Enter){</b>
+<b class="nc">&nbsp;                position = player.getPosition();</b>
+<b class="nc">&nbsp;                moved = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            else if(keyStroke.getKeyType() == KeyType.Escape) {</b>
+<b class="nc">&nbsp;                MainMenuModel mainMenuModel = new MainMenuModel();</b>
+<b class="nc">&nbsp;                application.setState(new MainMenuState(mainMenuModel, new MainMenuViewer(mainMenuModel), new MainMenuController(mainMenuModel)));</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        player.setPosition(position);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Fighter selectTarget(Screen screen, List&lt;Fighter&gt; targets, GameViewer gameViewer) throws IOException {
+<b class="nc">&nbsp;        int target_index = 0;</b>
+<b class="nc">&nbsp;        Fighter target = targets.get(target_index);</b>
+<b class="nc">&nbsp;        boolean selected = false;</b>
+&nbsp;
+<b class="nc">&nbsp;        while(!selected) {</b>
+<b class="nc">&nbsp;            gameViewer.drawFighterCombatPhase(screen, player, targets.get(target_index));</b>
+<b class="nc">&nbsp;            KeyStroke keyStroke = screen.readInput();</b>
+&nbsp;
+<b class="nc">&nbsp;            switch (keyStroke.getKeyType()) {</b>
+&nbsp;                case KeyType.ArrowRight:
+<b class="nc">&nbsp;                    target_index++;</b>
+&nbsp;                    break;
+&nbsp;
+&nbsp;                case KeyType.ArrowLeft:
+<b class="nc">&nbsp;                    target_index--;</b>
+&nbsp;                    break;
+&nbsp;
+&nbsp;                case KeyType.Enter:
+<b class="nc">&nbsp;                    selected = true;</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            if(target_index &lt; 0){</b>
+<b class="nc">&nbsp;                target_index += targets.size();</b>
+&nbsp;            }
+<b class="nc">&nbsp;            else if(target_index &gt;= targets.size()){</b>
+<b class="nc">&nbsp;                target_index %= targets.size();</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            target = targets.get(target_index);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return target;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //Temporary
+&nbsp;    @Override
+&nbsp;    public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+<b class="nc">&nbsp;        GameModel gameModel = (GameModel) super.getModel();</b>
+<b class="nc">&nbsp;        GameUtils gameUtils = new GameUtils(gameModel);</b>
+<b class="nc">&nbsp;        SoundPlayer soundPlayer = new SoundPlayer();</b>
+<b class="nc">&nbsp;        if(gameModel.hitOrMiss(player, target)){</b>
+<b class="nc">&nbsp;            soundPlayer.hitSound();</b>
+<b class="nc">&nbsp;            target.sufferDamage(gameUtils.damageCalculator(player, target.getPosition()));</b>
+&nbsp;            return;
+&nbsp;        }
+<b class="nc">&nbsp;        soundPlayer.missSound();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-21 05:05</div>
+</div>
+</body>
+</html>
