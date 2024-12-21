@@ -9,7 +9,7 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
 ### *FEATURES* IMPLEMENTADAS
 <!--- preciso pegar prints e gifs para add aqui --->
 
-- **Menu inicial** - O jogo tem um menu inicial com opções de:
+- **Menu Inicial** - O jogo tem um menu inicial com opções de:
   - `Play` - Inicia o combate no nível 1
   - `Help` - Apresenta um ecrã que explica como o jogo funciona e algumas dicas
   - `Quit` - Fecha o jogo
@@ -24,10 +24,32 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
   
   > Você precisa estar adjacente a eles (8 blocos) e obstáculo precisa estar entre a origem e o alvo para surtir efeito. Flanquear é uma tática válida para negar os efeitos dos obstáculos.
 - **Diferentes níveis** - Há mais inimigos em cada nível. Os aliados que se manterem vivos para o próximo nível, sofrem uma melhoria nos seus *stats*.
-  - `Nvl 1` - 
-  - `Nvl 2` - 
-  - `Nvl 3` - 
+  - `Nvl 1` - 3 inimigos
+  - `Nvl 2` - 6 inimigos
+  - `Nvl 3` - 9 inimigos
 - **Efeitos Sonoros** - Após o disparo, seja do aliado, seja do inimigo, sempre é emitido um efeito sonoro de acerto ou de erro.
+- **Tela de Vitória/Derrota** - Ao fim do jogo é exibida uma mensagem de finalização, seja de vitória, seja de derrota.
+
+<p align="center" justify="center">
+  <img src="./main_menu.png">
+</p>
+<p align="center">
+  <b><i>Fig. 1 - Menu Inicial</i></b>
+</p>
+
+<p align="center" justify="center">
+  <img src="./help.png">
+</p>
+<p align="center">
+  <b><i>Fig. 2 - Ecrã de Help</i></b>
+</p>
+
+<p align="center" justify="center">
+  <img src="./nvl1.png">
+</p>
+<p align="center">
+  <b><i>Fig. 3 - Nível 1</i></b>
+</p>
 
 
 
@@ -64,6 +86,9 @@ O design baseia-se em dois padrões. Primeiramente, utiliza a arquitetura MVC (M
 **Example of one of such subsections**:
 
 ---
+#### MVC
+
+#### States
 
 #### THE JUMP ACTION OF THE KANGAROOBOY SHOULD BEHAVE DIFFERENTLY DEPENDING ON ITS STATE
 
