@@ -5,7 +5,7 @@ import static java.lang.Math.sqrt
 
 import spock.lang.Specification
 
-class TestPosition extends Specification{
+class TestPosition extends Specification {
 
     def "test getX"(){
         given:
