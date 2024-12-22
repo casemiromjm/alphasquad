@@ -257,7 +257,7 @@ class TestGameModel extends Specification {
         gameBuilder.createPlayer() >> new Player(position)
         gameBuilder.createEnemies(_) >> [new Enemy(new Position(2, 1))]
         gameBuilder.createObstacles(_) >> []
-        
+
         when:
         GameModel gameModel = new GameModel(width, height, arenaStartPoint, gameBuilder, random)
         boolean res = gameModel.hitOrMiss(gameModel.getPlayer(), gameModel.getEnemyList().getFirst())

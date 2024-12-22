@@ -39,7 +39,6 @@ public class PlayerControl extends GameController implements FighterControl{
         GameViewer gameViewer = (GameViewer) viewer;
         gameViewer.draw(screen);
         move(application, screen);
-        //To be refactored, too confusing (possibly follow the idea of LanternGUI for this)
         if(!(application.getState() instanceof GameState)){
             return;
         }
