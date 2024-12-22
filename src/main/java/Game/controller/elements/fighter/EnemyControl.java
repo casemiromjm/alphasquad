@@ -36,6 +36,7 @@ public class EnemyControl extends GameController implements FighterControl {
      * @param screen O ecrã onde os elementos do jogo são apresentados.
      * @param viewer O visualizador que gere a interface gráfica do jogo.
      */
+    @Override
     public void run(Application application, Screen screen, Viewer viewer) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         GameModel gameModel = (GameModel) super.getModel();
 
@@ -67,6 +68,7 @@ public class EnemyControl extends GameController implements FighterControl {
      * @param application A instância da aplicação principal.
      * @param screen O ecrã onde os elementos do jogo são apresentados.
      */
+    @Override
     public void move(Application application, Screen screen) {
         GameModel gameModel = (GameModel) super.getModel();
         List<Position> adjacentPositions = Arrays.asList(enemy.getUp(), enemy.getDown(), enemy.getLeft(), enemy.getRight());
@@ -98,22 +100,23 @@ public class EnemyControl extends GameController implements FighterControl {
      * @param gameViewer O visualizador para mostrar o estado atual.
      * @return O lutador mais próximo.
      */
+    @Override
     public Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer){
         Fighter closest = targets.getFirst();
 
         for(Fighter fighter : targets){
             if(Position.getDistance(enemy.getPosition(), fighter.getPosition()) < Position.getDistance(enemy.getPosition(), closest.getPosition()))
                 closest = fighter;
-            }
         }
+
         return closest;
     }
 
     /**
-     * Realiza um ataque ao alvo selecionado.
-     *
-     * @param target O lutador que será atacado.
-     */
+    * Realiza um ataque ao alvo selecionado.
+    * @param target O lutador que será atacado.
+    */
+    @Override
     public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
         SoundPlayer soundPlayer = new SoundPlayer();
@@ -123,6 +126,6 @@ public class EnemyControl extends GameController implements FighterControl {
             target.sufferDamage(gameModel.damageCalculator(enemy, target.getPosition()));
             return;
         }
-        soundPlayer.missSound();
+    soundPlayer.missSound();
     }
 }

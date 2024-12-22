@@ -1,0 +1,268 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GameController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Game.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: GameController (Game.controller)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6,2%
+  </span>
+  <span class="absValue">
+    (1/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    21,7%
+  </span>
+  <span class="absValue">
+    (5/23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GameController$run</td>
+  </tr>
+  <tr>
+    <td class="name">GameController$SpockMock$393358895</td>
+  </tr>
+  <tr>
+    <td class="name">GameController$SpockMock$393358895$auxiliary$2oCZsAfR</td>
+  </tr>
+  <tr>
+    <td class="name">GameController$SpockMock$393358895$auxiliary$cL0QvGDg</td>
+  </tr>
+  <tr>
+    <td class="name">GameController$SpockMock$393358895$auxiliary$efxTH0Fi</td>
+  </tr>
+  <tr>
+    <td class="name">GameController$SpockMock$393358895$auxiliary$pxl38CSR</td>
+  </tr>
+  <tr>
+    <td class="name">GameController$SpockMock$393358895$auxiliary$Ra3SaWFT</td>
+  </tr>
+  <tr>
+    <td class="name">GameController$SpockMock$393358895$auxiliary$x7977FU2</td>
+  </tr>
+  <tr>
+    <td class="name">GameController$SpockMock$393358895$auxiliary$XOwlKPzr</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    6,2%
+  </span>
+  <span class="absValue">
+    (1/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    21,7%
+  </span>
+  <span class="absValue">
+    (5/23)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Game.controller;
+&nbsp;
+&nbsp;import Game.Application;
+&nbsp;import Game.controller.elements.fighter.AllyControl;
+&nbsp;import Game.controller.elements.fighter.EnemyControl;
+&nbsp;import Game.controller.elements.fighter.PlayerControl;
+&nbsp;import Game.model.DefeatModel;
+&nbsp;import Game.model.gameModel.GameModel;
+&nbsp;import Game.model.VictoryModel;
+&nbsp;import Game.model.elements.fighter.Ally;
+&nbsp;import Game.model.elements.fighter.Enemy;
+&nbsp;import Game.state.DefeatState;
+&nbsp;import Game.state.GameState;
+&nbsp;import Game.state.VictoryState;
+&nbsp;import Game.view.DefeatViewer;
+&nbsp;import Game.view.VictoryViewer;
+&nbsp;import Game.view.Viewer;
+&nbsp;import com.googlecode.lanterna.screen.Screen;
+&nbsp;
+&nbsp;import javax.sound.sampled.LineUnavailableException;
+&nbsp;import javax.sound.sampled.UnsupportedAudioFileException;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;// Controlador principal do jogo, responsável por gerir o ciclo de jogabilidade
+&nbsp;public class GameController extends Game.controller.Controller {
+&nbsp;
+&nbsp;    // Construtor que inicializa o controlador com o modelo do jogo
+&nbsp;    public GameController(GameModel gameModel) {
+<b class="fc">&nbsp;        super(gameModel);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Método principal que gere o ciclo de jogabilidade.
+&nbsp;     * Inclui verificações de vitória, derrota, e transições de estado do jogo.
+&nbsp;     *
+&nbsp;     * @param application Instância da aplicação principal.
+&nbsp;     * @param screen O ecrã onde o jogo é exibido.
+&nbsp;     * @param viewer O visualizador responsável por renderizar o estado atual do jogo.
+&nbsp;     * @throws IOException Caso ocorra um erro de entrada/saída.
+&nbsp;     * @throws UnsupportedAudioFileException Caso o ficheiro de som não seja suportado.
+&nbsp;     * @throws LineUnavailableException Caso a linha de áudio não esteja disponível.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void run(Application application, Screen screen, Viewer viewer) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
+<b class="fc">&nbsp;        GameModel gameModel = (GameModel) super.getModel();</b>
+&nbsp;
+&nbsp;        // Verifica se o jogador atingiu o nível máximo e ativa o estado de vitória
+<b class="pc">&nbsp;        if (gameModel.getLevel() &gt; 3) {</b>
+<b class="fc">&nbsp;            VictoryModel victoryModel = new VictoryModel();</b>
+<b class="fc">&nbsp;            application.setState(new VictoryState(</b>
+&nbsp;                victoryModel,
+&nbsp;                new VictoryViewer(victoryModel),
+&nbsp;                new VictoryController(victoryModel)
+&nbsp;            ));
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // Executa a jogada do jogador
+<b class="nc">&nbsp;        PlayerControl playerControl = new PlayerControl(gameModel, gameModel.getPlayer());</b>
+<b class="nc">&nbsp;        playerControl.run(application, screen, viewer);</b>
+&nbsp;
+&nbsp;        // Verifica se o estado do jogo mudou após a jogada do jogador
+<b class="nc">&nbsp;        if (!(application.getState() instanceof GameState)) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // Remove lutadores mortos e verifica se o nível foi concluído
+<b class="nc">&nbsp;        gameModel.cleanDeath();</b>
+<b class="nc">&nbsp;        if (gameModel.checkNewLevel()) {</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // Executa as jogadas dos aliados
+<b class="nc">&nbsp;        for (Ally ally : gameModel.getAllyList()) {</b>
+<b class="nc">&nbsp;            AllyControl allyControl = new AllyControl(gameModel, ally);</b>
+<b class="nc">&nbsp;            allyControl.run(application, screen, viewer);</b>
+&nbsp;
+&nbsp;            // Verifica se o estado do jogo mudou após a jogada de um aliado
+<b class="nc">&nbsp;            if (!(application.getState() instanceof GameState)) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            // Remove lutadores mortos e verifica se o nível foi concluído
+<b class="nc">&nbsp;            gameModel.cleanDeath();</b>
+<b class="nc">&nbsp;            if (gameModel.checkNewLevel()) {</b>
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        // Executa as jogadas dos inimigos
+<b class="nc">&nbsp;        for (Enemy enemy : gameModel.getEnemyList()) {</b>
+<b class="nc">&nbsp;            EnemyControl enemyControl = new EnemyControl(gameModel, enemy);</b>
+<b class="nc">&nbsp;            enemyControl.run(application, screen, viewer);</b>
+&nbsp;
+&nbsp;            // Remove lutadores mortos após a jogada de um inimigo
+<b class="nc">&nbsp;            gameModel.cleanDeath();</b>
+&nbsp;
+&nbsp;            // Verifica se o jogador morreu e ativa o estado de derrota
+<b class="nc">&nbsp;            if (gameModel.getPlayer().isDead()) {</b>
+<b class="nc">&nbsp;                DefeatModel defeatModel = new DefeatModel();</b>
+<b class="nc">&nbsp;                application.setState(new DefeatState(</b>
+&nbsp;                    defeatModel,
+&nbsp;                    new DefeatViewer(defeatModel),
+&nbsp;                    new DefeatController(defeatModel)
+&nbsp;                ));
+&nbsp;                return;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-22 22:47</div>
+</div>
+</body>
+</html>
