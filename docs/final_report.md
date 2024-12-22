@@ -188,7 +188,7 @@ Para alem disso, este padrao permitiu um isolamento melhor dos MVCs especificos 
 A figura seguinte demonstra como as classes que implementam este padrao se relacionam com o MVC (a estrutura de classes abstratas foi utilizada para representar esta relaçao).
 
 <p align="center" justify="center">
-  <img src="docs/umls/State.svg">
+  <img src="docs/umls/State.png">
 </p>
 
 As classes que representam este padrao sao:
