@@ -1,21 +1,21 @@
 package Game.controller;
 
 import Game.Application;
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.model.HelpScreenModel;
 import Game.model.MainMenuModel;
+import Game.model.gameModel.RandomGameBuilder;
 import Game.state.GameState;
 import Game.state.HelpState;
-import Game.state.MainMenuState;
 import Game.view.GameViewer;
 import Game.view.HelpScreenViewer;
-import Game.view.MainMenuViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
+import java.util.Random;
 
 // Controlador responsável por gerir o menu principal do jogo
 public class MainMenuController extends Game.controller.Controller {
@@ -55,16 +55,10 @@ public class MainMenuController extends Game.controller.Controller {
 
         // Inicia o jogo se o utilizador pressionar 'p'
         } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
-            GameModel gameModel = new GameModel(
-                screen.getTerminalSize().getColumns(),
-                screen.getTerminalSize().getRows(),
-                17
-            );
-            application.setState(new GameState(
-                gameModel,
-                new GameViewer(gameModel),
-                new GameController(gameModel)
-            ));
+            int width = screen.getTerminalSize().getColumns();
+            int height = screen.getTerminalSize().getRows();
+            GameModel gameModel = new GameModel(width, height, 17, new RandomGameBuilder(width, height, 17, new Random()));
+            application.setState(new GameState(gameModel, new GameViewer(gameModel), new GameController(gameModel)));
 
         // Fecha a aplicação se for recebida a EOF (End of File)
         } else if (key.getKeyType() == KeyType.EOF) {

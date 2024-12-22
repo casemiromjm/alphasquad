@@ -3,11 +3,12 @@ package Game.controller.elements.fighter;
 import Game.Application;
 import Game.controller.GameController;
 import Game.controller.MainMenuController;
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.model.MainMenuModel;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Ally;
 import Game.model.elements.fighter.Fighter;
+import Game.sound.SoundPlayer;
 import Game.state.GameState;
 import Game.state.MainMenuState;
 import Game.view.GameViewer;
@@ -26,8 +27,7 @@ import java.util.List;
 // Classe que implementa o controlo de um aliado durante o jogo
 public class AllyControl extends GameController implements FighterControl {
 
-    private final Ally ally; // Instância do aliado controlado
-    private Fighter target; // Alvo do aliado
+    private final Ally ally;
 
     // Construtor que inicializa o controlador com o modelo do jogo e o aliado
     public AllyControl(GameModel gameModel, Ally ally) {
@@ -70,7 +70,7 @@ public class AllyControl extends GameController implements FighterControl {
         Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);
 
         // Ataca o alvo selecionado
-        fire(target, gameViewer);
+        fire(target);
     }
 
     /**
@@ -91,16 +91,22 @@ public class AllyControl extends GameController implements FighterControl {
 
             // Movimentos do aliado com base nas setas do teclado
             if (keyStroke.getKeyType() == KeyType.ArrowUp) {
-                position = new Position(ally.getPosition().getX(), ally.getPosition().getY() - 1);
+                position = ally.getUp();
                 moved = gameModel.elementCanBePlaced(position);
-            } else if (keyStroke.getKeyType() == KeyType.ArrowDown) {
-                position = new Position(ally.getPosition().getX(), ally.getPosition().getY() + 1);
+            }
+
+            else if(keyStroke.getKeyType() == KeyType.ArrowDown) {
+                position = ally.getDown();
                 moved = gameModel.elementCanBePlaced(position);
-            } else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
-                position = new Position(ally.getPosition().getX() + 1, ally.getPosition().getY());
+            }
+
+            else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
+                position = ally.getRight();
                 moved = gameModel.elementCanBePlaced(position);
-            } else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
-                position = new Position(ally.getPosition().getX() - 1, ally.getPosition().getY());
+            }
+
+            else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
+                position = ally.getLeft(); 
                 moved = gameModel.elementCanBePlaced(position);
             }
 
@@ -174,15 +180,15 @@ public class AllyControl extends GameController implements FighterControl {
      * @param gameViewer O visualizador para exibir o resultado do ataque.
      */
     @Override
-    public void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
-
+        SoundPlayer soundPlayer = new SoundPlayer();
         // Verifica se o ataque foi bem-sucedido
-        if (gameModel.hitOrMiss(ally, target)) {
-            gameViewer.hitSound(); // Som de acerto
-            target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(ally, target.getPosition())); // Reduz os pontos de vida do alvo
+        if(gameModel.hitOrMiss(ally, target)){
+            soundPlayer.hitSound();   // Som de acerto
+            target.sufferDamage(gameModel.damageCalculator(ally, target.getPosition()));  // Reduz os pontos de vida do alvo
             return;
         }
-        gameViewer.missSound(); // Som de falha
+        soundPlayer.missSound();  // Som de falha
     }
 }

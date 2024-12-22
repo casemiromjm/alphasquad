@@ -6,42 +6,70 @@ import Game.model.elements.Position;
 
 //The characters of the game, both enemies, friendlies and the player
 public abstract class Fighter extends Element {
-    int hitPoints;
+    int health;
     int aim;
     int damage;
 
     public Fighter(Position position){
         super(position);
-        hitPoints = 20;
-        aim = 70;       //Subject to change
+        health = 20;
+        aim = 70;
         damage = 10;
     }
 
     public boolean isDead() {
-        return hitPoints <= 0;
+        return health <= 0;
     }
 
-    public int getHitPoints() {
-        return hitPoints;
+    public int getHealth() {
+        return health;
     }
 
-    public void setHitPoints(int hitPoints) {
-        this.hitPoints = hitPoints;
+    public void increaseHealth(int bonus) {
+        health += bonus;
+    }
+
+    public void sufferDamage(int damage){
+        health -= damage;
     }
 
     public int getAim() {
         return aim;
     }
 
-    public void setAim(int aim) {
-        this.aim = aim;
+    public void increaseAim(int bonus) {
+        aim += bonus;
     }
 
     public int getDamage() {
         return damage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void increaseDamage(int bonus) {
+        damage += bonus;
+    }
+
+    public Position getUp(){
+        int new_x = super.getPosition().getX();
+        int new_y = super.getPosition().getY() - 1;
+        return new Position(new_x, new_y);
+    }
+
+    public Position getDown(){
+        int new_x = super.getPosition().getX();
+        int new_y = super.getPosition().getY() + 1;
+        return new Position(new_x, new_y);
+    }
+
+    public Position getLeft(){
+        int new_x = super.getPosition().getX() - 1;
+        int new_y = super.getPosition().getY();
+        return new Position(new_x, new_y);
+    }
+
+    public Position getRight(){
+        int new_x = super.getPosition().getX() + 1;
+        int new_y = super.getPosition().getY();
+        return new Position(new_x, new_y);
     }
 }

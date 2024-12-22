@@ -3,11 +3,12 @@ package Game.controller.elements.fighter;
 import Game.Application;
 import Game.controller.GameController;
 import Game.controller.MainMenuController;
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.model.MainMenuModel;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Fighter;
 import Game.model.elements.fighter.Player;
+import Game.sound.SoundPlayer;
 import Game.state.GameState;
 import Game.state.MainMenuState;
 import Game.view.GameViewer;
@@ -42,9 +43,8 @@ public class PlayerControl extends GameController implements FighterControl {
 
         // Move o jogador baseado na entrada do utilizador
         move(application, screen);
-
         // Verifica se o estado atual da aplicação ainda é o jogo
-        if (!(application.getState() instanceof GameState)) {
+        if(!(application.getState() instanceof GameState)){
             return;
         }
 
@@ -57,9 +57,9 @@ public class PlayerControl extends GameController implements FighterControl {
         // Obtém a lista de inimigos e seleciona um alvo
         List<Fighter> enemies = new ArrayList<>(gameModel.getEnemyList());
         Fighter target = selectTarget(screen, enemies, (GameViewer) viewer);
+         // Realiza o ataque ao inimigo selecionado
+        fire(target);
 
-        // Realiza o ataque ao inimigo selecionado
-        fire(target, gameViewer);
     }
 
     @Override
@@ -74,16 +74,23 @@ public class PlayerControl extends GameController implements FighterControl {
 
             // Movimentos do jogador com base nas setas do teclado
             if (keyStroke.getKeyType() == KeyType.ArrowUp) {
-                position = new Position(player.getPosition().getX(), player.getPosition().getY() - 1);
+                position = player.getUp();
                 moved = gameModel.elementCanBePlaced(position);
-            } else if (keyStroke.getKeyType() == KeyType.ArrowDown) {
-                position = new Position(player.getPosition().getX(), player.getPosition().getY() + 1);
+            }
+
+            else if(keyStroke.getKeyType() == KeyType.ArrowDown) {
+                position = player.getDown();
                 moved = gameModel.elementCanBePlaced(position);
-            } else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
-                position = new Position(player.getPosition().getX() + 1, player.getPosition().getY());
+            }
+
+            else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
+                position = player.getRight();
                 moved = gameModel.elementCanBePlaced(position);
-            } else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
-                position = new Position(player.getPosition().getX() - 1, player.getPosition().getY());
+            }
+
+            else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
+                position = player.getLeft();
+
                 moved = gameModel.elementCanBePlaced(position);
             } 
             // Permanecer na posição atual ao pressionar Enter
@@ -97,8 +104,6 @@ public class PlayerControl extends GameController implements FighterControl {
                 application.setState(new MainMenuState(mainMenuModel, new MainMenuViewer(mainMenuModel), new MainMenuController(mainMenuModel)));
                 return;
             }
-        }
-
         // Atualiza a posição do jogador após o movimento
         player.setPosition(position);
     }
@@ -142,16 +147,16 @@ public class PlayerControl extends GameController implements FighterControl {
 
     // Realiza o ataque ao inimigo selecionado
     @Override
-    public void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
-
         // Determina se o ataque acertou ou falhou
-        if (gameModel.hitOrMiss(player, target)) {
-            gameViewer.hitSound(); // Toca som de acerto
-            target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(player, target.getPosition())); // Reduz os pontos de vida do alvo
+        SoundPlayer soundPlayer = new SoundPlayer();
+        if(gameModel.hitOrMiss(player, target)){
+            soundPlayer.hitSound();   // Toca som de acerto
+            target.sufferDamage(gameModel.damageCalculator(player, target.getPosition()));  // Reduz os pontos de vida do alvo
             return;
         }
-        gameViewer.missSound(); // Toca som de falha
+        soundPlayer.missSound();  // Toca som de falha
     }
 }
 

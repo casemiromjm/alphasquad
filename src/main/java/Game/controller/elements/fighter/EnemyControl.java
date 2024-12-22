@@ -2,10 +2,11 @@ package Game.controller.elements.fighter;
 
 import Game.Application;
 import Game.controller.GameController;
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Enemy;
 import Game.model.elements.fighter.Fighter;
+import Game.sound.SoundPlayer;
 import Game.view.GameViewer;
 import Game.view.Viewer;
 import com.googlecode.lanterna.screen.Screen;
@@ -55,12 +56,9 @@ public class EnemyControl extends GameController implements FighterControl {
         time = application.waiting(time, timer);
         move(application, screen);
         gameViewer.draw(screen);
-        time = application.waiting(time, timer);
-        gameViewer.drawFighterCombatPhase(screen, enemy, target);
         application.waiting(time, timer);
-
-        // Ataca o alvo
-        fire(target, gameViewer);
+        gameViewer.drawFighterCombatPhase(screen, enemy, target);
+        fire(target);
     }
 
     /**
@@ -71,18 +69,10 @@ public class EnemyControl extends GameController implements FighterControl {
      */
     public void move(Application application, Screen screen) {
         GameModel gameModel = (GameModel) super.getModel();
-        Position currentPosition = enemy.getPosition();
-
-        // Define as posições adjacentes ao inimigo
-        List<Position> adjacentPositions = Arrays.asList(
-            new Position(currentPosition.getX() + 1, currentPosition.getY()),
-            new Position(currentPosition.getX() - 1, currentPosition.getY()),
-            new Position(currentPosition.getX(), currentPosition.getY() + 1),
-            new Position(currentPosition.getX(), currentPosition.getY() - 1)
-        );
+        List<Position> adjacentPositions = Arrays.asList(enemy.getUp(), enemy.getDown(), enemy.getLeft(), enemy.getRight());
 
         Position best = null;
-        int aim_penalty = 0; // Valor para determinar a melhor posição (penalidade)
+        int aim_penalty = 0;
 
         // Avalia as posições adjacentes para encontrar a mais vantajosa
         for (Position pos : adjacentPositions) {
@@ -108,14 +98,11 @@ public class EnemyControl extends GameController implements FighterControl {
      * @param gameViewer O visualizador para mostrar o estado atual.
      * @return O lutador mais próximo.
      */
-    public Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer) {
-        GameModel gameModel = (GameModel) super.getModel();
-        Fighter closest = targets.get(0); // Assume o primeiro alvo como o mais próximo inicialmente
+    public Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer){
+        Fighter closest = targets.getFirst();
 
-        // Procura o alvo mais próximo baseado na distância
-        for (Fighter fighter : targets) {
-            if (gameModel.getDistance(enemy.getPosition(), fighter.getPosition()) < 
-                gameModel.getDistance(enemy.getPosition(), closest.getPosition())) {
+        for(Fighter fighter : targets){
+            if(Position.getDistance(enemy.getPosition(), fighter.getPosition()) < Position.getDistance(enemy.getPosition(), closest.getPosition()))
                 closest = fighter;
             }
         }
@@ -126,17 +113,16 @@ public class EnemyControl extends GameController implements FighterControl {
      * Realiza um ataque ao alvo selecionado.
      *
      * @param target O lutador que será atacado.
-     * @param gameViewer O visualizador para mostrar o resultado do ataque.
      */
-    public void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
         GameModel gameModel = (GameModel) super.getModel();
-
+        SoundPlayer soundPlayer = new SoundPlayer();
         // Verifica se o ataque foi bem-sucedido
-        if (gameModel.hitOrMiss(enemy, target)) {
-            gameViewer.hitSound(); // Toca som de acerto
-            target.setHitPoints(target.getHitPoints() - gameModel.damageCalculator(enemy, target.getPosition())); // Reduz os pontos de vida do alvo
+        if(gameModel.hitOrMiss(enemy, target)){
+            soundPlayer.hitSound();
+            target.sufferDamage(gameModel.damageCalculator(enemy, target.getPosition()));
             return;
         }
-        gameViewer.missSound(); // Toca som de falha
+        soundPlayer.missSound();
     }
 }

@@ -33,14 +33,13 @@ public interface FighterControl {
      */
     Fighter selectTarget(Screen screen, List<Fighter> targets, GameViewer gameViewer) throws IOException;
 
-    /**
+     /**
      * Método para realizar um ataque ao lutador alvo.
      * 
      * @param target O lutador que será atacado.
-     * @param gameViewer O visualizador do jogo para mostrar o estado atualizado após o ataque.
      * @throws UnsupportedAudioFileException Caso o ficheiro de som não seja suportado.
      * @throws LineUnavailableException Caso a linha de áudio não esteja disponível.
      * @throws IOException Caso ocorra um erro de entrada/saída.
      */
-    void fire(Fighter target, GameViewer gameViewer) throws UnsupportedAudioFileException, LineUnavailableException, IOException;
+    void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException;
 }

@@ -1,18 +1,13 @@
-package Game.model;
+package Game.model.gameModel;
 
+import Game.model.Model;
 import Game.model.elements.Element;
 import Game.model.elements.Position;
 import Game.model.elements.fighter.Ally;
 import Game.model.elements.fighter.Enemy;
 import Game.model.elements.fighter.Fighter;
 import Game.model.elements.fighter.Player;
-import Game.model.elements.obstacles.Bush;
 import Game.model.elements.obstacles.Obstacle;
-import Game.model.elements.obstacles.SmallStoneWall;
-import Game.model.elements.obstacles.SmallWoodenWall;
-import Game.model.elements.powerUps.ExtraAim;
-import Game.model.elements.powerUps.ExtraDamage;
-import Game.model.elements.powerUps.ExtraHealth;
 import Game.model.elements.powerUps.PowerUp;
 
 import java.util.ArrayList;
@@ -22,21 +17,23 @@ import java.util.Random;
 import static java.lang.Math.*;
 
 public class GameModel extends Model {
-    private final List<Enemy> enemyList = new ArrayList<>();
-    private final List<Ally> allyList = new ArrayList<>();
+    private List<Enemy> enemyList = new ArrayList<>();
+    private List<Ally> allyList = new ArrayList<>();
     private Player player;
-    private final List<Obstacle> obstacleList = new ArrayList<>();
-    private final List<PowerUp> powerUpList = new ArrayList<>();
+    private List<Obstacle> obstacleList = new ArrayList<>();
+    private List<PowerUp> powerUpList = new ArrayList<>();
     private int level = 1;
     private final int width;
     private final int height;
-    private int arenaStartPoint;
+    private final int arenaStartPoint;
     private final Random rand;
+    private final GameBuilder gameBuilder;
 
-    public GameModel(int width, int height, int arenaStartPoint) {
+    public GameModel(int width, int height, int arenaStartPoint, GameBuilder gameBuilder) {
         this.width = width;
         this.height = height;
         this.arenaStartPoint = arenaStartPoint;
+        this.gameBuilder = gameBuilder;
         rand = new Random();
         createInitialElements();
 
@@ -44,20 +41,27 @@ public class GameModel extends Model {
         createLevelElements();
     }
 
-    public GameModel(int width, int height, Random rand) {
+    //Mainly for testing purposes
+    public GameModel(int width, int height, int arenaStartPoint, GameBuilder gameBuilder, Random rand) {
         this.width = width;
         this.height = height;
+        this.arenaStartPoint = arenaStartPoint;
+        this.gameBuilder = gameBuilder;
         this.rand = rand;
         createInitialElements();
         createLevelElements();
     }
 
-    public int getArenaStartPoint() {
-        return arenaStartPoint;
+    public int getWidth() {
+        return width;
     }
 
-    public void setArenaStartPoint(int arenaStartPoint) {
-        this.arenaStartPoint = arenaStartPoint;
+    public int getHeight() {
+        return height;
+    }
+
+    public int getArenaStartPoint() {
+        return arenaStartPoint;
     }
 
     public List<Enemy> getEnemyList() {
@@ -85,118 +89,12 @@ public class GameModel extends Model {
 
     }
 
-    public void nextLevel(){
-        level++;
-        obstacleList.clear();
-        enemyList.clear();
-        powerUpList.clear();
-        newLevelPermElements();
-
-        createLevelElements();
-    }
-
-    public boolean checkNewLevel(){
-        if(enemyList.isEmpty()){
-            nextLevel();
-            return true;
-        }
-        return false;
-    }
-
-    private void createInitialElements(){
-        //Elements maintained from beginning to end
-        player = new Player(new Position(width/2, height - 2));
-
-        while(allyList.size() < 2){
-            int x = rand.nextInt(width/2 - 3, width/2 + 4);
-            int y = height - 2;
-
-            if(elementCanBePlaced(new Position(x, y)))
-                allyList.add(new Ally(new Position(x, y)));
-
-        }
-    }
-
-    private void createLevelElements(){
-        //Creating Level specific elements
-        while(enemyList.size() < level * 3){
-            Position position = generatePosition(arenaStartPoint, width, 0, height/4);
-
-            if(elementCanBePlaced(position))
-                enemyList.add(new Enemy(position));
-
-        }
-
-        //Add stone walls
-        for(int i = 0; i < 2;) {
-            Position position = generatePosition(arenaStartPoint, width, height/5, 4 * height/5);
-
-            if (elementCanBePlaced(position)) {
-                obstacleList.add(new SmallStoneWall(position));
-                i++;
-            }
-        }
-
-        for(int i = 0; i < 4;){
-            Position position = generatePosition(arenaStartPoint, width, height/5, 4 * height/5);
-
-            if (elementCanBePlaced(position)) {
-                obstacleList.add(new SmallWoodenWall(position));
-                i++;
-            }
-        }
-
-        for(int i = 0; i < 4;) {
-            Position position = generatePosition(arenaStartPoint, width, height / 5, 4 * height / 5);
-
-            if (elementCanBePlaced(position)){
-                obstacleList.add(new Bush(position));
-                i++;
-            }
-        }
-
-        //To improve
-        List<Position> powerup_pos = new ArrayList<>();
-        while(true){
-            Position position = generatePosition(arenaStartPoint, width, 4 * height/5, 4 * height);
-
-            if(elementCanBePlaced(position)){
-                powerUpList.add(new ExtraHealth(position));
-                powerup_pos.add(position);
-                break;
-            }
-        }
-
-        while(true){
-            Position position = generatePosition(arenaStartPoint, width, 4 * height/5, 4 * height);
-
-            if(elementCanBePlaced(position) && !powerup_pos.contains(position)){
-                powerUpList.add(new ExtraAim(position));
-                break;
-            }
-        }
-
-        while(true){
-            Position position = generatePosition(arenaStartPoint, width, 4 * height/5, 4 * height);
-
-            if(elementCanBePlaced(position) && !powerup_pos.contains(position)){
-                powerUpList.add(new ExtraDamage(position));
-                break;
-            }
-        }
-
-    }
-
-    private Position generatePosition(int xOrigin, int xLimit, int yOrigin, int yLimit){
-        int x = rand.nextInt(xOrigin, xLimit);
-        int y = rand.nextInt(yOrigin, yLimit);
-
-        return new Position(x, y);
-    }
 
     public boolean elementCanBePlaced(Position position){
-        //To make more efficient
-        if(position.getX() < arenaStartPoint || position.getX() > width - 1 || position.getY() < 0 || position.getY() > height - 1)
+        if(position.getX() < arenaStartPoint
+                || position.getX() > width - 1
+                || position.getY() < 0
+                || position.getY() > height - 1)
             return false;
 
         if(player.getPosition().equals(position))
@@ -215,16 +113,9 @@ public class GameModel extends Model {
 
         }
 
-        for(Element el : enemyList){
-            if(el.getPosition().equals(position))
-                return false;
-
-        }
-
         for (Element el : obstacleList){
             if(el.getPosition().equals(position))
                 return false;
-
         }
 
         return true;
@@ -235,9 +126,9 @@ public class GameModel extends Model {
         Obstacle obstacle = checkObstacles(origin, target);
 
         if(obstacle != null)
-            return 2 * toIntExact(round(getDistance(origin, target))) + obstacle.getProtection();
+            return 2 * toIntExact(round(Position.getDistance(origin, target))) + obstacle.getProtection();
 
-        return 2 * toIntExact(round(getDistance(origin, target)));
+        return 2 * toIntExact(round(Position.getDistance(origin, target)));
     }
 
     public int aimCalculator(Fighter origin, Position target){
@@ -269,8 +160,8 @@ public class GameModel extends Model {
 
         for(Obstacle ob : obstacleList){
             Position ob_position = ob.getPosition();
-            //Hard to understand, to improve
-            if(getDistance(ob_position, target) < 2){
+            //Check for adjacent obstacles that are between two positions
+            if(Position.getDistance(ob_position, target) < 2){
                 if((ob_position.getX() >= origin.getX() && ob_position.getY() >= origin.getY() && ob_position.getX() <= target.getX() && ob_position.getY() <= target.getY()) ||
                         (ob_position.getX() <= origin.getX() && ob_position.getY() >= origin.getY() && ob_position.getX() >= target.getX() && ob_position.getY() <= target.getY()) ||
                         (ob_position.getX() <= origin.getX() && ob_position.getY() <= origin.getY() && ob_position.getX() >= target.getX() && ob_position.getY() >= target.getY()) ||
@@ -294,8 +185,33 @@ public class GameModel extends Model {
         return result;
     }
 
-    public double getDistance(Position p1, Position p2){
-        return sqrt(pow(p1.getX() - p2.getX(), 2) + pow(p1.getY() - p2.getY(), 2));
+    private void nextLevel(){
+        level++;
+        obstacleList.clear();
+        enemyList.clear();
+        powerUpList.clear();
+        newLevelPermElements();
+
+        createLevelElements();
+    }
+
+    public boolean checkNewLevel(){
+        if(enemyList.isEmpty()){
+            nextLevel();
+            return true;
+        }
+        return false;
+    }
+
+    private void createInitialElements(){
+        player = gameBuilder.createPlayer();
+        allyList = gameBuilder.createAllies(this);
+    }
+
+    private void createLevelElements(){
+        enemyList = gameBuilder.createEnemies(this);
+        obstacleList = gameBuilder.createObstacles(this);
+        powerUpList = gameBuilder.createPowerUps(this);
     }
 
     public boolean hitOrMiss(Fighter origin, Fighter target){
@@ -345,8 +261,9 @@ public class GameModel extends Model {
     }
 
     private void improveFighter(Fighter fighter){
-        fighter.setHitPoints(fighter.getHitPoints() + 20);
-        fighter.setAim(fighter.getAim() + 10);
-        fighter.setDamage(fighter.getDamage() + 5);
+        fighter.increaseHealth(20);
+        fighter.increaseAim(10);
+        fighter.increaseDamage(5);
     }
+
 }

@@ -5,7 +5,7 @@ import Game.controller.elements.fighter.AllyControl;
 import Game.controller.elements.fighter.EnemyControl;
 import Game.controller.elements.fighter.PlayerControl;
 import Game.model.DefeatModel;
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.model.VictoryModel;
 import Game.model.elements.fighter.Ally;
 import Game.model.elements.fighter.Enemy;

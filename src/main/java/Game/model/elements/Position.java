@@ -2,6 +2,9 @@ package Game.model.elements;
 
 import java.util.Objects;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 public class Position {
     int x;
     int y;
@@ -38,5 +41,9 @@ public class Position {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    public static double getDistance(Position p1, Position p2){
+        return sqrt(pow(p1.getX() - p2.getX(), 2) + pow(p1.getY() - p2.getY(), 2));
     }
 }

@@ -1,89 +1,124 @@
 package Game.controller
 
+import Game.Application
+import Game.model.MainMenuModel
+import Game.state.GameState
+import Game.state.HelpState
+import Game.view.MainMenuViewer
+import com.googlecode.lanterna.TerminalSize
 import com.googlecode.lanterna.input.KeyStroke
+import com.googlecode.lanterna.input.KeyType
 import com.googlecode.lanterna.screen.Screen
 import spock.lang.Specification
 
-class TestMainMenuController extends Specification{
-
-    def "Test only help"(){
+class TestMainMenuController extends Specification {
+    def "test run with quit"(){
         given:
-        def screen = Stub(Screen){
-            readInput() >> new KeyStroke((Character) 'q', false, false)
-        }
-
-        def helpscreen = Mock(HelpScreenController)
-        def gamecontroller = Mock(GameController)
-
-        MainMenuController mainMenuController = new MainMenuController(screen, gamecontroller, helpscreen)
+        MainMenuModel mainMenuModel = Mock()
+        MainMenuViewer mainMenuViewer = Mock()
+        Application application = Mock()
+        Screen screen = Mock()
+        TerminalSize terminalSize = Mock()
+        screen.getTerminalSize() >> terminalSize
+        terminalSize.getColumns() >> 85
+        terminalSize.getRows() >> 45
 
         when:
-        mainMenuController.run()
+        MainMenuController mainMenuController = new MainMenuController(mainMenuModel)
+        mainMenuController.run(application, screen, mainMenuViewer)
 
         then:
-        0 * helpscreen.run()
-        0 * gamecontroller.run()
+        1 * screen.readInput() >>  new KeyStroke('q' as Character, false, false)
+        1 * application.setState(null)
+        0 * application.setState(_ as GameState)
+        0 * application.setState(_ as HelpState)
     }
 
-    def "Test all options"(){
-
+    def "test run with play"(){
         given:
-        def screen = Stub(Screen){
-                readInput() >>> [new KeyStroke((Character) 'h', false, false),
-                                 new KeyStroke((Character) 'p', false, false),
-                                 new KeyStroke((Character) 'q', false, false)]
-        }
-
-        def helpscreen = Mock(HelpScreenController)
-        def gamecontroller = Mock(GameController)
-
-        MainMenuController mainMenuController = new MainMenuController(screen, gamecontroller, helpscreen)
+        MainMenuModel mainMenuModel = Mock()
+        MainMenuViewer mainMenuViewer = Mock()
+        Application application = Mock()
+        Screen screen = Mock()
+        TerminalSize terminalSize = Mock()
+        screen.getTerminalSize() >> terminalSize
+        terminalSize.getColumns() >> 85
+        terminalSize.getRows() >> 45
 
         when:
-        mainMenuController.run()
+        MainMenuController mainMenuController = new MainMenuController(mainMenuModel)
+        mainMenuController.run(application, screen, mainMenuViewer)
 
         then:
-        1 * helpscreen.run()
-        1 * gamecontroller.run()
+        1 * screen.readInput() >>  new KeyStroke('p' as Character, false, false)
+        0 * application.setState(null)
+        1 * application.setState(_ as GameState)
+        0 * application.setState(_ as HelpState)
     }
 
-    def "Test only help"(){
+    def "test run with help"(){
         given:
-        def screen = Stub(Screen){
-            readInput() >>> [new KeyStroke((Character) 'h', false, false),
-                             new KeyStroke((Character) 'q', false, false)]
-        }
-
-        def helpscreen = Mock(HelpScreenController)
-        def gamecontroller = Mock(GameController)
-
-        MainMenuController mainMenuController = new MainMenuController(screen, gamecontroller, helpscreen)
+        MainMenuModel mainMenuModel = Mock()
+        MainMenuViewer mainMenuViewer = Mock()
+        Application application = Mock()
+        Screen screen = Mock()
+        TerminalSize terminalSize = Mock()
+        screen.getTerminalSize() >> terminalSize
+        terminalSize.getColumns() >> 85
+        terminalSize.getRows() >> 45
 
         when:
-        mainMenuController.run()
+        MainMenuController mainMenuController = new MainMenuController(mainMenuModel)
+        mainMenuController.run(application, screen, mainMenuViewer)
 
         then:
-        1 * helpscreen.run()
-        0 * gamecontroller.run()
+        1 * screen.readInput() >>  new KeyStroke('h' as Character, false, false)
+        0 * application.setState(null)
+        0 * application.setState(_ as GameState)
+        1 * application.setState(_ as HelpState)
     }
 
-    def "Test only play"(){
+    def "test run with EOF"(){
         given:
-        def screen = Stub(Screen){
-            readInput() >>> [new KeyStroke((Character) 'p', false, false),
-                             new KeyStroke((Character) 'q', false, false)]
-        }
-
-        def helpscreen = Mock(HelpScreenController)
-        def gamecontroller = Mock(GameController)
-
-        MainMenuController mainMenuController = new MainMenuController(screen, gamecontroller, helpscreen)
+        MainMenuModel mainMenuModel = Mock()
+        MainMenuViewer mainMenuViewer = Mock()
+        Application application = Mock()
+        Screen screen = Mock()
+        TerminalSize terminalSize = Mock()
+        screen.getTerminalSize() >> terminalSize
+        terminalSize.getColumns() >> 85
+        terminalSize.getRows() >> 45
 
         when:
-        mainMenuController.run()
+        MainMenuController mainMenuController = new MainMenuController(mainMenuModel)
+        mainMenuController.run(application, screen, mainMenuViewer)
 
         then:
-        0 * helpscreen.run()
-        1 * gamecontroller.run()
+        1 * screen.readInput() >>  new KeyStroke(KeyType.EOF, false, false)
+        1 * application.setState(null)
+        0 * application.setState(_ as GameState)
+        0 * application.setState(_ as HelpState)
+    }
+
+    def "test run without valid key"(){
+        given:
+        MainMenuModel mainMenuModel = Mock()
+        MainMenuViewer mainMenuViewer = Mock()
+        Application application = Mock()
+        Screen screen = Mock()
+        TerminalSize terminalSize = Mock()
+        screen.getTerminalSize() >> terminalSize
+        terminalSize.getColumns() >> 85
+        terminalSize.getRows() >> 45
+
+        when:
+        MainMenuController mainMenuController = new MainMenuController(mainMenuModel)
+        mainMenuController.run(application, screen, mainMenuViewer)
+
+        then:
+        1 * screen.readInput() >>  new KeyStroke('a' as Character, false, false)
+        0 * application.setState(null)
+        0 * application.setState(_ as GameState)
+        0 * application.setState(_ as HelpState)
     }
 }

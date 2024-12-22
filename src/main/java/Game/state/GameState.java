@@ -1,7 +1,7 @@
 package Game.state;
 
 import Game.controller.GameController;
-import Game.model.GameModel;
+import Game.model.gameModel.GameModel;
 import Game.view.GameViewer;
 
 public class GameState extends State{

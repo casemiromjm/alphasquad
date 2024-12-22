@@ -10,6 +10,6 @@ public class ExtraAim extends PowerUp {
 
     @Override
     public void apply(Fighter fighter) {
-        fighter.setAim(fighter.getAim() + 10);
+        fighter.increaseAim(10);
     }
 }

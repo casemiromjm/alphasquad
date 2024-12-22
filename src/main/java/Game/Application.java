@@ -22,7 +22,7 @@ public class Application {
     }
 
     public Application() throws IOException, URISyntaxException, FontFormatException {
-        screenManager = new ScreenManager();
+        screenManager = new ScreenManager(85, 45, "fonts/square.ttf");
         MainMenuModel mainMenuModel = new MainMenuModel();
         state = new MainMenuState(mainMenuModel, new MainMenuViewer(mainMenuModel), new MainMenuController(mainMenuModel));
     }
@@ -44,7 +44,7 @@ public class Application {
             state.run(this, screenManager.getScreen());
         }
 
-        screenManager.getScreen().close();
+        screenManager.closeScreen();
     }
 
     public long waiting(long time, long timer){
