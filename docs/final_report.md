@@ -188,17 +188,17 @@ Para alem disso, este padrao permitiu um isolamento melhor dos MVCs especificos 
 A figura seguinte demonstra como as classes que implementam este padrao se relacionam com o MVC (a estrutura de classes abstratas foi utilizada para representar esta relaçao).
 
 <p align="center" justify="center">
-  <img src="docs/umls/State.png">
+  <img src="umls/State.png">
 </p>
 
 As classes que representam este padrao sao:
 
-- [State](java/Game/state/State.java)
-- [MainMenuState](java/Game/state/MainMenuState.java)
-- [HelpState](java/Game/state/HelpState.java)
-- [GameState](java/Game/state/GameState.java)
-- [DefeatState](java/Game/state/DefeatState.java)
-- [VictoryState](java/Game/state/VictoryState.java)
+- [State](../src/main/java/Game/state/State.java)
+- [MainMenuState](../src/main/java/Game/state/MainMenuState.java)
+- [HelpState](../src/main/java/Game/state/HelpState.java)
+- [GameState](../src/main/java/Game/state/GameState.java)
+- [DefeatState](../src/main/java/Game/state/DefeatState.java)
+- [VictoryState](../src/main/java/Game/state/VictoryState.java)
 
 **Consequencias**
 
@@ -217,7 +217,7 @@ Este pequeno *bug* acontece quando, antes do movimento do esquadrão aliado (sej
 
 
 ##### Code smell 2
-A classe [GameModel](java/Game/model/gameModel/GameModel.java) ´e visivelmente mais extensa do que qualquer outra. Poderia, possivelmente, ter alguns dos seus metodos movidos para uma outra classe.
+A classe [GameModel](../src/main/java/Game/model/gameModel/GameModel.java) ´e visivelmente mais extensa do que qualquer outra. Poderia, possivelmente, ter alguns dos seus metodos movidos para uma outra classe.
 
 
 ##### Code smell 3
@@ -229,9 +229,9 @@ Chamadas a metodos da biblioteca *Lanterna* sao frequentes, no entanto, sempre q
 ---
 ### TESTING
 
-- [Testing Coverage Report](docs/tests/coverage/index.html)
+- [Testing Coverage Report](tests/coverage/index.html)
 
-- [Mutation Testing Report](docs/tests/pitest/index.html)
+- [Mutation Testing Report](tests/pitest/index.html)
 
 ---
 ### AUTOAVALIAÇÃO
