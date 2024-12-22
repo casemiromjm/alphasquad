@@ -5,14 +5,8 @@ import Game.model.elements.Position;
 import Game.model.elements.fighter.Ally;
 import Game.model.elements.fighter.Enemy;
 import Game.model.elements.fighter.Fighter;
-import Game.model.elements.obstacles.Bush;
-import Game.model.elements.obstacles.Obstacle;
-import Game.model.elements.obstacles.SmallStoneWall;
-import Game.model.elements.obstacles.SmallWoodenWall;
-import Game.model.elements.powerUps.ExtraAim;
-import Game.model.elements.powerUps.ExtraDamage;
-import Game.model.elements.powerUps.ExtraHealth;
-import Game.model.elements.powerUps.PowerUp;
+import Game.model.elements.obstacles.*;
+import Game.model.elements.powerUps.*;
 import Game.view.elements.Drawable;
 import Game.view.elements.fighter.AllyDraw;
 import Game.view.elements.fighter.EnemyDraw;
@@ -34,12 +28,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+// Classe responsável por renderizar o estado principal do jogo no ecrã
 public class GameViewer extends Viewer {
 
+    /**
+     * Construtor que inicializa o visualizador do jogo com o modelo fornecido.
+     *
+     * @param gameModel O modelo que contém os dados do jogo.
+     */
     public GameViewer(GameModel gameModel) {
         super(gameModel);
     }
 
+    /**
+     * Desenha o estado atual do jogo no ecrã.
+     *
+     * @param screen O ecrã onde os elementos do jogo serão desenhados.
+     * @throws IOException Caso ocorra um erro ao desenhar no ecrã.
+     */
     public void draw(Screen screen) throws IOException {
         screen.clear();
 
@@ -53,6 +59,14 @@ public class GameViewer extends Viewer {
         screen.refresh();
     }
 
+    /**
+     * Desenha o ecrã da fase de combate, mostrando informações adicionais sobre o lutador ativo e o alvo.
+     *
+     * @param screen O ecrã onde os elementos do combate serão desenhados.
+     * @param fighter O lutador ativo.
+     * @param target O alvo do lutador ativo.
+     * @throws IOException Caso ocorra um erro ao desenhar no ecrã.
+     */
     public void drawFighterCombatPhase(Screen screen, Fighter fighter, Fighter target) throws IOException {
         screen.clear();
 
@@ -68,43 +82,41 @@ public class GameViewer extends Viewer {
         screen.refresh();
     }
 
-    private List<Drawable> createElements(){
+    /**
+     * Cria uma lista de elementos desenháveis com base no estado atual do jogo.
+     *
+     * @return Uma lista de elementos que podem ser desenhados.
+     */
+    private List<Drawable> createElements() {
         List<Drawable> elements = new ArrayList<>();
         GameModel gameModel = (GameModel) super.getModel();
+
         elements.add(new PlayerDraw(gameModel.getPlayer()));
 
-        for(Enemy enemy : gameModel.getEnemyList()) {
+        for (Enemy enemy : gameModel.getEnemyList()) {
             elements.add(new EnemyDraw(enemy));
         }
 
-        for(Ally al : gameModel.getAllyList()){
+        for (Ally al : gameModel.getAllyList()) {
             elements.add(new AllyDraw(al));
         }
 
-        for(Obstacle ob : gameModel.getObstacleList()){
-            if(ob instanceof Bush){
+        for (Obstacle ob : gameModel.getObstacleList()) {
+            if (ob instanceof Bush) {
                 elements.add(new BushDraw((Bush) ob));
-            }
-
-            else if(ob instanceof SmallStoneWall){
+            } else if (ob instanceof SmallStoneWall) {
                 elements.add(new SmallStoneWallDraw((SmallStoneWall) ob));
-            }
-
-            else if(ob instanceof SmallWoodenWall){
+            } else if (ob instanceof SmallWoodenWall) {
                 elements.add(new SmallWoodenWallDraw((SmallWoodenWall) ob));
             }
         }
 
-        for(PowerUp pu : gameModel.getPowerUpList()){
-            if(pu instanceof ExtraHealth){
+        for (PowerUp pu : gameModel.getPowerUpList()) {
+            if (pu instanceof ExtraHealth) {
                 elements.add(new ExtraHealthDraw((ExtraHealth) pu));
-            }
-
-            else if(pu instanceof ExtraAim){
+            } else if (pu instanceof ExtraAim) {
                 elements.add(new ExtraAimDraw((ExtraAim) pu));
-            }
-
-            else if(pu instanceof ExtraDamage){
+            } else if (pu instanceof ExtraDamage) {
                 elements.add(new ExtraDamageDraw((ExtraDamage) pu));
             }
         }
@@ -112,26 +124,54 @@ public class GameViewer extends Viewer {
         return elements;
     }
 
-    private void drawBackground(TextGraphics textGraphics, int width, int height){
+    /**
+     * Desenha o fundo da arena.
+     *
+     * @param textGraphics O objeto responsável por desenhar no ecrã.
+     * @param width A largura do ecrã.
+     * @param height A altura do ecrã.
+     */
+    private void drawBackground(TextGraphics textGraphics, int width, int height) {
         GameModel gameModel = (GameModel) super.getModel();
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
         textGraphics.setForegroundColor(TextColor.ANSI.GREEN);
-        textGraphics.fillRectangle(new TerminalPosition(gameModel.getArenaStartPoint(), 0), new TerminalSize(width, height), '~');
+        textGraphics.fillRectangle(
+            new TerminalPosition(gameModel.getArenaStartPoint(), 0),
+            new TerminalSize(width, height),
+            '~'
+        );
     }
 
-    private void drawElements(TextGraphics textGraphics){
-
+    /**
+     * Desenha todos os elementos do jogo.
+     *
+     * @param textGraphics O objeto responsável por desenhar no ecrã.
+     */
+    private void drawElements(TextGraphics textGraphics) {
         List<Drawable> elements = createElements();
-        for(Drawable el : elements){
+        for (Drawable el : elements) {
             el.draw(textGraphics);
         }
     }
 
+    /**
+     * Destaca a posição do alvo na arena.
+     *
+     * @param textGraphics O objeto responsável por desenhar no ecrã.
+     * @param position A posição do alvo.
+     */
     private void drawTargetSelection(TextGraphics textGraphics, Position position) {
         textGraphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
         textGraphics.setCharacter(new TerminalPosition(position.getX(), position.getY()), 'T');
     }
 
+    /**
+     * Desenha informações detalhadas sobre o lutador ativo e o alvo na área lateral do ecrã.
+     *
+     * @param textGraphics O objeto responsável por desenhar no ecrã.
+     * @param fighter O lutador ativo.
+     * @param target O alvo do lutador ativo.
+     */
     private void drawSideInfo(TextGraphics textGraphics, Fighter fighter, Fighter target) {
         GameModel gameModel = (GameModel) super.getModel();
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);
@@ -144,7 +184,7 @@ public class GameViewer extends Viewer {
         textGraphics.putString(new TerminalPosition(1, 6), "Base Damage: " + fighter.getDamage());
         textGraphics.putString(new TerminalPosition(1, 8), "Real Damage: " + gameModel.damageCalculator(fighter, target.getPosition()));
         textGraphics.putString(new TerminalPosition(1, 10), "Base Aim: " + fighter.getAim());
-        textGraphics.putString(new TerminalPosition(1, 12), "Real Aim: " + gameModel.aimCalculator(fighter, target.getPosition())); //To update when aim calculation is implemented
+        textGraphics.putString(new TerminalPosition(1, 12), "Real Aim: " + gameModel.aimCalculator(fighter, target.getPosition()));
 
         textGraphics.enableModifiers(SGR.BOLD);
         textGraphics.putString(new TerminalPosition(1, 16), "Target");
