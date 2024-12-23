@@ -251,9 +251,9 @@ Além disso, devido à dimensão naturalmente pequena do projeto e ao uso relati
 ---
 ### TESTING
 
-- <a href="https://feup-ldts-2024.github.io/project-t01g06/tests/coverage/index.html" target="blank" title="Testing Coverage Report">Testing Coverage Report</a>
+- <a href="https://feup-ldts-2024.github.io/project-t01g06/tests/coverage/index.html" target="_blank" title="Testing Coverage Report">Testing Coverage Report</a>
 
-- <a href="https://feup-ldts-2024.github.io/project-t01g06/tests/pitest/index.html" target="blank" title="Mutation Testing Report">Mutation Testing Report</a>
+- <a href="https://feup-ldts-2024.github.io/project-t01g06/tests/pitest/index.html" target="_blank" title="Mutation Testing Report">Mutation Testing Report</a>
 
 
 ---
