@@ -191,7 +191,7 @@ A figura seguinte demonstra como as classes que implementam este padrão se rela
   <img src="umls/State.png">
 </p>
 
-As classes que representam este padrão são:
+**As classes que representam este padrão são:**
 
 - [State](../src/main/java/Game/state/State.java)
 - [MainMenuState](../src/main/java/Game/state/MainMenuState.java)
@@ -200,7 +200,7 @@ As classes que representam este padrão são:
 - [DefeatState](../src/main/java/Game/state/DefeatState.java)
 - [VictoryState](../src/main/java/Game/state/VictoryState.java)
 
-**Consequencias**
+**Consequências**
 
 O recurso a este padrão resultou nas seguintes vantagens e desvantagens:
 
@@ -218,26 +218,26 @@ Este pequeno bug ocorre quando, antes do movimento do esquadrão aliado (seja do
 
 ##### Code smell 2
 A classe [GameModel](../src/main/java/Game/model/gameModel/GameModel.java) é visivelmente mais extensa do que qualquer outra. Poderia, possivelmente, ter alguns dos seus métodos movidos para outra classe.
-Tentou-se fazer essa separação, mas isso resultou na existencia de uma classe que necessitava da existencia de uma instância do GameModel, o que impedia a efetiva separação dessas funcionalidades, nao tendo nenhum dos impactos positivos esperados.
+Tentou-se fazer essa separação, mas isso resultou na existência de uma classe que necessitava da existência de uma instância do GameModel, o que impedia a efetiva separação dessas funcionalidades, não tendo nenhum dos impactos positivos esperados.
 
 
 ##### Code smell 3
-Quando é necessário mudar de estado, é preciso criar um model, um viewer e um controller adequados. Seria possível simplificar para que apenas o model fosse necessário.
-Nao temos a certeza do quao benefico seria adotar esta abordagem em relaçao a implementaçao atual.
+Quando é necessário mudar de estado, é preciso criar um `model`, um `viewer` e um `controller` adequados. Seria possível simplificar para que apenas o `model` fosse necessário.
+Não temos a certeza do quão benéfico seria adotar esta abordagem em comparação a implementação atual.
 
 
 ##### Code smell 4
-As chamadas a métodos da biblioteca Lanterna são frequentes; no entanto, sempre que utilizadas, são feitas de forma direta. Caso fosse necessário mudar a biblioteca, seria preciso realizar alterações em várias classes diferentes, em particular, nos Controllers e Viewers.
-No entanto, como existem diversas chamadas diferentes, existiram duvidas sobre como fazer essa separaçao adequadamente sem comprometer funcionalidades. 
-Além disso, devido a dime nsao naturalmente pequena do projeto e ao uso relativamente concentrado dessas chamadas num número pequeno de classes, muitas das quais sao classes razoavelmente simples, achamos que esse esforço seria melhor dedicado noutros lados.
+As chamadas a métodos da biblioteca Lanterna são frequentes; no entanto, sempre que utilizadas, são feitas de forma direta. Caso fosse necessário mudar a biblioteca, seria preciso realizar alterações em várias classes diferentes, em particular, nos *Controllers* e *Viewers*.
+No entanto, como existem diversas chamadas diferentes, existiram dúvidas sobre como fazer essa separação adequadamente sem comprometer funcionalidades. 
+Além disso, devido à dimensão naturalmente pequena do projeto e ao uso relativamente concentrado dessas chamadas num número pequeno de classes, muitas das quais são classes razoavelmente simples, achamos que esse esforço seria melhor dedicado noutros lados.
 
 
 ---
 ### TESTING
 
-- [Testing Coverage Report](tests/coverage/index.html)
+- [Testing Coverage Report](https://feup-ldts-2024.github.io/project-t01g06/tests/coverage/index.html)
 
-- [Mutation Testing Report](tests/pitest/index.html)
+- [Mutation Testing Report](https://feup-ldts-2024.github.io/project-t01g06/tests/pitest/index.html)
 
 ---
 ### AUTOAVALIAÇÃO
