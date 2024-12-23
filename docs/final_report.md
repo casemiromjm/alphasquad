@@ -218,13 +218,19 @@ Este pequeno bug ocorre quando, antes do movimento do esquadrão aliado (seja do
 
 ##### Code smell 2
 A classe [GameModel](../src/main/java/Game/model/gameModel/GameModel.java) é visivelmente mais extensa do que qualquer outra. Poderia, possivelmente, ter alguns dos seus métodos movidos para outra classe.
+Tentou-se fazer essa separação, mas isso resultou na existencia de uma classe que necessitava da existencia de uma instância do GameModel, o que impedia a efetiva separação dessas funcionalidades, nao tendo nenhum dos impactos positivos esperados.
 
 
 ##### Code smell 3
 Quando é necessário mudar de estado, é preciso criar um model, um viewer e um controller adequados. Seria possível simplificar para que apenas o model fosse necessário.
+Nao temos a certeza do quao benefico seria adotar esta abordagem em relaçao a implementaçao atual.
+
 
 ##### Code smell 4
-As chamadas a métodos da biblioteca Lanterna são frequentes; no entanto, sempre que utilizadas, são feitas de forma direta. Caso fosse necessário mudar a biblioteca, seria preciso realizar alterações em várias classes diferentes, especialmente nos Controllers e Viewers.
+As chamadas a métodos da biblioteca Lanterna são frequentes; no entanto, sempre que utilizadas, são feitas de forma direta. Caso fosse necessário mudar a biblioteca, seria preciso realizar alterações em várias classes diferentes, em particular, nos Controllers e Viewers.
+No entanto, como existem diversas chamadas diferentes, existiram duvidas sobre como fazer essa separaçao adequadamente sem comprometer funcionalidades. 
+Além disso, devido a dime nsao naturalmente pequena do projeto e ao uso relativamente concentrado dessas chamadas num número pequeno de classes, muitas das quais sao classes razoavelmente simples, achamos que esse esforço seria melhor dedicado noutros lados.
+
 
 ---
 ### TESTING
