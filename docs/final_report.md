@@ -191,6 +191,10 @@ A figura seguinte demonstra como as classes que implementam este padrão se rela
 <p align="center" justify="center">
   <img src="umls/State.png">
 </p>
+<p align="center">
+  <b><i>Fig. 9 - UML State Pattern</i></b>
+</p>
+
 
 **As classes que representam este padrão são:**
 
@@ -231,6 +235,17 @@ Não temos a certeza do quão benéfico seria adotar esta abordagem em comparaç
 As chamadas a métodos da biblioteca Lanterna são frequentes; no entanto, sempre que utilizadas, são feitas de forma direta. Caso fosse necessário mudar a biblioteca, seria preciso realizar alterações em várias classes diferentes, em particular, nos *Controllers* e *Viewers*.
 No entanto, como existem diversas chamadas diferentes, existiram dúvidas sobre como fazer essa separação adequadamente sem comprometer funcionalidades. 
 Além disso, devido à dimensão naturalmente pequena do projeto e ao uso relativamente concentrado dessas chamadas num número pequeno de classes, muitas das quais são classes razoavelmente simples, achamos que esse esforço seria melhor dedicado noutros lados.
+
+
+---
+### Diagrama UML final
+
+<p align="center" justify="center">
+  <img src="umls/uml_final.png">
+</p>
+<p align="center">
+  <b><i>Fig. 10 - UML</i></b>
+</p>
 
 
 ---
