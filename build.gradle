@@ -3,6 +3,7 @@ plugins {
     id 'info.solidsoft.pitest' version '1.15.0'
     id 'groovy'
     id("net.ltgt.errorprone") version "4.1.0"
+    id 'application'
 }
 
 group = 'Game'
@@ -19,6 +20,10 @@ dependencies {
     testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
     testImplementation 'org.codehaus.groovy:groovy-all:3.0.21'
     errorprone("com.google.errorprone:error_prone_core:2.36.0")
+}
+
+application {
+    mainClass = 'Game.Application'
 }
 
 tasks.test {
