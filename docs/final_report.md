@@ -134,15 +134,15 @@ O design baseia-se, principalmente, em dois padrões. Primeiramente, utiliza a a
 #### MVC
 **Problema**
 
-Um jogo possui, por norma, uma estrutura relativamente complexa, desde a capacidade de representar a sua informaçao de maneira visivel de modo a permitir a interaçao do jogador ate as atualizaçoes da informaçao que advem de tal interaçao e envolve muitas partes, e, obviamente, a melhor opção é organizar o código da melhor maneira possível. 
-Para tornar o código mais facilmente extendivel e adaptavel para novas funcionalidades, a estrutura precisa ser razoavelmente simples e modular, para permitir alteraçoes extensas sem que estas impliquem alterar partes do codigo com as quais tais alteraçoes tem pouca ou nenhuma relaçao.
+Um jogo possui, por norma, uma estrutura relativamente complexa, desde a capacidade de representar a sua informação de maneira visível, permitindo a interação do jogador, até às atualizações da informação que resultam dessa interação, envolvendo muitas partes. É, obviamente, essencial organizar o código da melhor maneira possível.
+Para tornar o código mais facilmente extensível e adaptável a novas funcionalidades, a estrutura precisa de ser razoavelmente simples e modular, de forma a permitir alterações extensas sem que estas impliquem modificar partes do código com as quais tais alterações têm pouca ou nenhuma relação.
 
 **Pattern escolhido**
 
 O padrão de arquitetura MVC é uma escolha perfeita para resolver o problema citado. De maneira geral, este padrão divide o projeto em três partes:
 - **Model** - Trata da lógica do jogo e do armazenamento dos dados
 - **View** - Apresenta os dados do `model` no ecrã
-- **Controller** - Disponibiliza os dados do `model` para o `view`, interpreta as interaçoes com o utilizador e despoleta atualizaçoes do `model` com base nas tais interaçoes.
+- **Controller** - Disponibiliza os dados do `model` para o `view`, interpreta as interações com o utilizador e despoleta atualizaçoes do `model` com base nas tais interações.
 
 
 **Implementação**
@@ -152,7 +152,7 @@ No nosso caso, dividimos o código em três grandes partes:
 - **View** - Representa os dados de cada do `model` de cada elemento (desenha o jogador, por exemplo)
 - **Controller** - Controla a lógica do jogo. Decide o que deve ser feito através da interpretação de *inputs* (por exemplo, atualizar o `model`) e disponibiliza ao `view` os dados do `model`
 
-  Este padrao foi amplamente aplicado, desde as estruturas mais gerais (por exemplo, GameModel, GameView, GameController) ate as mais especificas (por exemplo, PlayerControl, PlayerDraw, Player).
+Este padrão foi amplamente aplicado, desde as estruturas mais gerais (por exemplo, GameModel, GameView, GameController) até às mais específicas (por exemplo, PlayerControl, PlayerDraw, Player).
 
 
 **Os *packages* citados podem ser encontrados através destes *links*:**
@@ -160,38 +160,38 @@ No nosso caso, dividimos o código em três grandes partes:
 - [View](../src/main/java/Game/view)
 - [Controller](../src/main/java/Game/controller)
 
-**Consequencias**
+**Consequências**
 
 O recurso ao MVC apresenta as seguintes vantagens e desvantagens:
 
-- Os diversos metodos do codigo ficam compartimentalizados de acordo com as suas funcoes e objetivos, sendo separados de metodos e dados com os quais eles nao tem qualquer relaçao.
-- A expansao ou refatorizaçao de alguma das partes acima referidas e independente das restantes permitindo que tais alteraçoes nao impliquem a refatorizaçao das outras partes desnecessariamente.
-- No entanto, isto resulta num numero razoavelmente maior de classes e a necessidade de assegurar comunicaçao adequada entre todas as partes quando necessario, uma vez que elas cntinuam, de certa forma, "dependentes" umas das outras.
+Os diversos métodos do código ficam compartimentalizados de acordo com as suas funções e objetivos, sendo separados de métodos e dados com os quais não têm qualquer relação
+A expansão ou refatorização de alguma das partes acima referidas é independente das restantes, permitindo que tais alterações não impliquem a refatorização das outras partes desnecessariamente
+No entanto, isto resulta num número razoavelmente maior de classes e na necessidade de assegurar uma comunicação adequada entre todas as partes quando necessário, uma vez que elas continuam, de certa forma, "dependentes" umas das outras.
 
 #### State
 
 **Problema**
 
-Uma vez que a funcionalidade do jogo nao se restringe apenas a  existencia de um unico "ecra" de jogo, mas esta sim espalhada por diversos "ecras" diferentes, cada um com funcionalidades distintas e independentes um dos outros, foi necessario arranjar forma de permitir transicoes entre eles de acordo com as necessidades do utilizador. 
-Inicialmente, estas transiçoes eram geridas pelo *MainMenuScreen*, isto e, sempre que um ecra novo era lançado, esta classe era responsavel por lançar o ecra correto e, quando este retorna-se, o *MainMenuScreen* tomava o controlo novamente.
-Isto tornava a inserçao de novos ecras complexa e implicava que, independentemente do que estivesse a ocorrer no ecra, haveria sempre uma instancia do *MainMenuScreen* desnecessaria no "fundo".
+Uma vez que a funcionalidade do jogo não se restringe apenas à existência de um único "ecrã" de jogo, mas está, sim, espalhada por diversos "ecrãs" diferentes, cada um com funcionalidades distintas e independentes uns dos outros, foi necessário encontrar uma forma de permitir transições entre eles de acordo com as necessidades do utilizador.
+Inicialmente, estas transições eram geridas pelo MainMenuScreen, isto é, sempre que um novo ecrã era lançado, esta classe era responsável por lançar o ecrã correto e, quando este retornasse, o MainMenuScreen retomava o controlo.
+Isto tornava a inserção de novos ecrãs complexa e implicava que, independentemente do que estivesse a ocorrer no ecrã, haveria sempre uma instância do MainMenuScreen desnecessária em segundo plano.
 
 **Pattern escolhido**
 
-Para resolver este problema e por recomendaçao do professor, recorremos ao **State pattern**. Este padrão permite-nos representar diversos estados com diferentes funcionalidades e ter ativo apenas o estado necessario naquele momento. Neste caso, cada estado representa um "ecra" diferente e implementa as funcionalidades necessarias para o correto funcionamento do respetivo ecra.
-Cada estado e tambem responsavel pela manutencao dos seus respetivos MVCs e por assegurar a transicao entre estados quando necessario.
-Este padrao ajudou-nos a resolver o problema anteriormente descrito, pois a criaçao de um novo "ecra" implica apenas a criaçao de um novo estado e pequenas alteraçoes que assegurem que esse estado possa ser acedido evitando alteraçoews em areas nao relacionadas.
-Para alem disso, este padrao permitiu um isolamento melhor dos MVCs especificos de cada estado e evita a existencia de classes redundantes ativas no "fundo".
+Para resolver este problema e por recomendação do professor, recorremos ao State pattern. Este padrão permite-nos representar diversos estados com diferentes funcionalidades e ter ativo apenas o estado necessário naquele momento. Neste caso, cada estado representa um "ecrã" diferente e implementa as funcionalidades necessárias para o correto funcionamento do respetivo ecrã.
+Cada estado é também responsável pela manutenção dos seus respetivos MVCs e por assegurar a transição entre estados, quando necessário.
+Este padrão ajudou-nos a resolver o problema anteriormente descrito, pois a criação de um novo "ecrã" implica apenas a criação de um novo estado e pequenas alterações para assegurar que esse estado possa ser acedido, evitando alterações em áreas não relacionadas.
+Para além disso, este padrão permitiu um melhor isolamento dos MVCs específicos de cada estado e evita a existência de classes redundantes ativas em segundo plano.
 
 **Implementação**
 
-A figura seguinte demonstra como as classes que implementam este padrao se relacionam com o MVC (a estrutura de classes abstratas foi utilizada para representar esta relaçao).
+A figura seguinte demonstra como as classes que implementam este padrão se relacionam com o MVC (a estrutura de classes abstratas foi utilizada para representar esta relação).
 
 <p align="center" justify="center">
   <img src="umls/State.png">
 </p>
 
-As classes que representam este padrao sao:
+As classes que representam este padrão são:
 
 - [State](../src/main/java/Game/state/State.java)
 - [MainMenuState](../src/main/java/Game/state/MainMenuState.java)
@@ -202,29 +202,29 @@ As classes que representam este padrao sao:
 
 **Consequencias**
 
-O recurso a este padrao resultou nas sesguintes vantagens e desvantagens:
+O recurso a este padrão resultou nas seguintes vantagens e desvantagens:
 
-- Permitiu isolar melhor os diferentes comportamentos e funcionalidades que o programa precisaria num dado momento.
-- Trocas de estado sao relativamente faceis de se implementar.
-- A adiçao de novos estados ´e relativamente simples.
-- Isto resulta, similarmente ao MVC, num aumento do numero de classes, no entanto, nao e um aumento muito grande e o numero de classes nao parece ser dificil de gerir.
+Permitiu isolar melhor os diferentes comportamentos e funcionalidades que o programa necessita num dado momento
+- Trocas de estado são relativamente fáceis de implementar
+- A adição de novos estados é relativamente simples
+- Isto resulta, de forma semelhante ao MVC, num aumento do número de classes; no entanto, este aumento não é muito significativo e o número de classes não parece ser difícil de gerir
 
 ---
 #### *CODE SMELLS* CONHECIDOS
 
 ##### *Buffer* de movimento do esquadrão aliado
-Este pequeno *bug* acontece quando, antes do movimento do esquadrão aliado (seja do `P` (player), seja do `A` (aliado)), é pressionado alguma tecla de movimento. Após ser pressionada, ela é mantida em memória e, logo após o movimento ser liberado, a personagem move-se nesta direção.
+Este pequeno bug ocorre quando, antes do movimento do esquadrão aliado (seja do P (jogador), seja do A (aliado)), é pressionada alguma tecla de movimento. Após ser pressionada, a tecla é mantida em memória e, assim que o movimento é permitido, a personagem desloca-se nessa direção.
 
 
 ##### Code smell 2
-A classe [GameModel](../src/main/java/Game/model/gameModel/GameModel.java) ´e visivelmente mais extensa do que qualquer outra. Poderia, possivelmente, ter alguns dos seus metodos movidos para uma outra classe.
+A classe [GameModel](../src/main/java/Game/model/gameModel/GameModel.java) é visivelmente mais extensa do que qualquer outra. Poderia, possivelmente, ter alguns dos seus métodos movidos para outra classe.
 
 
 ##### Code smell 3
-Quando ´e necessario mudar de estado, existe a necessidade de criar um model, viewer e controller adequados, poderia ser possivel simplificar para necessitar apenas do model.
+Quando é necessário mudar de estado, é preciso criar um model, um viewer e um controller adequados. Seria possível simplificar para que apenas o model fosse necessário.
 
 ##### Code smell 4
-Chamadas a metodos da biblioteca *Lanterna* sao frequentes, no entanto, sempre que usadas, sao feitas chamadas diretas. Caso fosse necessario mudar a biblioteca, seria necessario fazer mudança em varias classes diferentes, especialmente, em *Controllers* e *Viewers*.
+As chamadas a métodos da biblioteca Lanterna são frequentes; no entanto, sempre que utilizadas, são feitas de forma direta. Caso fosse necessário mudar a biblioteca, seria preciso realizar alterações em várias classes diferentes, especialmente nos Controllers e Viewers.
 
 ---
 ### TESTING
