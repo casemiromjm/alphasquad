@@ -258,6 +258,6 @@ Além disso, devido à dimensão naturalmente pequena do projeto e ao uso relati
 ---
 ### AUTOAVALIAÇÃO
 
-- Casemiro Medeiros:
-- Guilherme Ferreira:
-- Hugo Alves:
+- Casemiro Medeiros: 30%
+- Guilherme Ferreira: 20%
+- Hugo Alves: 50%
