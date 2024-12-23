@@ -26,7 +26,8 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
   - `Parede de Madeira Pequena (W)` - Reduz o dano recebido em 5 pontos e a precisão inimiga em 20 pontos
   - `Parede de Pedra Pequena (S)` - Reduz o dano recebido em 10 pontos e a precisão inimiga em 30 pontos
   
-  > E necessario estar adjacente a eles e o obstáculo precisa estar entre a origem e o alvo para surtir efeito. Flanquear é uma tática válida para negar os efeitos dos obstáculos.
+
+  > É necessário estar adjacente a eles e o obstáculo precisa estar entre a origem e o alvo para surtir efeito. Flanquear é uma tática válida para negar os efeitos dos obstáculos.
 
 
 - **Diferentes níveis** - Há mais inimigos em cada nível. Os aliados que se mantiverem vivos para o próximo nível, sofrem uma melhoria nos seus *stats*. Vale ressaltar também que cada nível é gerado aleatoriamente.
@@ -106,7 +107,7 @@ O projeto foi desenvolvido por Casemiro Medeiros (up202301897@fe.up.pt), Guilher
 ---
 ### *FEATURES* FUTURAS
 
-Apesar de todas as *features* inicialmente planeadas terem sido implementadas, seria possivel expandir as funcionalidades deste jogo. Algumas sugestoes seriam:
+Apesar de todas as *features* inicialmente planeadas terem sido implementadas, seria possível expandir as funcionalidades deste jogo. Algumas sugestoes seriam:
 
 - Modo PvP
   - Em vez de se ter um oponente controlado pela máquina, teríamos outro jogador localmente a traçar estratégias e a tomar decisões no confronto.
@@ -114,13 +115,13 @@ Apesar de todas as *features* inicialmente planeadas terem sido implementadas, s
 
 - Novos *power-ups*
   - Novos *power-ups* tornam o jogo mais dinâmico, uma vez que abre possibilidade para novas estratégias. Como exemplo destes novos *power-ups* temos:
-    - Munição incendiária: adiciona o efeito *burn* em que o combatente atingido por essa munição sofre dano extra por um certo numero de turnos.
+    - Munição incendiária: adiciona o efeito *burn* em que o combatente atingido por essa munição sofre dano extra por um certo número de turnos.
     - Munição explosiva: adiciona a possibilidade de um ataque crítico que resultaria em mais dano contra o combatente atingido.
-    - Equipa de medicos: adiciona a capacidade de recuperar HP durante um determinado numero de turnos.
+    - Equipa de médicos: adiciona a capacidade de recuperar HP durante um determinado número de turnos.
 
 
 - Novas *features* no mapa
-  - Atualizações no mapa dão mais variedade de estratégias e uma maior dinamica ao jogo. Como exemplo temos:
+  - Atualizações no mapa dão mais variedade de estratégias e uma maior dinâmica ao jogo. Como exemplo temos:
     - Blocos de água: os combatentes não conseguem atravessar estes blocos.
     - Blocos de lama: adicionam a possibilidade do movimento não ser bem-sucedido e o combatente nao se mover.
     - Minas terrestre: blocos que parecem normais, mas explodem ao serem atravessados por um combatente, causando dano significativo. Poder-se-ia usar um novo *power-up* para contornar estes novos obstáculos.
