@@ -128,8 +128,8 @@ Apesar de todas as *features* inicialmente planeadas terem sido implementadas, s
 ---
 ### DESIGN
 
-Antes de mais, e importante ressaltar que o design deste jogo tirou bastante inspiraçao do exemplo do *"Hero"* fornecido.
-O design baseia-se, principalmente, em dois padrões. Primeiramente, utiliza a arquitetura MVC (Model - View - Controller), tornando o projeto mais modular. Contudo, com o avanço do desenvolvimento, foi necessario adotar um outro padrão de desenvolvimento, o *State Pattern*.
+Antes de mais, é importante ressaltar que o design deste jogo tirou bastante inspiração do exemplo do "Hero" fornecido.
+O design baseia-se, principalmente, em dois padrões. Primeiramente, utiliza a arquitetura MVC (Model - View - Controller), tornando o projeto mais modular. Contudo, com o avanço do desenvolvimento, foi necessário adotar outro padrão de desenvolvimento, o State Pattern.
 
 #### MVC
 **Problema**
