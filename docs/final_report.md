@@ -251,9 +251,10 @@ Além disso, devido à dimensão naturalmente pequena do projeto e ao uso relati
 ---
 ### TESTING
 
-- [Testing Coverage Report](https://feup-ldts-2024.github.io/project-t01g06/tests/coverage/index.html)
+- <a href="https://feup-ldts-2024.github.io/project-t01g06/tests/coverage/index.html" target="blank" title="Testing Coverage Report">Testing Coverage Report</a>
 
-- [Mutation Testing Report](https://feup-ldts-2024.github.io/project-t01g06/tests/pitest/index.html)
+- <a href="https://feup-ldts-2024.github.io/project-t01g06/tests/pitest/index.html" target="blank" title="Mutation Testing Report">Mutation Testing Report</a>
+
 
 ---
 ### AUTOAVALIAÇÃO
