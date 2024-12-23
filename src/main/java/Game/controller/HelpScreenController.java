@@ -14,8 +14,6 @@ import java.io.IOException;
 
 // Controlador responsável pela interação no ecrã de ajuda
 public class HelpScreenController extends Game.controller.Controller {
-    private HelpScreenModel helpScreenModel; // Modelo do ecrã de ajuda
-    private Screen screen; // Referência ao ecrã onde o jogo é exibido
 
     // Construtor que inicializa o controlador com o modelo do ecrã de ajuda
     public HelpScreenController(HelpScreenModel helpScreenModel) {

@@ -46,6 +46,7 @@ public class GameViewer extends Viewer {
      * @param screen O ecrã onde os elementos do jogo serão desenhados.
      * @throws IOException Caso ocorra um erro ao desenhar no ecrã.
      */
+    @Override
     public void draw(Screen screen) throws IOException {
         screen.clear();
 

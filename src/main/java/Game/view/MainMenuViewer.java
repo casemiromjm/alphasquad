@@ -32,6 +32,7 @@ public class MainMenuViewer extends Viewer {
      * @param screen O ecrã onde os elementos do menu serão desenhados.
      * @throws IOException Caso ocorra um erro ao desenhar no ecrã.
      */
+    @Override
     public void draw(Screen screen) throws IOException {
         // Limpa o ecrã antes de desenhar
         screen.clear();

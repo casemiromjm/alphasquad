@@ -28,6 +28,7 @@ public class HelpScreenViewer extends Viewer {
      * @param screen O ecrã onde o texto será desenhado.
      * @throws IOException Caso ocorra um erro ao desenhar no ecrã.
      */
+    @Override
     public void draw(Screen screen) throws IOException {
         // Obtém o modelo associado e o texto a ser exibido
         HelpScreenModel helpScreenModel = (HelpScreenModel) super.getModel();
