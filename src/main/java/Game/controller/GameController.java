@@ -40,6 +40,7 @@ public class GameController extends Game.controller.Controller {
      * @throws UnsupportedAudioFileException Caso o ficheiro de som não seja suportado.
      * @throws LineUnavailableException Caso a linha de áudio não esteja disponível.
      */
+    @Override
     public void run(Application application, Screen screen, Viewer viewer) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         GameModel gameModel = (GameModel) super.getModel();
 

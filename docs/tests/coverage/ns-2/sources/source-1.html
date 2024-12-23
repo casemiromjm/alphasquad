@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Controller</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Game.controller</a>
+</div>
+
+<h1>Coverage Summary for Class: Controller (Game.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Controller</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Game.controller;
+&nbsp;
+&nbsp;import Game.Application;
+&nbsp;import Game.model.Model;
+&nbsp;import Game.view.Viewer;
+&nbsp;import com.googlecode.lanterna.screen.Screen;
+&nbsp;
+&nbsp;import javax.sound.sampled.LineUnavailableException;
+&nbsp;import javax.sound.sampled.UnsupportedAudioFileException;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;// Classe abstrata que serve como base para todos os controladores no jogo
+&nbsp;public abstract class Controller {
+&nbsp;    private final Model model; // Modelo associado ao controlador
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Construtor que inicializa o controlador com o modelo especificado.
+&nbsp;     *
+&nbsp;     * @param model O modelo associado ao controlador.
+&nbsp;     */
+<b class="fc">&nbsp;    public Controller(Model model) {</b>
+<b class="fc">&nbsp;        this.model = model;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Método para obter o modelo associado ao controlador.
+&nbsp;     *
+&nbsp;     * @return O modelo atual do controlador.
+&nbsp;     */
+&nbsp;    public Model getModel() {
+<b class="fc">&nbsp;        return model;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Método abstrato que deve ser implementado por subclasses.
+&nbsp;     * Gere as ações principais do controlador.
+&nbsp;     *
+&nbsp;     * @param application Instância da aplicação principal.
+&nbsp;     * @param screen O ecrã onde o estado atual é exibido.
+&nbsp;     * @param viewer O visualizador responsável pela renderização do estado atual.
+&nbsp;     * @throws IOException Caso ocorra um erro de entrada/saída.
+&nbsp;     * @throws UnsupportedAudioFileException Caso o ficheiro de som utilizado não seja suportado.
+&nbsp;     * @throws LineUnavailableException Caso a linha de áudio não esteja disponível.
+&nbsp;     */
+&nbsp;    public abstract void run(Application application, Screen screen, Viewer viewer) throws IOException, UnsupportedAudioFileException, LineUnavailableException;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-22 22:47</div>
+</div>
+</body>
+</html>

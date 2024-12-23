@@ -76,36 +76,30 @@ public class PlayerControl extends GameController implements FighterControl {
             if (keyStroke.getKeyType() == KeyType.ArrowUp) {
                 position = player.getUp();
                 moved = gameModel.elementCanBePlaced(position);
-            }
-
-            else if(keyStroke.getKeyType() == KeyType.ArrowDown) {
+            } else if (keyStroke.getKeyType() == KeyType.ArrowDown) {
                 position = player.getDown();
                 moved = gameModel.elementCanBePlaced(position);
-            }
-
-            else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
+            } else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
                 position = player.getRight();
                 moved = gameModel.elementCanBePlaced(position);
-            }
-
-            else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
+            } else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
                 position = player.getLeft();
-
                 moved = gameModel.elementCanBePlaced(position);
-            } 
+            }
             // Permanecer na posição atual ao pressionar Enter
             else if (keyStroke.getKeyType() == KeyType.Enter) {
                 position = player.getPosition();
                 moved = true;
-            } 
+            }
             // Volta ao menu principal ao pressionar Escape
             else if (keyStroke.getKeyType() == KeyType.Escape) {
                 MainMenuModel mainMenuModel = new MainMenuModel();
                 application.setState(new MainMenuState(mainMenuModel, new MainMenuViewer(mainMenuModel), new MainMenuController(mainMenuModel)));
                 return;
             }
-        // Atualiza a posição do jogador após o movimento
-        player.setPosition(position);
+            // Atualiza a posição do jogador após o movimento
+            player.setPosition(position);
+        }
     }
 
     @Override
@@ -130,6 +124,8 @@ public class PlayerControl extends GameController implements FighterControl {
                     break;
                 case KeyType.Enter:
                     selected = true;
+                    break;
+                default:
                     break;
             }
 

@@ -159,6 +159,8 @@ public class AllyControl extends GameController implements FighterControl {
                 case KeyType.Enter:
                     selected = true;
                     break;
+                default:
+                    break;
             }
 
             // Garante que o índice está dentro dos limites da lista
@@ -177,7 +179,6 @@ public class AllyControl extends GameController implements FighterControl {
      * Realiza um ataque ao alvo selecionado.
      *
      * @param target O inimigo a ser atacado.
-     * @param gameViewer O visualizador para exibir o resultado do ataque.
      */
     @Override
     public void fire(Fighter target) throws UnsupportedAudioFileException, LineUnavailableException, IOException {

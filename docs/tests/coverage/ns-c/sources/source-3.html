@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > HelpScreenViewer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Game.view</a>
+</div>
+
+<h1>Coverage Summary for Class: HelpScreenViewer (Game.view)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HelpScreenViewer</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    10%
+  </span>
+  <span class="absValue">
+    (1/10)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HelpScreenViewer$SpockMock$1445963475</td>
+  </tr>
+  <tr>
+    <td class="name">HelpScreenViewer$SpockMock$1445963475$auxiliary$3uS2Q9G5</td>
+  </tr>
+  <tr>
+    <td class="name">HelpScreenViewer$SpockMock$1445963475$auxiliary$4wrmPLMg</td>
+  </tr>
+  <tr>
+    <td class="name">HelpScreenViewer$SpockMock$1445963475$auxiliary$9rEhZmEW</td>
+  </tr>
+  <tr>
+    <td class="name">HelpScreenViewer$SpockMock$1445963475$auxiliary$b23ohoMm</td>
+  </tr>
+  <tr>
+    <td class="name">HelpScreenViewer$SpockMock$1445963475$auxiliary$bw7lzzL0</td>
+  </tr>
+  <tr>
+    <td class="name">HelpScreenViewer$SpockMock$1445963475$auxiliary$fFfIS7Zt</td>
+  </tr>
+  <tr>
+    <td class="name">HelpScreenViewer$SpockMock$1445963475$auxiliary$nqv64HMU</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    10%
+  </span>
+  <span class="absValue">
+    (1/10)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Game.view;
+&nbsp;
+&nbsp;import Game.model.HelpScreenModel;
+&nbsp;import com.googlecode.lanterna.TerminalPosition;
+&nbsp;import com.googlecode.lanterna.TextColor;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;import com.googlecode.lanterna.screen.Screen;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class HelpScreenViewer extends Viewer {
+&nbsp;
+&nbsp;    // Default Constructor
+&nbsp;    public HelpScreenViewer(HelpScreenModel helpScreenModel) {
+<b class="fc">&nbsp;        super(helpScreenModel);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void draw(Screen screen) throws IOException {
+<b class="nc">&nbsp;        HelpScreenModel helpScreenModel = (HelpScreenModel) super.getModel();</b>
+<b class="nc">&nbsp;        List&lt;String&gt; text = helpScreenModel.getText();</b>
+<b class="nc">&nbsp;        screen.clear();</b>
+<b class="nc">&nbsp;        TextGraphics textGraphics = screen.newTextGraphics();</b>
+<b class="nc">&nbsp;        textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);</b>
+<b class="nc">&nbsp;        textGraphics.setForegroundColor(TextColor.ANSI.WHITE);</b>
+&nbsp;
+<b class="nc">&nbsp;        for(int i = 0; i &lt; text.size(); i++){</b>
+<b class="nc">&nbsp;            textGraphics.putString(new TerminalPosition(1, i + 1), text.get(i));</b>
+&nbsp;        }
+<b class="nc">&nbsp;        screen.refresh();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-22 22:47</div>
+</div>
+</body>
+</html>

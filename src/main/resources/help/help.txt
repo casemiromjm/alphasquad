@@ -12,7 +12,7 @@
         -> use the right and left arrows to choose your target (marked with a 'T');
         -> press Enter to select the target.
 
-->There is a total of three levels, before victory is reached, each one with an increasing number of enemies
+-> There is a total of three levels, before victory is reached, each one with an increasing number of enemies
 in each, despite this, any losses you suffer between levels are permanent and will not be replenished. Plus, any of your
 characters that survive will have their stats buffed.
 

@@ -1,0 +1,209 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MainMenuViewer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Game.view</a>
+</div>
+
+<h1>Coverage Summary for Class: MainMenuViewer (Game.view)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MainMenuViewer</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    9,1%
+  </span>
+  <span class="absValue">
+    (2/22)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MainMenuViewer$SpockMock$464137419</td>
+  </tr>
+  <tr>
+    <td class="name">MainMenuViewer$SpockMock$464137419$auxiliary$55ctZi1y</td>
+  </tr>
+  <tr>
+    <td class="name">MainMenuViewer$SpockMock$464137419$auxiliary$anAUHfon</td>
+  </tr>
+  <tr>
+    <td class="name">MainMenuViewer$SpockMock$464137419$auxiliary$FYGIacFo</td>
+  </tr>
+  <tr>
+    <td class="name">MainMenuViewer$SpockMock$464137419$auxiliary$hniElBip</td>
+  </tr>
+  <tr>
+    <td class="name">MainMenuViewer$SpockMock$464137419$auxiliary$PtqdZj2d</td>
+  </tr>
+  <tr>
+    <td class="name">MainMenuViewer$SpockMock$464137419$auxiliary$zdM7MR4j</td>
+  </tr>
+  <tr>
+    <td class="name">MainMenuViewer$SpockMock$464137419$auxiliary$zSpF7MqE</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    9,1%
+  </span>
+  <span class="absValue">
+    (2/22)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Game.view;
+&nbsp;
+&nbsp;import Game.model.MainMenuModel;
+&nbsp;import com.googlecode.lanterna.SGR;
+&nbsp;import com.googlecode.lanterna.TerminalPosition;
+&nbsp;import com.googlecode.lanterna.TextColor;
+&nbsp;import com.googlecode.lanterna.graphics.TextGraphics;
+&nbsp;import com.googlecode.lanterna.screen.Screen;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class MainMenuViewer extends Viewer {
+&nbsp;
+&nbsp;    private final MainMenuModel mainMenuModel;
+&nbsp;
+&nbsp;    public MainMenuViewer(MainMenuModel mainMenuModel) {
+<b class="fc">&nbsp;        super(mainMenuModel);</b>
+<b class="fc">&nbsp;        this.mainMenuModel = mainMenuModel;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void draw(Screen screen) throws IOException {
+&nbsp;        //Draw the game title on the screen
+<b class="nc">&nbsp;        screen.clear();</b>
+<b class="nc">&nbsp;        TextGraphics textGraphics = screen.newTextGraphics();</b>
+<b class="nc">&nbsp;        textGraphics.setBackgroundColor(TextColor.ANSI.BLACK);</b>
+<b class="nc">&nbsp;        textGraphics.setForegroundColor(TextColor.ANSI.WHITE);</b>
+<b class="nc">&nbsp;        textGraphics.enableModifiers(SGR.BOLD, SGR.BORDERED);</b>
+<b class="nc">&nbsp;        textGraphics.putString(new TerminalPosition((screen.getTerminalSize().getColumns() / 2) - (mainMenuModel.getTitle().length() / 2), 3), mainMenuModel.getTitle());</b>
+&nbsp;
+&nbsp;        //Remove the modifiers before drawing the options
+<b class="nc">&nbsp;        textGraphics.disableModifiers(SGR.BOLD, SGR.BORDERED);</b>
+&nbsp;        //Positions the options around the middle of the screen
+<b class="nc">&nbsp;        int options_row = screen.getTerminalSize().getRows()/2 - 2;</b>
+&nbsp;        //Draw the options in the center and bold the first letter
+<b class="nc">&nbsp;        List&lt;String&gt; options = mainMenuModel.getOptions();</b>
+&nbsp;
+<b class="nc">&nbsp;        for(String opt:options){</b>
+<b class="nc">&nbsp;            textGraphics.enableModifiers(SGR.BOLD);</b>
+<b class="nc">&nbsp;            textGraphics.putString(new TerminalPosition((screen.getTerminalSize().getColumns() / 2) - (opt.length() / 2), options_row), opt.substring(0, 1));</b>
+<b class="nc">&nbsp;            textGraphics.disableModifiers(SGR.BOLD);</b>
+<b class="nc">&nbsp;            textGraphics.putString(new TerminalPosition((screen.getTerminalSize().getColumns() / 2) - (opt.length() / 2) + 1, options_row), opt.substring(1));</b>
+<b class="nc">&nbsp;            options_row += 2;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        textGraphics.enableModifiers(SGR.BOLD);</b>
+<b class="nc">&nbsp;        textGraphics.putString(new TerminalPosition(1,screen.getTerminalSize().getRows() - 2), &quot;Note: &quot;);</b>
+<b class="nc">&nbsp;        textGraphics.disableModifiers(SGR.BOLD);</b>
+<b class="nc">&nbsp;        textGraphics.putString(new TerminalPosition(7,screen.getTerminalSize().getRows() - 2),</b>
+&nbsp;                &quot;Press the key corresponding to the bolded letter of the option.&quot;);
+&nbsp;
+<b class="nc">&nbsp;        screen.refresh();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-12-22 22:47</div>
+</div>
+</body>
+</html>
